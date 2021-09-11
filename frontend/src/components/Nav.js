@@ -28,6 +28,7 @@ export const Nav = () => {
       position="fixed"
       w="100%"
       px={4}
+      top={0}
     >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <Flex alignItems={'center'}>
