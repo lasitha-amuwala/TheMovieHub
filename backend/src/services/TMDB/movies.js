@@ -5,7 +5,7 @@ const baseURL = 'https://api.themoviedb.org/3';
 
 module.exports.getTrending = async () => {
   let res = await axios.get(
-    `${baseURL}/trending/movie/day?api_key=${process.env.TMDB_API_KEY}`
+    `${baseURL}/trending/movie/week?api_key=${process.env.TMDB_API_KEY}`
   );
 
   if (res.status === 200 && res.data) {
@@ -13,7 +13,6 @@ module.exports.getTrending = async () => {
   }
   return null;
 };
-
 
 module.exports.getNowPlaying= async () => {
   let res = await axios.get(
@@ -26,7 +25,7 @@ module.exports.getNowPlaying= async () => {
   return null;
 }
 
-module.exports.getPopular= async () => {
+module.exports.getPopular = async () => {
   let res = await axios.get(
     `${baseURL}trending/movie/day?api_key=${process.env.TMDB_API_KEY}`
   );
