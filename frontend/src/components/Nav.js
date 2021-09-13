@@ -6,7 +6,7 @@ import React from 'react';
 export const Nav = () => {
   return (
     <div
-      className="h-16 w-screen fixed top-0 px-4 bg"
+      className="h-16 w-screen fixed top-0 px-4 bg z-50"
       style={{
         backgroundImage:
           'linear-gradient(to bottom,rgba(0,0,0,.7) 1%,rgba(0,0,0,0))',
