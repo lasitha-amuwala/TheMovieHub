@@ -1,8 +1,8 @@
-const {getNowPlaying} = require('../services/TMDB/movies')
+const {getTrending} = require('../services/TMDB/movies')
 
 module.exports.getTrending = async (req, res) => {
   try {
-    getNowPlaying().then((data) => {
+    getTrending().then((data) => {
       res.status(200).json(data);
     });
   } catch (e) {
