@@ -1,60 +1,37 @@
-import {
-  Flex,
-  Box,
-  Text,
-  HStack,
-  Link,
-  Button,
-  IconButton,
-  useColorMode,
-  useColorModeValue,
-  useBreakpointValue,
-} from '@chakra-ui/react';
 import React from 'react';
 
-import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
-
+//import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
+//    <FaMoon color="#A0AEC0" />,
+//<FaSun color="#A0AEC0" />
 export const Nav = () => {
-  const { toggleColorMode } = useColorMode();
-
-  const toggleDarkModeIcon = useColorModeValue(
-    <FaMoon color="#A0AEC0" />,
-    <FaSun color="#A0AEC0" />
-  );
-
   return (
-    <Box
-      bg={useColorModeValue('gray.100', 'gray.900')}
-      position="fixed"
-      w="100%"
-      px={4}
-      top={0}
-      opacity='80%'
+    <div
+      className="h-16 w-screen fixed top-0 px-4 bg"
+      style={{
+        backgroundImage:
+          'linear-gradient(to bottom,rgba(0,0,0,.7) 1%,rgba(0,0,0,0))',
+      }}
     >
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <Flex alignItems={'center'}>
-          <HStack spacing={8} align={'center'}>
-            <Text
-              color={useColorModeValue('gray.700', 'white')}
-            >
-              MovieHub
-            </Text>
-            <HStack as="nav" spacing={4}>
-              <Button variant="ghost">Movies</Button>
-              <Button variant="ghost">Series</Button>
-              <Button variant="ghost">Profile</Button>
-              <Button variant="ghost">My List</Button>
-            </HStack>
-          </HStack>
-        </Flex>
-        <IconButton
-          mt="1"
-          fontSize="22px"
-          aria-label="Toggles Dark Mode"
-          onClick={toggleColorMode}
-          icon={toggleDarkModeIcon}
-        ></IconButton>
-      </Flex>
-    </Box>
+      <div className="flex h-16 items-center justify-between">
+        <div className="flex items-center text-white">
+          <h6 className="font-bold">MovieHub</h6>
+          <div className="flex pl-8 gap-4">
+            <button className="px-4 py-2 hover:text-gray-300 font-normal">
+              Movies
+            </button>
+            <button className="px-4 py-2 hover:text-gray-300 font-normal">
+              Series
+            </button>
+            <button className="px-4 py-2 hover:text-gray-300 font-normal">
+              Profile
+            </button>
+            <button className="px-4 py-2 hover:text-gray-300 font-normal">
+              My List
+            </button>
+          </div>
+        </div>
+        <button className="text-gray-700 px-4"></button>
+      </div>
+    </div>
   );
 };
