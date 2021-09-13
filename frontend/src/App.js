@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getTrending } from './api/tmdb';
+
 import { Nav } from './components/Nav';
-import { Billboard } from './components/Billboard';
+import { Carousel } from './components/Carousel';
 
 export const App = () => {
+  const [trendingList, setTrendingList] = useState([]);
+
+  useEffect(() => {
+    getTrending().then((res) => {
+      console.log(res);
+      setTrendingList(res.data.results);
+    });
+  }, []);
+
   return (
     <div>
       <Nav />
-      <Billboard />
+      <Carousel slides={trendingList} />
+      <div className='h-screen'>
+
+      </div>
     </div>
   );
 };
