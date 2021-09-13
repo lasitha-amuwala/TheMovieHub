@@ -11,7 +11,7 @@ export const Carousel = ({ slides }) => {
   const LeftChevron = () => (
     <div
       onClick={prevSlide}
-      className="absolute left-8 z-10 cursor-pointer select-none"
+      className="absolute flex items-center p-4 left-3 rounded-full bg-black bg-opacity-20 hover:bg-opacity-50 z-10 cursor-pointer select-none"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -33,11 +33,11 @@ export const Carousel = ({ slides }) => {
   const RightChevron = () => (
     <div
       onClick={nextSlide}
-      className="absolute right-8 z-10 cursor-pointer select-none"
+      className="absolute flex items-center p-4 right-3 rounded-full bg-black bg-opacity-20 hover:bg-opacity-50 z-10 cursor-pointer select-none"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-white"
+        className="h-6 w-6 text-white hover:opacity-100"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -57,13 +57,12 @@ export const Carousel = ({ slides }) => {
   }
 
   return (
-    <div className="relative flex justify-center items-center">
+    <div className="relative flex justify-center items-center w-screen">
       <LeftChevron />
       <RightChevron />
       {slides.map((slide, index) => {
-        console.log(slide);
         return (
-          <div className={index === current ? '' : ''}>
+          <div>
             {index === current && (
               <img
                 className="w-screen"
@@ -77,29 +76,3 @@ export const Carousel = ({ slides }) => {
     </div>
   );
 };
-
-/*
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
-*/
-
-/**
- *     <div>
-      <div className="max-h-screen overflow-hidden">
-        <div>{trendingList.length !== 0 ? render() : null}</div>
-      </div>
-      <div className="h-20 text-white bg-gray-600">
-        <button classname="bg-gray-900 p-4" onClick={handlePrev}>
-          Prev
-        </button>
-        <br />
-        <button classname="bg-gray-900 p-4" onClick={handleNext}>
-          next
-        </button>
-      </div>
-    </div>
- */
