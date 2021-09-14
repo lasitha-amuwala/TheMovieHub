@@ -3,7 +3,7 @@ import React from 'react';
 //import { FaSun, FaMoon, FaGithub } from 'react-icons/fa';
 //    <FaMoon color="#A0AEC0" />,
 //<FaSun color="#A0AEC0" />
-export const Nav = () => {
+export const Navbar = () => {
   return (
     <div
       className="h-16 w-screen fixed top-0 px-4 bg z-50"

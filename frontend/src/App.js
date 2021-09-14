@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getTrending } from './api/tmdb';
 
-import { Nav } from './components/Nav';
-import { Carousel } from './components/Carousel';
+import { Navbar } from './components/Navbar';
+import { Featured } from './components/Featured';
+import { List } from './components/List';
 
 export const App = () => {
   const [trendingList, setTrendingList] = useState([]);
@@ -16,8 +17,9 @@ export const App = () => {
 
   return (
     <div>
-      <Nav />
-      <Carousel slides={trendingList} />
+      <Navbar />
+      <Featured slides={trendingList} />
+      <List data={trendingList}/>
     </div>
   );
 };
