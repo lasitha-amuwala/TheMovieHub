@@ -27,7 +27,7 @@ module.exports.getNowPlaying= async () => {
 
 module.exports.getPopular = async () => {
   let res = await axios.get(
-    `${baseURL}trending/movie/day?api_key=${process.env.TMDB_API_KEY}`
+    `${baseURL}/movie/popular?region=US&language=en-US&api_key=${process.env.TMDB_API_KEY}`
   );
 
   if (res.status === 200 && res.data) {
@@ -38,7 +38,7 @@ module.exports.getPopular = async () => {
 
 module.exports.getTopRated= async () => {
   let res = await axios.get(
-    `${baseURL}trending/movie/day?api_key=${process.env.TMDB_API_KEY}`
+    `${baseURL}/movie/top_rated?region=US&language=en-US&api_key=${process.env.TMDB_API_KEY}`
   );
 
   if (res.status === 200 && res.data) {
@@ -49,7 +49,7 @@ module.exports.getTopRated= async () => {
 
 module.exports.getUpcoming= async () => {
   let res = await axios.get(
-    `${baseURL}trending/movie/day?api_key=${process.env.TMDB_API_KEY}`
+    `${baseURL}/movie/upcoming?region=US&language=en-US&api_key=${process.env.TMDB_API_KEY}`
   );
 
   if (res.status === 200 && res.data) {
