@@ -9,16 +9,21 @@ module.exports = {
       }),
       maxHeight: {
         '90vh': '90vh',
-        '27': '110px',
+        27: '110px',
       },
       height: {
-        '27': '110px',
-      }
+        27: '110px',
+      },
+      width: {
+        54: '215px',
+      },
+      screens: {
+        '3xl': '1600px',
+      },
     },
     variants: {
       extend: {},
     },
     plugins: [],
-
   },
 };

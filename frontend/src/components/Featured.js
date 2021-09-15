@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { ReactComponent as ChevronRight } from '../icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from '../icons/chevronLeft.svg';
 
 export const Featured = ({ slides }) => {
   const [current, setCurrent] = useState(0);
+  const [height, setHeight] = useState(0);
+  
   const length = slides.length;
-
+  
+  useEffect(() => {
+    setHeight((window.innerWidth/16)*9)
+  },[])
+  // decrement current slide and go back to the end if at the start of the list
   const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
 
+  // increment current slide and go to the beginning if at the end of the list
   const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
 
+  // if the data is not an array return null
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
   }
@@ -35,11 +43,14 @@ export const Featured = ({ slides }) => {
           <div className="max-h-90vh overflow-hidden relative">
             {index === current && (
               <>
+
+                <div style={{height}}>
                 <img
                   className="w-screen"
                   src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`}
                   alt={`${slide.title.split(' ').join('-')}-poster`}
                 />
+                </div>
                 <div className="absolute z-40 left-24 bottom-16 text-white w-2/5 bg-opacity-30 bg-gray-800 p-6 rounded-xl backdrop-filter backdrop-blur">
                   <div className="text-4xl font-semibold">{slide.title}</div>
                   <div className="py-2">
@@ -55,7 +66,7 @@ export const Featured = ({ slides }) => {
                     </p>
                   </div>
                   <div>
-                    <button className="items-center flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg hover:bg-opacity-60">
+                    <button className="items-center flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg focus:bg-opacity-60 focus:ring-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
