@@ -38,10 +38,13 @@ module.exports = {
       margin: {
         'ml-4%': '0 0 0 4%',
       },
+      
     },
-    variants: {
-      extend: {},
-    },
-    plugins: [],
   },
+  variants: {
+    extend: {
+      margin: ['responsive', 'hover'],  
+    },
+  },
+  plugins: [],
 };
