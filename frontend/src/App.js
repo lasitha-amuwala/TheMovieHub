@@ -19,13 +19,14 @@ export const App = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden 3xl:max-w-full">
+    <div className="overflow-hidden min-h-screen relative pb-16">
       <Navbar />
       <Featured slides={trendingList} />
       <List data={trendingList} title="Trending Now" />
-      <List data={popularList} title="Popular" />
+      {/* <List data={popularList} title="Popular" />
       <List data={topRatedList} title="Top Rated" />
-      <List data={upcomingList} title="Upcoming" />
+      <List data={upcomingList} title="Upcoming" /> */}
+      <div className="absolute bottom-0 w-full h-16 bg-black bg-opacity-30"></div>
     </div>
   );
 };

@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { ReactComponent as ChevronRight } from '../icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from '../icons/chevronLeft.svg';
 
-export const Featured = ({ slides, }) => {
+export const Featured = ({ slides }) => {
   const [current, setCurrent] = useState(0);
-  
+
   const length = slides.length;
-  
+
   // decrement current slide and go back to the end if at the start of the list
   const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
 
@@ -39,13 +39,12 @@ export const Featured = ({ slides, }) => {
           <div className="max-h-90vh overflow-hidden relative">
             {index === current && (
               <>
-
                 <div className="w-screen h-16/9">
-                <img
-                  className="w-full h-full"
-                  src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`}
-                  alt={`${slide.title.split(' ').join('-')}-poster`}
-                />
+                  <img
+                    className="w-full"
+                    src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`}
+                    alt={`${slide.title.split(' ').join('-')}-poster`}
+                  />
                 </div>
                 <div className="absolute z-40 left-24 bottom-16 text-white w-2/5 bg-opacity-30 bg-gray-800 p-6 rounded-xl backdrop-filter backdrop-blur">
                   <div className="text-4xl font-semibold">{slide.title}</div>
@@ -89,3 +88,20 @@ export const Featured = ({ slides, }) => {
     </div>
   );
 };
+
+/*
+  const filterImages = () => {
+    let newSlideList = [];
+    slides.map((slide) => {
+      let img = new Image();
+      img.src = `https://image.tmdb.org/t/p/original/${slide.backdrop_path}`;
+      img.onload = () =>
+        img.height > 1080 && img.width > 1920 && newSlideList.push(slide);
+    });
+    return newSlideList;
+  }
+  useEffect(async () => {
+    let newSlideList = await filterImages()
+    setSlideList(newSlideList);
+  }, [slides]);
+*/
