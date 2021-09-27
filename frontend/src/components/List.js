@@ -11,7 +11,9 @@ export const List = ({ data, title }) => {
   const listRef = useRef();
 
   const handleLeftClick = () => {};
-  const handleRightClick = () => {};
+  const handleRightClick = () => {
+    listRef.current.style.transform = `translateX(${-window.innerWidth}px)`;
+  };
 
   return (
     <div className="group mt-3 mb-2 text-white w-full">
@@ -33,7 +35,7 @@ export const List = ({ data, title }) => {
         </div>
         <div
           ref={listRef}
-          className="flex m-ml-4% 2xl:ml-14 w-max gap-2 h-full transform-transform duration-300 ease-linear "
+          className="flex m-ml-4% 2xl:ml-14 w-max gap-2 h-full transform transition duration-300 ease-linear "
         >
           {data.map((item) => (
             <ListItem data={item} />
