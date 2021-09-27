@@ -46,7 +46,7 @@ export const Featured = ({ slides }) => {
                     alt={`${slide.title.split(' ').join('-')}-poster`}
                   />
                 </div>
-                <div className="absolute z-40 left-24 bottom-16 text-white w-2/5 bg-opacity-30 bg-gray-800 p-6 rounded-xl backdrop-filter backdrop-blur">
+                <div className="absolute left-24 bottom-16 text-white w-2/5 bg-opacity-30 bg-gray-800 p-6 rounded-xl backdrop-filter backdrop-blur">
                   <div className="text-4xl font-semibold">{slide.title}</div>
                   <div className="py-2">
                     <p

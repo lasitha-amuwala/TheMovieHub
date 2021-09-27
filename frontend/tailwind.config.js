@@ -39,9 +39,11 @@ module.exports = {
         'ml-4%': '0 0 0 4%',
       },
     },
-    variants: {
-      extend: {},
-    },
-    plugins: [],
   },
+  variants: {
+    extend: {
+      zIndex: ['hover'],
+    },
+  },
+  plugins: [],
 };
