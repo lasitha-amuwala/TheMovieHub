@@ -36,7 +36,7 @@ export const Featured = ({ slides }) => {
 
       {slides.map((slide, index) => {
         return (
-          <div className="max-h-90vh overflow-hidden relative">
+          <div className="max-h-90vh overflow-hidden relative" key={slide.id}>
             {index === current && (
               <>
                 <div className="w-screen h-16/9">
