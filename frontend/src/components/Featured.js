@@ -23,13 +23,13 @@ export const Featured = ({ slides }) => {
 		<div className="relative justify-center items-center">
 			<div
 				onClick={prevSlide}
-				className="absolute flex items-center p-4 left-3 top-45% rounded-full bg-black bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none"
+				className="absolute flex items-center p-4 left-3 top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur"
 			>
 				<ChevronLeft className="h-6 w-6 text-white hover:opacity-100" />
 			</div>
 			<div
 				onClick={nextSlide}
-				className="absolute flex items-center p-4 right-3 top-45% rounded-full bg-black bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none"
+				className="absolute flex items-center p-4 right-3 top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur"
 			>
 				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
 			</div>
