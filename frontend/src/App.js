@@ -19,7 +19,7 @@ export const App = () => {
 	}, []);
 
 	return (
-		<div className="overflow-hidden min-h-screen relative pb-16">
+		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
 			<Navbar />
 			<Featured slides={trendingList} />
 
