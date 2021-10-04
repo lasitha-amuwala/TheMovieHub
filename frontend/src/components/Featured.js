@@ -1,90 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { ReactComponent as ChevronRight } from '../icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from '../icons/chevronLeft.svg';
+import { ReactComponent as InfoIcon } from '../icons/infoIcon.svg';
+
+const Track = ({ children, slideIndex, prevRef }) => {
+	const ref = useRef(null);
+
+	const handleClick = () =>
+		(ref.current.style.transform =
+			slideIndex > prevRef.current
+				? `translateX(${-ref.current.clientWidth * slideIndex}px)`
+				: `translateX(${ref.current.clientWidth * -slideIndex}px)`);
+
+	useEffect(() => {
+		ref.current && handleClick();
+		prevRef.current = slideIndex;
+	}, [slideIndex]);
+
+	return (
+		<div ref={ref} className="transition duration-300 ease-in-out">
+			{children}
+		</div>
+	);
+};
 
 export const Featured = ({ slides }) => {
-	const [current, setCurrent] = useState(0);
+	const [slideIndex, setSlideIndex] = useState(0);
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-	const length = slides.length;
+	const prevRef = useRef(null);
 
-	// decrement current slide and go back to the end if at the start of the list
-	const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
+	const handleClick = (direction) =>
+		direction
+			? setSlideIndex((prevIdx) =>
+					prevIdx === 0 ? slides.length - 1 : prevIdx - 1
+			  )
+			: setSlideIndex((prevIdx) =>
+					prevIdx === slides.length - 1 ? 0 : prevIdx + 1
+			  );
 
-	// increment current slide and go to the beginning if at the end of the list
-	const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
+	const handleResize = () => {
+		let timeoutId;
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(setWindowWidth(window.innerWidth), 100);
+	};
 
-	// if the data is not an array return null
-	if (!Array.isArray(slides) || slides.length <= 0) {
-		return null;
-	}
+	useEffect(() => {
+		const interval = setInterval(() => handleClick(0), 10000);
+		return () => clearInterval(interval);
+	}, []);
+
+	useEffect(() => window.addEventListener('resize', handleResize), []);
+
+	useEffect(() => setSlideIndex(0), [windowWidth]);
+
+	// if the datails not an array return null
+	if (!Array.isArray(slides) || slides.length <= 0) return null;
+
+	const SliderButton = ({ children, classes, onClick }) => {
+		const classNames = `absolute flex items-center p-4 ${classes} top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur`;
+		return (
+			<div className={classNames} onClick={onClick}>
+				{children}
+			</div>
+		);
+	};
 
 	return (
 		<div className="relative justify-center items-center">
-			<div
-				onClick={prevSlide}
-				className="absolute flex items-center p-4 left-3 top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur"
-			>
+			<SliderButton onClick={() => handleClick(1)} classes="left-3">
 				<ChevronLeft className="h-6 w-6 text-white hover:opacity-100" />
-			</div>
-			<div
-				onClick={nextSlide}
-				className="absolute flex items-center p-4 right-3 top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur"
-			>
+			</SliderButton>
+			<SliderButton onClick={() => handleClick(0)} classes="right-3">
 				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
-			</div>
-
-			{slides.map((slide, index) => {
-				return (
-					<div className="max-h-90vh overflow-hidden relative" key={slide.id}>
-						{index === current && (
-							<>
-								<div className="w-full h-16/9">
-									<img
-										className="w-full"
-										src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`}
-										alt={`${slide.title.split(' ').join('-')}-poster`}
-									/>
-								</div>
-								<div className="absolute left-24 bottom-16 text-white w-2/5 bg-opacity-30 bg-gray-800 p-6 rounded-xl backdrop-filter backdrop-blur">
-									<div className="text-4xl font-semibold">{slide.title}</div>
-									<div className="py-2">
-										<p
-											style={{
-												display: '-webkit-box',
-												WebkitLineClamp: '4',
-												WebkitBoxOrient: 'vertical',
-											}}
-											className="text-base overflow-hidden max-h-27"
-										>
-											{slide.overview}
-										</p>
+			</SliderButton>
+			<div className="w-full overflow-hidden relative">
+				<Track slideIndex={slideIndex} prevRef={prevRef}>
+					<ul className="flex relative list-none ">
+						{slides.map(({ title, backdrop_path, overview, id }, index) => {
+							return (
+								<li
+									className="min-w-full max-w-full max-h-90vh relative"
+									key={index}
+								>
+									<div className="w-full h-16/9">
+										<img
+											className="w-full h-full relative select-none block"
+											src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+											alt={`${title.split(' ').join('-')}-poster`}
+										/>
 									</div>
-									<div>
+									<div className="absolute left-24 bottom-16 text-white w-1/3  bg-opacity-50 bg-bg p-6 rounded-xl backdrop-filter backdrop-blur">
+										<p className="text-4xl font-semibold">{title}</p>
+										<p className="text-base my-4 max-h-24 line-clamp-4">
+											{overview}
+										</p>
 										<button className="items-center flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="h-6 w-6"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="currentColor"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-												/>
-											</svg>
+											<InfoIcon />
 											More Info
 										</button>
 									</div>
-								</div>
-							</>
-						)}
-					</div>
-				);
-			})}
+								</li>
+							);
+						})}
+					</ul>
+				</Track>
+			</div>
 		</div>
 	);
 };
@@ -105,3 +127,75 @@ export const Featured = ({ slides }) => {
     setSlideList(newSlideList);
   }, [slides]);
 */
+
+/**
+ * 		<div className="relative justify-center items-center">
+			<SliderButton onClick={prevSlide} classes="left-3">
+				<ChevronLeft className="h-6 w-6 text-white hover:opacity-100" />
+			</SliderButton>
+			<SliderButton onClick={nextSlide} classes="right-3">
+				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
+			</SliderButton>
+			<div>
+				<ul className="flex h-full w-max overflow-hidden">
+					{slides.map(({ title, backdrop_path, overview, id }) => {
+						return (
+							<li className="max-h-90vh overflow-hidden relative" key={id}>
+								<div className="w-full h-16/9">
+									<img
+										className="w-full h-full"
+										src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+										alt={`${title.split(' ').join('-')}-poster`}
+									/>
+								</div>
+								<div className="absolute left-24 bottom-16 text-white w-1/3 bg-opacity-50 bg-bg p-6 rounded-xl backdrop-filter backdrop-blur">
+									<p className="text-4xl font-semibold">{title}</p>
+									<p className="text-base py-4 line-clamp-4">{overview}</p>
+									<button className="items-center flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4">
+										<InfoIcon />
+										More Info
+									</button>
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
+ */
+
+/**
+		 * 		<div className="relative justify-center items-center">
+			<SliderButton onClick={prevSlide} classes="left-3">
+				<ChevronLeft className="h-6 w-6 text-white hover:opacity-100" />
+			</SliderButton>
+			<SliderButton onClick={nextSlide} classes="right-3">
+				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
+			</SliderButton>
+			<div ref={ref} className="w-full overflow-hidden relative">
+				<ul className="flex relative list-none">
+					{slides.map(({ title, backdrop_path, overview, id }, index) => {
+						return (
+							<li className="min-w-full max-h-90vh relative p-4" key={id}>
+								<div className="w-full h-16/9">
+									<img
+										className="w-full h-full"
+										src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+										alt={`${title.split(' ').join('-')}-poster`}
+									/>
+								</div>
+								<div className="absolute left-24 bottom-16 text-white w-1/3 bg-opacity-50 bg-bg p-6 rounded-xl backdrop-filter backdrop-blur">
+									<p className="text-4xl font-semibold">{title}</p>
+									<p className="text-base py-4 line-clamp-4">{overview}</p>
+									<button className="items-center flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4">
+										<InfoIcon />
+										More Info
+									</button>
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
+		 */
