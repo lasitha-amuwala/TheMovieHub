@@ -24,11 +24,9 @@ export const App = () => {
 			<Featured slides={trendingList} />
 
 			<List data={trendingList} title="Trending Now" />
-      {<div className="h-screen w-screen"></div>}
-      {/* 
-       <List data={popularList} title="Popular" />
-      <List data={topRatedList} title="Top Rated" />
-      <List data={upcomingList} title="Upcoming" /> */}
+			<List data={popularList} title="Popular" />
+			<List data={topRatedList} title="Top Rated" />
+			<List data={upcomingList} title="Upcoming" />
 
 			<div className="absolute bottom-0 w-full h-16 bg-black bg-opacity-30"></div>
 		</div>
