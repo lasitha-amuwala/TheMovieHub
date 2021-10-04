@@ -77,7 +77,7 @@ export const List = ({ data, title }) => {
         </div>
         <div
           ref={listRef}
-          className="flex m-ml-4% 2xl:ml-14 w-max gap-2 h-full transform transition duration-300 ease-linear "
+          className="flex m-ml-4% 2xl:ml-14 w-max gap-2 h-full transition duration-300 ease-linear"
         >
           {data.map((item) => (
             <ListItem data={item} key={item.id} ref={itemRef} />
