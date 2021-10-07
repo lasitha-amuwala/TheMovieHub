@@ -3,10 +3,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ReactComponent as ChevronRight } from '../icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from '../icons/chevronLeft.svg';
 import { ReactComponent as InfoIcon } from '../icons/infoIcon.svg';
+import { Skeleton, SkeletonElement } from './Skeleton';
 
 const Track = ({ children, slideIndex, prevRef }) => {
 	const ref = useRef(null);
-
+	console.log(slideIndex, prevRef);
 	const handleClick = () =>
 		(ref.current.style.transform =
 			slideIndex > prevRef.current
@@ -27,18 +28,16 @@ const Track = ({ children, slideIndex, prevRef }) => {
 
 export const Featured = ({ slides }) => {
 	const [slideIndex, setSlideIndex] = useState(0);
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [windowWidth, setWindowWidth] = useState(0);
+	const [imageLoaded, setImageLoaded] = useState(false);
+	const [length, setLength] = useState(0);
 
 	const prevRef = useRef(null);
 
 	const handleClick = (direction) =>
 		direction
-			? setSlideIndex((prevIdx) =>
-					prevIdx === 0 ? slides.length - 1 : prevIdx - 1
-			  )
-			: setSlideIndex((prevIdx) =>
-					prevIdx === slides.length - 1 ? 0 : prevIdx + 1
-			  );
+			? setSlideIndex((idx) => (idx <= 0 ? length : idx - 1))
+			: setSlideIndex((idx) => (idx >= length ? 0 : idx + 1));
 
 	const handleResize = () => {
 		let timeoutId;
@@ -46,14 +45,18 @@ export const Featured = ({ slides }) => {
 		timeoutId = setTimeout(setWindowWidth(window.innerWidth), 100);
 	};
 
-	useEffect(() => {
-		const interval = setInterval(() => handleClick(0), 10000);
-		return () => clearInterval(interval);
-	}, []);
-
-	useEffect(() => window.addEventListener('resize', handleResize), []);
+	useEffect(() => setLength(slides.length - 1), [slides]);
 
 	useEffect(() => setSlideIndex(0), [windowWidth]);
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		const interval = setInterval(
+			() => setSlideIndex((idx) => (idx >= length ? 0 : idx + 1)),
+			15000
+		);
+		return () => clearInterval(interval);
+	}, [length]);
 
 	// if the datails not an array return null
 	if (!Array.isArray(slides) || slides.length <= 0) return null;
@@ -61,11 +64,13 @@ export const Featured = ({ slides }) => {
 	const SliderButton = ({ children, classes, onClick }) => {
 		const classNames = `absolute flex items-center p-4 ${classes} top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur`;
 		return (
-			<div className={classNames} onClick={onClick}>
+			<button className={classNames} onClick={onClick}>
 				{children}
-			</div>
+			</button>
 		);
 	};
+
+	const Skeleton = () => <div className="animate-pulse w-full h-16/9"></div>;
 
 	return (
 		<div className="relative justify-center items-center">
@@ -85,10 +90,12 @@ export const Featured = ({ slides }) => {
 									key={index}
 								>
 									<div className="w-full h-16/9">
+										{!imageLoaded && Skeleton()}
 										<img
 											className="w-full h-full relative select-none block"
 											src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
 											alt={`${title.split(' ').join('-')}-poster`}
+											onLoad={() => setImageLoaded(true)}
 										/>
 									</div>
 									<div className="absolute left-24 bottom-16 text-white w-1/3  bg-opacity-50 bg-bg p-6 rounded-xl backdrop-filter backdrop-blur">
