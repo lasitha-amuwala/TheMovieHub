@@ -15,6 +15,9 @@ module.exports = {
 				'90vh': '90vh',
 				27: '110px',
 			},
+			minWidth: {
+				'1/2': '25%',
+			},
 			height: {
 				27: '110px',
 				'16/9': '54vw',
@@ -49,5 +52,5 @@ module.exports = {
 			margin: ['hover'],
 		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/line-clamp')],
 };
