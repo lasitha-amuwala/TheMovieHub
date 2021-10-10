@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 export const ListItem = forwardRef((props, ref) => {
 
