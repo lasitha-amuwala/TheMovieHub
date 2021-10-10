@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import useInterval from '../../../Hooks/useInterval';
+import useInterval from '../../../hooks/useInterval';
 
 import { ReactComponent as ChevronRight } from '../../../icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from '../../../icons/chevronLeft.svg';
