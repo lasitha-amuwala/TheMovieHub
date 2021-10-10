@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getTrending, getPopular, getTopRated, getUpcoming } from './api/tmdb';
 
 import { Navbar } from './components/Navbar';
-import { Featured } from './components/Featured';
+import { Featured } from './components/Carousel/Featured';
 import { List } from './components/List';
 
 export const App = () => {
@@ -21,8 +21,7 @@ export const App = () => {
 	return (
 		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
 			<Navbar />
-			<Featured slides={trendingList} />
-
+			<Featured slides={trendingList} autoplay/>
 			<List data={trendingList} title="Trending Now" />
 			<List data={popularList} title="Popular" />
 			<List data={topRatedList} title="Top Rated" />
