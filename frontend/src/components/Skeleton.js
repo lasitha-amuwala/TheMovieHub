@@ -1,5 +1,6 @@
-import React from 'react';
 /*
+import React from 'react';
+
 export const SkeletonElement = ({ type }) => {
 	let element =
 		type === 'circle' ? (
