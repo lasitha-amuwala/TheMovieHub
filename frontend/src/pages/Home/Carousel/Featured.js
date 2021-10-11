@@ -10,13 +10,26 @@ import { Track } from './Track';
 export const Featured = ({ slides, autoplay }) => {
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const [windowWidth, setWindowWidth] = useState(0);
+	const [sliderData, setSliderData] = useState([]);
 	const [slideIndex, setSlideIndex] = useState(0);
+	const [lastIndex, setLastIndex] = useState(0);
+	const [loop, setLoop] = useState(false);
 	const [delay, setDelay] = useState(10000);
-	const [length, setLength] = useState(0);
-
+	console.log('what', loop, slideIndex, lastIndex);
 	const prevRef = useRef(null);
 
-	useEffect(() => setLength(slides.length - 1), [slides]);
+	useEffect(() => {
+		if (slides.length > 0) {
+			slides.push(slides[0]);
+			setSliderData(slides);
+			setLastIndex(slides.length - 1);
+		}
+	}, [slides]);
+
+	useEffect(() => {
+		setLoop((lastIndex != 0 && slideIndex === lastIndex) || false);
+	}, [slideIndex, lastIndex]);
+
 	useEffect(() => setSlideIndex(0), [windowWidth]);
 
 	useInterval(() => handleClick('right'), autoplay ? delay : null);
@@ -29,8 +42,8 @@ export const Featured = ({ slides, autoplay }) => {
 	const handleClick = (direction) => {
 		setDelay(delay + 1);
 		direction === 'left'
-			? setSlideIndex((idx) => (idx <= 0 ? length : idx - 1))
-			: setSlideIndex((idx) => (idx >= length ? 0 : idx + 1));
+			? setSlideIndex((idx) => (idx <= 0 ? lastIndex : idx - 1))
+			: setSlideIndex((idx) => (idx >= lastIndex ? 0 : idx + 1));
 	};
 
 	const handleResize = () => {
@@ -40,7 +53,7 @@ export const Featured = ({ slides, autoplay }) => {
 	};
 
 	// if the datails not an array return null
-	if (!Array.isArray(slides) || slides.length <= 0) return null;
+	if (!Array.isArray(sliderData) || !sliderData.length) return null;
 
 	const SliderButton = ({ children, classes, onClick }) => {
 		const classNames = `absolute flex items-center p-4 ${classes} top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur`;
@@ -62,9 +75,9 @@ export const Featured = ({ slides, autoplay }) => {
 				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
 			</SliderButton>
 			<div className="w-full overflow-hidden relative">
-				<Track slideIndex={slideIndex} prevRef={prevRef}>
+				<Track slideIndex={slideIndex} prevRef={prevRef} loop={loop}>
 					<ul className="flex relative list-none ">
-						{slides.map(({ title, backdrop_path, overview, id }, index) => {
+						{sliderData.map(({ title, backdrop_path, overview, id }, index) => {
 							return (
 								<li
 									className="min-w-full max-w-full max-h-90vh relative"
