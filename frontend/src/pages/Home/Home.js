@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getTrending, getPopular, getTopRated, getUpcoming } from '../../api/tmdb';
+import {
+	getTrending,
+	getPopular,
+	getTopRated,
+	getUpcoming,
+} from '../../api/tmdb';
 
 import { Navbar } from '../../components/Navbar';
 import { Featured } from './Carousel/Featured';
@@ -11,18 +16,21 @@ export const Home = () => {
 	const [topRatedList, setTopRatedList] = useState([]);
 	const [upcomingList, setUpcomingList] = useState([]);
 
-	useEffect(() => {
-		getTrending().then((res) => setTrendingList(res.data.results));
-		getPopular().then((res) => setPopularList(res.data.results));
-		getTopRated().then((res) => setTopRatedList(res.data.results));
-		getUpcoming().then((res) => setUpcomingList(res.data.results));
+	useEffect(async () => {
+		await Promise.all([
+			getTrending().then((res) => setTrendingList(res.data.results)),
+			getPopular().then((res) => setPopularList(res.data.results)),
+			getTopRated().then((res) => setTopRatedList(res.data.results)),
+			getUpcoming().then((res) => setUpcomingList(res.data.results)),
+		]);
 	}, []);
 
 	return (
 		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
 			<Navbar />
-			<Featured slides={trendingList} autoplay/>
+			<Featured slides={trendingList} />
 			<List data={trendingList} title="Trending Now" />
+
 			<List data={popularList} title="Popular" />
 			<List data={topRatedList} title="Top Rated" />
 			<List data={upcomingList} title="Upcoming" />
