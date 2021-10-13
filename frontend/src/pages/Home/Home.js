@@ -28,7 +28,7 @@ export const Home = () => {
 	return (
 		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
 			<Navbar />
-			<Featured slides={trendingList} />
+			<Featured slides={trendingList} autoplay />
 			<List data={trendingList} title="Trending Now" />
 
 			<List data={popularList} title="Popular" />

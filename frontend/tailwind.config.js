@@ -20,7 +20,7 @@ module.exports = {
 			},
 			height: {
 				27: '110px',
-				'16/9': '54vw',
+				'50vw': '56vw',
 			},
 			width: {
 				54: '215px',
