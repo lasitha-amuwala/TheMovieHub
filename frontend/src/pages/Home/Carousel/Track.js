@@ -1,26 +1,42 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { usePrevious } from '../../../hooks/usePrevious';
 
-export const Track = ({ children, slideIndex, prevRef, loop }) => {
-	const [index, setIndex] = useState(0);
+export const Track = ({ children, slideIndex, lastIndex, onLoop }) => {
+	const [index, setIndex] = useState(slideIndex);
+
 	const ref = useRef(null);
-	console.log(loop, slideIndex)
-	const handleClick = () =>
-		(ref.current.style.transform =
-			index > prevRef.current
-				? `translateX(${-ref.current.clientWidth * index}px)`
-				: `translateX(${ref.current.clientWidth * -index}px)`);
+	const prevIndex = usePrevious(index);
 
-	useEffect(() => setIndex(loop ? slideIndex + 1 : slideIndex), [slideIndex]);
-
+	useEffect(() => setIndex(slideIndex), [slideIndex]);
 	useEffect(() => {
 		ref.current && handleClick();
-		prevRef.current = index;
+		if (index === lastIndex && prevIndex === 0) {
+			onLoop(lastIndex - 1);
+		}
 	}, [index]);
+
+	const handleLoop = () => {
+		if (index === lastIndex && prevIndex !== 0) {
+			onLoop(0);
+		}
+	};
+
+	const handleClick = () =>
+		(ref.current.style.transform =
+			index > prevIndex
+				? `translateX(${-ref.current.clientWidth * index}px)`
+				: `translateX(${ref.current.clientWidth * -index}px)`);
 
 	return (
 		<div
 			ref={ref}
-			className={!loop ? 'transition duration-300 ease-in-out' : 'transition duration-300 ease-in-out'}
+			onTransitionEnd={handleLoop}
+			className={
+				(index === 0 && prevIndex === lastIndex) ||
+				(index === lastIndex && prevIndex === lastIndex)
+					? ''
+					: 'transition duration-500 ease-in-out'
+			}
 		>
 			{children}
 		</div>

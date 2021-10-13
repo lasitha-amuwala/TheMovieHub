@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import useInterval from '../../../hooks/useInterval';
+import { useInterval } from '../../../hooks/useInterval';
 
 import { ReactComponent as ChevronRight } from '../../../icons/chevronRight.svg';
 import { ReactComponent as ChevronLeft } from '../../../icons/chevronLeft.svg';
@@ -13,24 +13,17 @@ export const Featured = ({ slides, autoplay }) => {
 	const [sliderData, setSliderData] = useState([]);
 	const [slideIndex, setSlideIndex] = useState(0);
 	const [lastIndex, setLastIndex] = useState(0);
-	const [loop, setLoop] = useState(false);
 	const [delay, setDelay] = useState(10000);
-	console.log('what', loop, slideIndex, lastIndex);
-	const prevRef = useRef(null);
 
 	useEffect(() => {
 		if (slides.length > 0) {
-			slides.push(slides[0]);
-			setSliderData(slides);
-			setLastIndex(slides.length - 1);
+			let list = slides.concat([slides[0]]);
+			setSliderData(list);
+			setLastIndex(list.length - 1);
 		}
 	}, [slides]);
 
-	useEffect(() => {
-		setLoop((lastIndex != 0 && slideIndex === lastIndex) || false);
-	}, [slideIndex, lastIndex]);
-
-	useEffect(() => setSlideIndex(0), [windowWidth]);
+	useEffect(() => windowWidth && setSlideIndex(0), [windowWidth]);
 
 	useInterval(() => handleClick('right'), autoplay ? delay : null);
 
@@ -50,6 +43,11 @@ export const Featured = ({ slides, autoplay }) => {
 		let timeoutId;
 		clearTimeout(timeoutId);
 		timeoutId = setTimeout(setWindowWidth(window.innerWidth), 100);
+	};
+
+	const setIndex = (index) => {
+		console.log('index: ', index);
+		setSlideIndex(index);
 	};
 
 	// if the datails not an array return null
@@ -75,7 +73,7 @@ export const Featured = ({ slides, autoplay }) => {
 				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
 			</SliderButton>
 			<div className="w-full overflow-hidden relative">
-				<Track slideIndex={slideIndex} prevRef={prevRef} loop={loop}>
+				<Track slideIndex={slideIndex} lastIndex={lastIndex} onLoop={setIndex}>
 					<ul className="flex relative list-none ">
 						{sliderData.map(({ title, backdrop_path, overview, id }, index) => {
 							return (
@@ -83,10 +81,10 @@ export const Featured = ({ slides, autoplay }) => {
 									className="min-w-full max-w-full max-h-90vh relative"
 									key={index}
 								>
-									<div className="w-full h-16/9">
+									<div className="w-full h-50vw">
 										{!imageLoaded && Skeleton()}
 										<img
-											className="w-full h-full relative select-none block"
+											className="w-full h-full object-cover relative select-none block"
 											src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
 											alt={`${title.split(' ').join('-')}-poster`}
 											onLoad={() => setImageLoaded(true)}
