@@ -23,7 +23,7 @@ export const Featured = ({ slides, autoplay }) => {
 		}
 	}, [slides]);
 
-	useEffect(() => windowWidth && setSlideIndex(0), [windowWidth]);
+//	useEffect(() => windowWidth && setSlideIndex(0), [windowWidth]);
 
 	useInterval(() => handleClick('right'), autoplay ? delay : null);
 
@@ -54,7 +54,7 @@ export const Featured = ({ slides, autoplay }) => {
 	if (!Array.isArray(sliderData) || !sliderData.length) return null;
 
 	const SliderButton = ({ children, classes, onClick }) => {
-		const classNames = `absolute flex items-center p-4 ${classes} top-45% rounded-full bg-bg bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter backdrop-blur`;
+		const classNames = `absolute flex items-center p-3 sm:p-4 ${classes} bottom-0 sm:bottom sm:bottom-45% sm:rounded-full bg-bg bg-opacity-0 sm:bg-opacity-50 hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter sm:backdrop-blur`;
 		return (
 			<button className={classNames} onClick={onClick}>
 				{children}
@@ -66,16 +66,16 @@ export const Featured = ({ slides, autoplay }) => {
 
 	return (
 		<div className="relative justify-center items-center">
-			<SliderButton onClick={() => handleClick('left')} classes="left-3">
-				<ChevronLeft className="h-6 w-6 text-white hover:opacity-100" />
+			<SliderButton onClick={() => handleClick('left')} classes="left-1 sm:left-3">
+				<ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-white hover:opacity-100" />
 			</SliderButton>
-			<SliderButton onClick={() => handleClick('right')} classes="right-3">
-				<ChevronRight className="h-6 w-6 text-white hover:opacity-100" />
+			<SliderButton onClick={() => handleClick('right')} classes="right-1 sm:right-3">
+				<ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-white hover:opacity-100" />
 			</SliderButton>
 			<div className="w-full overflow-hidden relative">
 				<Track slideIndex={slideIndex} lastIndex={lastIndex} onLoop={setIndex}>
 					<ul className="flex relative list-none ">
-						{sliderData.map(({ title, backdrop_path, overview, id }, index) => {
+						{sliderData.map(({ title, backdrop_path, overview}, index) => {
 							return (
 								<li
 									className="min-w-full max-w-full max-h-90vh relative"
@@ -90,12 +90,12 @@ export const Featured = ({ slides, autoplay }) => {
 											onLoad={() => setImageLoaded(true)}
 										/>
 									</div>
-									<div className="absolute left-24 bottom-16 text-white w-1/3  bg-opacity-50 bg-bg p-6 rounded-xl backdrop-filter backdrop-blur">
-										<p className="text-4xl font-semibold">{title}</p>
-										<p className="text-base my-4 max-h-24 line-clamp-4">
+									<div className="absolute left-0sm:left-24 bottom-0 sm:bottom-16 text-white w-full sm:w-1/3 bg-opacity-40 bg-bg px-12 py-3 sm:px-6 sm:py-6 rounded-none sm:rounded-xl backdrop-filter backdrop-blur-lg">
+										<p className="text-sm sm:text-4xl sm:font-semibold">{title}</p>
+										<p className="text-base my-4 max-h-24 hidden sm:line-clamp-4">
 											{overview}
 										</p>
-										<button className="items-center flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4">
+										<button className="items-center hidden sm:flex gap-1 text-lg px-4 py-2 font-semibold bg-blue-700 bg-opacity-40 rounded-lg hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4">
 											<InfoIcon />
 											More Info
 										</button>
