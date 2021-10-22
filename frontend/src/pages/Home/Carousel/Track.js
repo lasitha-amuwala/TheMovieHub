@@ -8,24 +8,16 @@ export const Track = ({ children, slideIndex, lastIndex, onLoop }) => {
 	const prevIndex = usePrevious(index);
 
 	useEffect(() => setIndex(slideIndex), [slideIndex]);
+
 	useEffect(() => {
-		ref.current && handleClick();
-		if (index === lastIndex && prevIndex === 0) {
-			onLoop(lastIndex - 1);
-		}
+		if (ref.current)
+			ref.current.style.transform = `translateX(${100 * -index}%)`;
+		if (index === lastIndex && prevIndex === 0) onLoop(lastIndex - 1);
 	}, [index]);
 
 	const handleLoop = () => {
-		if (index === lastIndex && prevIndex !== 0) {
-			onLoop(0);
-		}
+		if (index === lastIndex && prevIndex !== 0) onLoop(0);
 	};
-
-	const handleClick = () =>
-		(ref.current.style.transform =
-			index > prevIndex
-				? `translateX(${-ref.current.clientWidth * index}px)`
-				: `translateX(${ref.current.clientWidth * -index}px)`);
 
 	return (
 		<div
@@ -35,7 +27,7 @@ export const Track = ({ children, slideIndex, lastIndex, onLoop }) => {
 				(index === 0 && prevIndex === lastIndex) ||
 				(index === lastIndex && prevIndex === lastIndex)
 					? ''
-					: 'transition duration-500 ease-in-out'
+					: 'transition duration-700 ease-in-out'
 			}
 		>
 			{children}

@@ -7,7 +7,7 @@ import {
 } from '../../api/tmdb';
 
 import { Navbar } from '../../components/Navbar';
-import { Featured } from './Carousel/Featured';
+import { Carousel } from './Carousel/Carousel';
 import { List } from '../../components/List';
 
 export const Home = () => {
@@ -28,7 +28,7 @@ export const Home = () => {
 	return (
 		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
 			<Navbar />
-			<Featured slides={trendingList} autoplay />
+			<Carousel slides={trendingList} autoplay/>
 			<List data={trendingList} title="Trending Now" />
 
 			<List data={popularList} title="Popular" />
