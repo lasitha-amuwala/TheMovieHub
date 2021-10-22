@@ -46,15 +46,6 @@ export const List = ({ data, title }) => {
       listRef.current.style.transform = `translateX(${-(count + width)}px)`;
       setCount(count + width);
     }
-    console.log('hi' ,count)
-  };
-
-  const handleLeftClick = (width, c) => {
-    console.log('y', count, width);
-    listRef.current.style.transform = `translateX(${c + width}px)`;
-  };
-  const handleRightClick = (width, c) => {
-    listRef.current.style.transform = `translateX(${-(c + width)}px)`;
   };
 
   return (
