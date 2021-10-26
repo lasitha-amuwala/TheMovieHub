@@ -30,7 +30,6 @@ module.exports = {
 			width: {
 				54: '215px',
 				'5%': 'calc(5% - 4px)',
-				13: '52px',
 			},
 			screens: {
 				'3xl': '1600px',
