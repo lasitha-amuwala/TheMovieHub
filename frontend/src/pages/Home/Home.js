@@ -29,12 +29,9 @@ export const Home = () => {
 		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
 			<Navbar />
 			<Carousel slides={trendingList} autoplay/>
-			<List data={trendingList} title="Trending Now" />
-
 			<List data={popularList} title="Popular" />
 			<List data={topRatedList} title="Top Rated" />
 			<List data={upcomingList} title="Upcoming" />
-
 			<div className="absolute bottom-0 w-full h-16 bg-black bg-opacity-30"></div>
 		</div>
 	);
