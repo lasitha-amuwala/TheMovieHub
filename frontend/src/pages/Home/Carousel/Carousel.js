@@ -64,7 +64,7 @@ export const Carousel = ({ slides, autoplay }) => {
 					lastIndex={lastIndex}
 					onLoop={(index) => setSlideIndex(index)}
 				>
-					<ul className="flex relative list-none ">
+					<ul className="flex relative list-none">
 						{sliderData.map((data) => (
 							<CarouselItem slide={data} />
 						))}
