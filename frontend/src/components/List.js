@@ -34,12 +34,12 @@ export const List = ({ data, title }) => {
 
 	return (
 		<div className="group mt-3 mb-2 text-white w-full">
-			<span className="text-white text-xl m-ml-4% 2xl:ml-14 font-medium">
+			<span className="text-white text-xl m-ml-5% font-medium">
 				{title}
 			</span>
 			<div className="mt-3 relative">
 				{count > 0 && (
-					<div className="w-4% 2xl:w-13 h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-50 hover:bg-opacity-70">
+					<div className="w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-50 hover:bg-opacity-80">
 						<ChevronLeft
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('left')}
@@ -47,14 +47,14 @@ export const List = ({ data, title }) => {
 					</div>
 				)}
 				{(count === 0 || count !== lastIndex) && (
-					<div className="w-4% 2xl:w-13 h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-50 hover:bg-opacity-70">
+					<div className="w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-50 hover:bg-opacity-80">
 						<ChevronRight
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('right')}
 						/>
 					</div>
 				)}
-				<div className="px-4% 2xl:px-14 overflow-hidden select-none">
+				<div className="px-5% overflow-hidden select-none">
 					<ul
 						ref={listRef}
 						className="flex transition duration-700 ease-in-out"
