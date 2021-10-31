@@ -10,36 +10,46 @@ export const List = ({ data, title }) => {
 
 	const [count, setCount] = useState(0);
 	const [lastIndex, setLastIndex] = useState(0);
+	const [windowWidth, setWindowWidth] = useState(0);
 
 	const handleClick = (direction) =>
 		setCount((count) => (direction === 'left' ? count - 1 : count + 1));
 
-	const handleSlide = () => {
-		if (listRef.current && itemRef.current) {
-			let len = data.length;
-			let num = Math.floor(
-				listRef.current.clientWidth / itemRef.current.clientWidth
-			);
+	const handleResize = () => {
+		if (window.innerWidth > 1536) setWindowWidth(1);
+		else if (window.innerWidth > 1280) setWindowWidth(2);
+		else if (window.innerWidth > 1024) setWindowWidth(3);
+		else if (window.innerWidth > 768) setWindowWidth(4);
+		else if (window.innerWidth > 640) setWindowWidth(5);
+		else setWindowWidth(6);
+	};
 
-			setLastIndex(Math.ceil(len / num) - 1);
+	useEffect(() => {
+		let currList = listRef.current;
+		let currItem = itemRef.current;
+
+		if (currList && currItem) {
+			let len = data.length;
+			let num = Math.floor(currList.clientWidth / currItem.clientWidth);
+			let newLastIndex = Math.ceil(len / num) - 1;
+
+			setLastIndex(newLastIndex);
+			if (count > newLastIndex) setCount(newLastIndex);
 
 			let remainder = len - num * count;
 			let translate = remainder < num ? count - 1 + remainder / num : count;
 			listRef.current.style.transform = `translateX(${translate * -100}%)`;
 		}
-	};
+	}, [count, windowWidth]);
 
-	useEffect(handleSlide, [count]);
-	useEffect(() => window.addEventListener('resize', () => setCount(0)), []);
+	useEffect(() => window.addEventListener('resize', handleResize), []);
 
 	return (
 		<div className="group mt-3 mb-2 text-white w-full">
-			<span className="text-white text-xl m-ml-5% font-medium">
-				{title}
-			</span>
+			<span className="text-white text-xl m-ml-5% font-medium">{title}</span>
 			<div className="mt-3 relative">
 				{count > 0 && (
-					<div className="w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-50 hover:bg-opacity-80">
+					<div className="w-10% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-50 hover:bg-opacity-80">
 						<ChevronLeft
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('left')}
@@ -47,14 +57,14 @@ export const List = ({ data, title }) => {
 					</div>
 				)}
 				{(count === 0 || count !== lastIndex) && (
-					<div className="w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-50 hover:bg-opacity-80">
+					<div className="w-10% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-50 hover:bg-opacity-80">
 						<ChevronRight
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('right')}
 						/>
 					</div>
 				)}
-				<div className="px-5% overflow-hidden select-none">
+				<div className="px-10% md:px-5% overflow-hidden select-none">
 					<ul
 						ref={listRef}
 						className="flex transition duration-700 ease-in-out"
