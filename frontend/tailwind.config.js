@@ -29,8 +29,8 @@ module.exports = {
 			},
 			width: {
 				54: '215px',
-				'5%': 'calc(5% - 4px)',
-				'10%': 'calc(7% - 4px)',
+				'5%': 'calc(5% - 3px)',
+				'10%': 'calc(7% - 3px)',
 			},
 			screens: {
 				'3xl': '1600px',
