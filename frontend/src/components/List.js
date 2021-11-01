@@ -49,7 +49,7 @@ export const List = ({ data, title }) => {
 			<span className="text-white text-xl m-ml-5% font-medium">{title}</span>
 			<div className="mt-3 relative">
 				{count > 0 && (
-					<div className="w-10% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-50 hover:bg-opacity-80">
+					<div className="w-10% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80">
 						<ChevronLeft
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('left')}
@@ -57,7 +57,7 @@ export const List = ({ data, title }) => {
 					</div>
 				)}
 				{(count === 0 || count !== lastIndex) && (
-					<div className="w-10% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-50 hover:bg-opacity-80">
+					<div className="w-10% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-60 hover:bg-opacity-80">
 						<ChevronRight
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('right')}
