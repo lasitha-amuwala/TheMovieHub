@@ -4,7 +4,7 @@ export const ListItem = forwardRef(({ data }, ref) => (
 	<li className='px-1 min-w-1/3 sm:min-w-1/4 md:min-w-1/5 lg:min-w-1/6 xl:min-w-1/7 2xl:min-w-1/8'>
 		<img
 			ref={ref}
-			className="h-full cursor-pointer rounded-lg "
+			className="h-auto cursor-pointer rounded-lg "
 			src={
 				data.poster_path &&
 				`https://image.tmdb.org/t/p/w500/${data.poster_path}`
