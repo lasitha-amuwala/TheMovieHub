@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
 import { ListItem } from './ListItem';
 import { ReactComponent as ChevronRight } from '../icons/chevronRight.svg';
@@ -9,12 +10,14 @@ export const List = ({ data, title }) => {
 	const itemRef = useRef(null);
 
 	const [count, setCount] = useState(0);
-	const [lastIndex, setLastIndex] = useState(0);
+	const [lastIndex, setLastIndex] = useState(1);
 	const [windowWidth, setWindowWidth] = useState(0);
 
-	const handleClick = (direction) =>
-		setCount((count) => (direction === 'left' ? count - 1 : count + 1));
-
+	const handleClick = (direction) => {
+		if (direction === 'left') setCount((c) => (c > 0 ? c - 1 : 0));
+		else setCount((c) => (c < lastIndex ? c + 1 : lastIndex));
+	};
+	
 	const handleResize = () => {
 		if (window.innerWidth > 1536) setWindowWidth(1);
 		else if (window.innerWidth > 1280) setWindowWidth(2);
@@ -23,6 +26,11 @@ export const List = ({ data, title }) => {
 		else if (window.innerWidth > 640) setWindowWidth(5);
 		else setWindowWidth(6);
 	};
+
+	const handlers = useSwipeable({
+		onSwipedLeft: () => handleClick('right'),
+		onSwipedRight: () => handleClick('left'),
+	});
 
 	useEffect(() => {
 		let currList = listRef.current;
@@ -49,7 +57,7 @@ export const List = ({ data, title }) => {
 			<span className="text-white text-xl m-ml-5% font-medium">{title}</span>
 			<div className="mt-3 relative">
 				{count > 0 && (
-					<div className="w-10% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80">
+					<div className="w-10% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none">
 						<ChevronLeft
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('left')}
@@ -57,17 +65,20 @@ export const List = ({ data, title }) => {
 					</div>
 				)}
 				{(count === 0 || count !== lastIndex) && (
-					<div className="w-10% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-60 hover:bg-opacity-80">
+					<div className="w-10% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none">
 						<ChevronRight
 							className="w-full h-full opacity-0 group-hover:opacity-100"
 							onClick={() => handleClick('right')}
 						/>
 					</div>
 				)}
-				<div className="px-10% md:px-5% overflow-hidden select-none">
+				<div
+					{...handlers}
+					className="px-10% md:px-5% overflow-hidden select-none"
+				>
 					<ul
 						ref={listRef}
-						className="flex transition duration-700 ease-in-out"
+						className="flex transition duration-150 md:duration-700 ease-linear md:ease-in-out"
 					>
 						{data.map((item) => (
 							<ListItem data={item} key={item.id} ref={itemRef} />
