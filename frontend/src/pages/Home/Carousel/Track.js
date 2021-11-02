@@ -27,7 +27,7 @@ export const Track = ({ children, slideIndex, lastIndex, onLoop }) => {
 				(index === 0 && prevIndex === lastIndex) ||
 				(index === lastIndex && prevIndex === lastIndex)
 					? ''
-					: 'transition duration-700 ease-in-out'
+					: 'transition duration-300 md:duration-700 ease-in-out'
 			}
 		>
 			{children}

@@ -6,6 +6,7 @@ import { ReactComponent as ChevronLeft } from '../../../icons/chevronLeft.svg';
 
 import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';
+import { useSwipeable } from 'react-swipeable';
 
 export const Carousel = ({ slides, autoplay }) => {
 	const [sliderData, setSliderData] = useState([]);
@@ -31,6 +32,11 @@ export const Carousel = ({ slides, autoplay }) => {
 			? setSlideIndex((idx) => (idx <= 0 ? lastIndex : idx - 1))
 			: setSlideIndex((idx) => (idx >= lastIndex ? 0 : idx + 1));
 	};
+	
+	const handlers = useSwipeable({
+		onSwipedLeft: () => handleClick('right'),
+		onSwipedRight: () => handleClick('left')
+	});
 
 	// if the datails not an array return null
 	if (!Array.isArray(sliderData) || !sliderData.length) return null;
@@ -58,7 +64,7 @@ export const Carousel = ({ slides, autoplay }) => {
 			>
 				<ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
 			</SliderButton>
-			<div className="w-full overflow-hidden relative">
+			<div {...handlers} className="w-full overflow-hidden relative">
 				<Track
 					slideIndex={slideIndex}
 					lastIndex={lastIndex}
