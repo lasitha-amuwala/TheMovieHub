@@ -12,7 +12,7 @@ module.exports = {
 				almostBlack: 'rgba(0,0,0,0.7)',
 			}),
 			maxHeight: {
-				'90vh': '90vh',
+				'85vh': '85vh',
 				27: '110px',
 			},
 			minWidth: {
@@ -30,20 +30,18 @@ module.exports = {
 			width: {
 				54: '215px',
 				'5%': 'calc(5% - 3px)',
-				'10%': 'calc(7% - 3px)',
+				'7%': 'calc(7% - 3px)',
 			},
 			screens: {
 				'3xl': '1600px',
 			},
 			margin: {
 				'ml-5%': '0 0 0 5%',
-				'ml-5%': '0 0 0 7%',
 				'mx-5%': '0 5%',
-				'mx-5%': '0 7%',
 			},
 			padding: {
 				'5%': '5%',
-				'10%': '7%'
+				'7%': '7%',
 			},
 			inset: {
 				'45%': '45%',

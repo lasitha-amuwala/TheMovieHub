@@ -32,10 +32,10 @@ export const Carousel = ({ slides, autoplay }) => {
 			? setSlideIndex((idx) => (idx <= 0 ? lastIndex : idx - 1))
 			: setSlideIndex((idx) => (idx >= lastIndex ? 0 : idx + 1));
 	};
-	
+
 	const handlers = useSwipeable({
 		onSwipedLeft: () => handleClick('right'),
-		onSwipedRight: () => handleClick('left')
+		onSwipedRight: () => handleClick('left'),
 	});
 
 	// if the datails not an array return null
