@@ -10,7 +10,7 @@ export const CarouselItem = ({ slide }) => {
 	const Skeleton = () => <div className="animate-pulse w-full h-16/9"></div>;
 
 	return (
-		<li className="min-w-full max-w-full max-h-90vh relative" key={id}>
+		<li className="min-w-full max-w-full max-h-85vh relative" key={id}>
 			<div className="w-full h-50vw">
 				{!imageLoaded && Skeleton()}
 				<img
