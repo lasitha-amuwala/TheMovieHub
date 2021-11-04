@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ReactComponent as InfoIcon } from '../../../icons/infoIcon.svg';
-import { Skeleton, SkeletonElement } from '../../../components/Skeleton';
 
 export const CarouselItem = ({ slide }) => {
 	const [imageLoaded, setImageLoaded] = useState(false);
