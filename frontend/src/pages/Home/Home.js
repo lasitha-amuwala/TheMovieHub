@@ -16,13 +16,16 @@ export const Home = () => {
 	const [topRatedList, setTopRatedList] = useState([]);
 	const [upcomingList, setUpcomingList] = useState([]);
 
-	useEffect(async () => {
-		await Promise.all([
-			getTrending().then((res) => setTrendingList(res.data.results)),
-			getPopular().then((res) => setPopularList(res.data.results)),
-			getTopRated().then((res) => setTopRatedList(res.data.results)),
-			getUpcoming().then((res) => setUpcomingList(res.data.results)),
-		]);
+	useEffect(() => {
+		const getData = async () => {
+			await Promise.all([
+				getTrending().then((res) => setTrendingList(res.data.results)),
+				getPopular().then((res) => setPopularList(res.data.results)),
+				getTopRated().then((res) => setTopRatedList(res.data.results)),
+				getUpcoming().then((res) => setUpcomingList(res.data.results)),
+			]);
+		};
+		getData();
 	}, []);
 
 	return (

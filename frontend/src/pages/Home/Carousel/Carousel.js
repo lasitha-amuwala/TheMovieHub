@@ -86,8 +86,8 @@ export const Carousel = ({ slides, autoplay }) => {
 					handleAnimation={handleAnimation}
 				>
 					<ul className="flex relative list-none">
-						{sliderData.map((data) => (
-							<CarouselItem slide={data} />
+						{sliderData.map((data, i) => (
+							<CarouselItem slide={data} key={i} />
 						))}
 					</ul>
 				</Track>
