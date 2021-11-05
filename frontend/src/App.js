@@ -1,6 +1,12 @@
 import React from 'react';
-import { Home } from './pages/Home/Home';
+import { Routes, Route } from 'react-router-dom';
 
-export const App = () => {
-	return <Home />;
-};
+import { Home } from './pages/Home/Home';
+import { Movie } from './pages/Movie';
+
+export const App = () => (
+	<Routes>
+		<Route path="/" element={<Home />} />
+		<Route path="/details/:type/:id" element={<Movie />} />
+	</Routes>
+);
