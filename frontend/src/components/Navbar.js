@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Navbar = () => (
 	<div className="h-16 fixed w-full top-0 bg z-50 bg-bg bg-opacity-80 backdrop-filter backdrop-blur">
-		<div className="flex h-full items-center justify-between m-mx-5%">
+		<div className="flex h-full items-center justify-between mx-7% md:mx-5%">
 			<div className="flex items-center text-white">
 				<h6 className="font-bold">MovieHub</h6>
 				<div className="flex pl-8 gap-4">
