@@ -54,8 +54,10 @@ export const List = ({ data, title }) => {
 	useEffect(() => window.addEventListener('resize', handleResize), []);
 
 	return (
-		<div className="group mt-3 mb-2 text-white w-full">
-			<span className="text-white text-xl m-ml-5% font-medium">{title}</span>
+		<div className="group my-5 md:my-9 text-white w-full">
+			<span className="text-white md:text-xl pl-1 ml-7% md:ml-5% font-medium">
+				{title}
+			</span>
 			<div className="mt-3 relative">
 				{count > 0 && (
 					<div className="w-7% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none">
