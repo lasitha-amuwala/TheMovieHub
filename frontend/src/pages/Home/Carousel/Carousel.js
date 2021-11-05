@@ -63,16 +63,16 @@ export const Carousel = ({ slides, autoplay }) => {
 	};
 
 	return (
-		<div className="relative justify-center items-center">
+		<div className="relative justify-center items-center ">
 			<SliderButton
 				onClick={() => handleClick('left')}
-				classes="left-1 sm:left-3"
+				classes="left-1 sm:left-3 transform transition duration-200 hover:scale-110"
 			>
 				<ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
 			</SliderButton>
 			<SliderButton
 				onClick={() => handleClick('right')}
-				classes="right-1 sm:right-3"
+				classes="right-1 sm:right-3 transform transition duration-200 hover:scale-110"
 			>
 				<ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
 			</SliderButton>
