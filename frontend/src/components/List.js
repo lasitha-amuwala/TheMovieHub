@@ -13,6 +13,8 @@ export const List = ({ data, title }) => {
 	const [lastIndex, setLastIndex] = useState(1);
 	const [windowWidth, setWindowWidth] = useState(0);
 
+	const length = data.length;
+
 	const handleClick = (direction) => {
 		if (direction === 'left') setCount((c) => (c > 0 ? c - 1 : 0));
 		else setCount((c) => (c < lastIndex ? c + 1 : lastIndex));
@@ -33,22 +35,21 @@ export const List = ({ data, title }) => {
 	});
 
 	useEffect(() => {
-		let currList = listRef.current;
-		let currItem = itemRef.current;
+		let cl = listRef.current;
+		let ci = itemRef.current;
 
-		if (currList && currItem) {
-			let len = data.length;
-			let num = Math.floor(currList.clientWidth / currItem.clientWidth);
-			let newLastIndex = Math.ceil(len / num) - 1;
+		if (cl && cl.clientWidth && ci && ci.clientWidth) {
+			let num = Math.floor(cl.clientWidth / ci.clientWidth);
+			let newLastIndex = Math.abs(Math.ceil(length / num) - 1);
 
 			setLastIndex(newLastIndex);
 			if (count > newLastIndex) setCount(newLastIndex);
 
-			let remainder = len - num * count;
+			let remainder = length - num * count;
 			let translate = remainder < num ? count - 1 + remainder / num : count;
-			listRef.current.style.transform = `translateX(${translate * -100}%)`;
+			cl.style.transform = `translateX(${translate * -100}%)`;
 		}
-	}, [count, windowWidth]);
+	}, [count, windowWidth, length]);
 
 	useEffect(() => window.addEventListener('resize', handleResize), []);
 
