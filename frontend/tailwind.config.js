@@ -54,6 +54,7 @@ module.exports = {
 			zIndex: ['hover'],
 			width: ['hover'],
 			margin: ['hover'],
+			scale: ['hover'],
 		},
 	},
 	plugins: [require('@tailwindcss/line-clamp')],
