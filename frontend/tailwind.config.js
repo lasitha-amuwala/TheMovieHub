@@ -4,12 +4,12 @@ module.exports = {
 	theme: {
 		backgroundColor: (theme) => ({
 			...theme('colors'),
-			bg: '#141414',
+			almostBlack: '#141414',
 		}),
 		extend: {
 			gradientColorStops: (theme) => ({
 				...theme('colors'),
-				almostBlack: 'rgba(0,0,0,0.7)',
+				almostBlack: '#141414',
 			}),
 			maxHeight: {
 				'85vh': '85vh',

@@ -54,8 +54,8 @@ export const List = ({ data, title }) => {
 	useEffect(() => window.addEventListener('resize', handleResize), []);
 
 	return (
-		<div className="group my-5 md:my-9 text-white w-full">
-			<span className="text-white md:text-xl pl-1 ml-7% md:ml-5% font-medium">
+		<div className="relative group mb-5 mt-5 lg:mt-0 lg:mb-20 2xl:mb-24 text-white w-full">
+			<span className="lg:absolute -top-14 2xl:-top-16 text-white md:text-2xl lg:text-3xl 2xl:text-4xl pl-1 ml-7% md:ml-5% font-medium">
 				{title}
 			</span>
 			<div className="mt-3 relative">
@@ -75,10 +75,7 @@ export const List = ({ data, title }) => {
 						/>
 					</div>
 				)}
-				<div
-					{...handlers}
-					className="px-7% md:px-5% overflow-hidden select-none"
-				>
+				<div {...handlers} className="px-7% md:px-5% z-10 select-none">
 					<ul
 						ref={listRef}
 						style={{
