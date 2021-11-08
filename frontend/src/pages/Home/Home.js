@@ -4,6 +4,7 @@ import {
 	getPopular,
 	getTopRated,
 	getUpcoming,
+	getNowPlaying,
 } from '../../api/tmdb';
 
 import { Navbar } from '../../components/Navbar';
@@ -12,6 +13,7 @@ import { List } from '../../components/List';
 
 export const Home = () => {
 	const [trendingList, setTrendingList] = useState([]);
+	const [nowPlayingList, setNowPlayingList] = useState([]);
 	const [popularList, setPopularList] = useState([]);
 	const [topRatedList, setTopRatedList] = useState([]);
 	const [upcomingList, setUpcomingList] = useState([]);
@@ -20,6 +22,7 @@ export const Home = () => {
 		const getData = async () => {
 			await Promise.all([
 				getTrending().then((res) => setTrendingList(res.data.results)),
+				getNowPlaying().then((res) => setNowPlayingList(res.data.results)),
 				getPopular().then((res) => setPopularList(res.data.results)),
 				getTopRated().then((res) => setTopRatedList(res.data.results)),
 				getUpcoming().then((res) => setUpcomingList(res.data.results)),
@@ -34,6 +37,7 @@ export const Home = () => {
 			<Carousel slides={trendingList} autoplay />
 			<List data={popularList} title="Popular" />
 			<List data={topRatedList} title="Top Rated" />
+			<List data={nowPlayingList} title="Now Playing" />
 			<List data={upcomingList} title="Upcoming" />
 			<div className="absolute bottom-0 w-full h-16 bg-black bg-opacity-30"></div>
 		</div>
