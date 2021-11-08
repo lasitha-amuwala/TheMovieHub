@@ -9,7 +9,7 @@ export const CarouselItem = ({ slide }) => {
 	const Skeleton = () => <div className="animate-pulse w-full h-16/9"></div>;
 
 	const InfoCard = () => (
-		<div className="absolute text-white left-0 lg:left-24 2xl:left-5% bottom-0 lg:bottom-28 2xl:bottom-44 w-full lg:w-1/2 2xl:w-2/5 bg-opacity-40 bg-almostBlack px-12 py-2 sm:px-7 lg:px-5 lg:py-4 rounded-none lg:rounded-xl backdrop-filter backdrop-blur-lg">
+		<div className="absolute text-white left-0 lg:left-24 2xl:left-5% bottom-0 lg:bottom-28 2xl:bottom-44 w-full lg:w-1/2 2xl:w-2/5 bg-opacity-40 bg-almostBlack px-12 py-2 sm:px-7% md:px-5% lg:px-5 lg:py-4 rounded-none lg:rounded-xl backdrop-filter backdrop-blur-lg">
 			<div className="flex items-center justify-between gap-4">
 				<p className="flex-grow font-medium sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
 					{title}
