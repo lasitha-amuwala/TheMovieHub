@@ -21,6 +21,16 @@ module.exports.getTrending = async (req, res) => {
 	}
 };
 
+module.exports.getNowPlaying = async (req, res) => {
+	try {
+		await axios.get(requests.movieNowPlaying).then(({ data }) => {
+			res.status(200).json(data);
+		});
+	} catch {
+		res.status(500);
+	}
+};
+
 module.exports.getPopular = async (req, res) => {
 	try {
 		await axios.get(requests.moviePopular).then(({ data }) => {
