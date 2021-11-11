@@ -12,7 +12,7 @@ export const Movie = () => {
 	return (
 		<div>
 			<img src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} />
-			{`Hello, ${id}, ${data.title}`}
+			{`Helloworld, ${id}, ${data.title}`}
 		</div>
 	);
 };
