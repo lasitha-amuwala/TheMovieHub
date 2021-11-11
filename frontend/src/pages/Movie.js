@@ -11,5 +11,5 @@ export const Movie = () => {
 		});
 	}, [id]);
 
-	return <div>{`Hello, ${id}, ${type}`}</div>;
+	return <div>{`Helloworld, ${id}, ${type}`}</div>;
 };
