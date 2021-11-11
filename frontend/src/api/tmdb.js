@@ -1,6 +1,6 @@
 import { api } from './api';
 
-export const getTrending = async (req, res) => {
+export const getTrending = async () => {
 	try {
 		const response = await api.get('/tmdb/trending');
 		return response;
@@ -9,7 +9,7 @@ export const getTrending = async (req, res) => {
 	}
 };
 
-export const getNowPlaying = async (req, res) => {
+export const getNowPlaying = async () => {
 	try {
 		const response = await api.get('/tmdb/nowPlaying');
 		return response;
@@ -18,7 +18,7 @@ export const getNowPlaying = async (req, res) => {
 	}
 };
 
-export const getPopular = async (req, res) => {
+export const getPopular = async () => {
 	try {
 		const response = await api.get('/tmdb/popular');
 		return response;
@@ -27,7 +27,7 @@ export const getPopular = async (req, res) => {
 	}
 };
 
-export const getTopRated = async (req, res) => {
+export const getTopRated = async () => {
 	try {
 		const response = await api.get('/tmdb/topRated');
 		return response;
@@ -36,7 +36,7 @@ export const getTopRated = async (req, res) => {
 	}
 };
 
-export const getUpcoming = async (req, res) => {
+export const getUpcoming = async () => {
 	try {
 		const response = await api.get('/tmdb/upcoming');
 		return response;
@@ -45,11 +45,10 @@ export const getUpcoming = async (req, res) => {
 	}
 };
 
-export const getMovie = async (req, res) => {
+export const getMovie = async (id) => {
 	try {
-		console.log(req)
-		const response = await api.get(`/tmdb/movie/${req.params.id}`);
-		return response;
+		const response = await api.get(`/tmdb/movie/${id}`);
+		return response.data;
 	} catch (e) {
 		console.log(e);
 	}
