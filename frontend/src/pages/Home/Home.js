@@ -7,8 +7,8 @@ import {
 	getNowPlaying,
 } from '../../api/tmdb';
 
-import { Navbar } from '../../components/Navbar';
 import { Carousel } from './Carousel/Carousel';
+import { Footer } from '../../components/Footer';
 import { List } from '../../components/List';
 
 export const Home = () => {
@@ -32,14 +32,13 @@ export const Home = () => {
 	}, []);
 
 	return (
-		<div className="overflow-hidden min-h-screen relative pb-16 mt-16">
-			<Navbar />
+		<div className="overflow-hidden min-h-screen relative pb-16">
 			<Carousel slides={trendingList} autoplay />
 			<List data={popularList} title="Popular" />
 			<List data={topRatedList} title="Top Rated" />
 			<List data={nowPlayingList} title="Now Playing" />
 			<List data={upcomingList} title="Upcoming" />
-			<div className="absolute bottom-0 w-full h-16 bg-black bg-opacity-30"></div>
+			<Footer />
 		</div>
 	);
 };

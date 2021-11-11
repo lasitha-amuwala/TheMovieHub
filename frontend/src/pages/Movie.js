@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getMovie } from '../api/tmdb';
 import { useParams } from 'react-router';
+import { Navbar } from '../components/Navbar';
 
 export const Movie = () => {
-	let { id, type } = useParams();
+	const { id, type } = useParams();
+	const [data, setData] = useState({});
 
-	useEffect(() => {
-		getMovie(id).then((res) => {
-			console.log(res);
-		});
-	}, [id]);
+	useEffect(() => getMovie(id).then((res) => setData(res)), [id]);
 
-	return <div>{`Hello, ${id}, ${type}`}</div>;
+	return (
+		<div>
+			<img src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} />
+			{`Hello, ${id}, ${data.title}`}
+		</div>
+	);
 };
