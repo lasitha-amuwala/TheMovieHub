@@ -11,8 +11,9 @@ export const Movie = () => {
 
 	return (
 		<div>
-			<img src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} />
-			{`Hello, ${id}, ${data.title}`}
+			<div className="w-96">
+				<img src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} />
+			</div>
 		</div>
 	);
 };
