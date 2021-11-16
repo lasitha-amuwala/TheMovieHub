@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ReactComponent as InfoIcon } from '../../../icons/infoIcon.svg';
 
 export const CarouselItem = ({ slide }) => {
 	const [imageLoaded, setImageLoaded] = useState(false);
 
-	const { title, backdrop_path, overview } = slide;
+	const { title, backdrop_path, overview, id } = slide;
 
 	const Skeleton = () => <div className="animate-pulse w-full h-16/9"></div>;
 
@@ -14,10 +15,13 @@ export const CarouselItem = ({ slide }) => {
 				<p className="flex-grow font-medium sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
 					{title}
 				</p>
-				<button className="items-center hidden lg:flex flex-shrink-0 gap-2 text-base px-3 py-3 font-semibold bg-blue-700 bg-opacity-40 rounded-xl hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4">
+				<Link
+					to={`/details/movie/${id}`}
+					className="items-center hidden lg:flex flex-shrink-0 gap-2 text-base px-3 py-3 font-semibold bg-blue-700 bg-opacity-40 rounded-xl hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4"
+				>
 					<InfoIcon />
 					More Info
-				</button>
+				</Link>
 			</div>
 			<p className="sm:text-sm md:text-base 2xl:text-lg 2xl:font-normal my-2 lg:my-3 xl:my-4 hidden md:line-clamp-2 lg:line-clamp-3 xl:line-clamp-4 2xl:line-clamp-5">
 				{overview}
