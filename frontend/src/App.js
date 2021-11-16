@@ -11,7 +11,7 @@ export const App = () => (
 		<div className="mt-16">
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/details/:type/:id" element={<Movie />} />
+				<Route path="/details/:id" element={<Movie />} />
 			</Routes>
 		</div>
 	</div>

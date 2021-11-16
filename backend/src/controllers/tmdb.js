@@ -66,7 +66,6 @@ module.exports.getMovieById = async (req, res) => {
 		await axios
 			.get(`${baseURL}/movie/${req.params.id}?api_key=${API_KEY}`)
 			.then(({ data }) => {
-				console.log(data);
 				res.status(200).json(data);
 			});
 	} catch {

@@ -16,7 +16,7 @@ export const CarouselItem = ({ slide }) => {
 					{title}
 				</p>
 				<Link
-					to={`/details/movie/${id}`}
+					to={`/details/${id}`}
 					className="items-center hidden lg:flex flex-shrink-0 gap-2 text-base px-3 py-3 font-semibold bg-blue-700 bg-opacity-40 rounded-xl hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4"
 				>
 					<InfoIcon />
