@@ -31,7 +31,7 @@ export const CarouselItem = ({ slide }) => {
 
 	return (
 		<li className="min-w-full max-w-full max-h-85vh relative">
-			<div className="w-full h-50vw">
+			<div className="w-full h-56vw">
 				{!imageLoaded && Skeleton()}
 				<img
 					className="w-full h-full object-cover relative select-none block"

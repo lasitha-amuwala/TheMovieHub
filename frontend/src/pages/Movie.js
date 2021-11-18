@@ -11,24 +11,26 @@ export const Movie = () => {
 	return (
 		<div>
 			<div
-				className="w-full  bg-contain "
+				className="w-screen bg-cover 2xl:h-50vh"
 				style={{
 					backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 				}}
 			>
-				<div className="grid grid-cols-2 h-full bg-black bg-opacity-80">
-					<div className="h-full w-full">
+				<div className="grid grid-cols-5 bg-black bg-opacity-90 2xl:px-72">
+					<div className="w-full h-16:9 2xl:h-50vh col-span-2">
 						<img
-							src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+							className="h-full p-16"
+							src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
 						></img>
-						hi
 					</div>
-					<div className="h-full w-full"></div>
+					<div className="p-16 col-span-3">
+						<p className="text-white font-bold sm:text-2xl md:text-3xl lg:text-5xl 2xl:text-6xl">
+							{data.title}
+						</p>
+					</div>
 				</div>
 			</div>
-			<div className="h-screen">hm</div>
+			<div className="h-screen"></div>
 		</div>
 	);
 };
-
-//					src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
