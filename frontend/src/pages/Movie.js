@@ -8,25 +8,30 @@ export const Movie = () => {
 
 	useEffect(() => getMovie(id).then((res) => setData(res)), [id]);
 
+	if (!Object.keys(data).length) return <div></div>;
+
+	const { backdrop_path, poster_path, title, release_date } = data;
 	return (
 		<div>
 			<div
-				className="w-screen bg-cover 2xl:h-50vh"
+				className="w-screen bg-cover"
 				style={{
-					backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
+					backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`,
 				}}
 			>
-				<div className="grid grid-cols-5 bg-black bg-opacity-90 2xl:px-72">
-					<div className="w-full h-16:9 2xl:h-50vh col-span-2">
+				<div className="flex bg-black bg-opacity-90 h-30vh 2xl:px-25%">
+					<div className="flex-none px-10 py-8">
 						<img
-							className="h-full p-16"
-							src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+							className="h-full rounded-xl"
+							src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
 						></img>
 					</div>
-					<div className="p-16 col-span-3">
-						<p className="text-white font-bold sm:text-2xl md:text-3xl lg:text-5xl 2xl:text-6xl">
-							{data.title}
+					<div className="flex p-10 flex-1 gap-4">
+						<p className=" text-white font-normal text-4xl">
+							{`${title}`}
 						</p>
+						<p className="text-white font-light text-4xl"
+						>{`(${release_date.split('-')[0]})`}</p>
 					</div>
 				</div>
 			</div>
