@@ -83,6 +83,7 @@ module.exports.getMovieById = async (req, res) => {
 				delete data.production_companies;
 				delete data.production_countries;
 				delete data.spoken_languages;
+				delete data.adult;
 
 				data.rating = rating.certification;
 
