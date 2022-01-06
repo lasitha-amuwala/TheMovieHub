@@ -14,6 +14,7 @@ module.exports = {
 			maxHeight: {
 				'85vh': '85vh',
 				27: '110px',
+				'16:9': 'calc(100vw / 1.78)',
 			},
 			minWidth: {
 				'1/3': '33.34%',
@@ -25,7 +26,10 @@ module.exports = {
 			},
 			height: {
 				27: '110px',
-				'50vw': '56vw',
+				'56vw': '56vw',
+				'50vh': '50vh',
+				'40vh': '40vh',
+				'16:9': 'calc(100vw / 1.78)',
 			},
 			width: {
 				54: '215px',
@@ -42,10 +46,14 @@ module.exports = {
 			padding: {
 				'5%': '5%',
 				'7%': '7%',
+				'20%': '20%',
 			},
 			inset: {
 				'45%': '45%',
 				'5%': '5%',
+			},
+			border: {
+				1: '1px',
 			},
 		},
 	},
