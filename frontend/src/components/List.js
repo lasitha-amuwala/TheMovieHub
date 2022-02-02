@@ -54,36 +54,35 @@ export const List = ({ data, title }) => {
 	useEffect(() => window.addEventListener('resize', handleResize), []);
 
 	return (
-		<div className="relative group mb-5 mt-5 lg:mt-0 lg:mb-20 2xl:mb-24 text-white w-full">
-			<span className="lg:absolute -top-14 2xl:-top-16 text-white md:text-2xl lg:text-3xl 2xl:text-4xl pl-1 ml-7% md:ml-5% font-medium">
+		<div className='relative group mb-5 mt-5 lg:mt-0 lg:mb-20 2xl:mb-24 text-white w-full'>
+			<span className='lg:absolute -top-14 2xl:-top-16 text-white md:text-2xl lg:text-3xl 2xl:text-4xl pl-1 ml-7% md:ml-5% font-medium'>
 				{title}
 			</span>
-			<div className="mt-3 relative">
+			<div className='mt-3 relative'>
 				{count > 0 && (
-					<div className="w-7% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none">
+					<div className='w-7% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none'>
 						<ChevronLeft
-							className="w-full h-full opacity-0 group-hover:opacity-100 transform transition duration-200 hover:scale-125"
+							className='w-full h-full opacity-0 group-hover:opacity-100 transform transition duration-200 hover:scale-125'
 							onClick={() => handleClick('left')}
 						/>
 					</div>
 				)}
 				{(count === 0 || count !== lastIndex) && (
-					<div className="w-7% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none">
+					<div className='w-7% md:w-5% h-full rounded-l-lg cursor-pointer bg-black absolute right-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none'>
 						<ChevronRight
-							className="w-full h-full opacity-0 group-hover:opacity-100 transform transition duration-200 hover:scale-125"
+							className='w-full h-full opacity-0 group-hover:opacity-100 transform transition duration-200 hover:scale-125'
 							onClick={() => handleClick('right')}
 						/>
 					</div>
 				)}
-				<div {...handlers} className="px-7% md:px-5% z-10 select-none">
+				<div {...handlers} className='px-7% md:px-5% z-10 select-none'>
 					<ul
 						ref={listRef}
 						style={{
 							display: 'flex',
 							transition:
 								'transform .75s ease 0s,-webkit-transform .75s ease 0s,-moz-transform .75s ease 0s,-o-transform .75s ease 0s',
-						}}
-					>
+						}}>
 						{data.map((item) => (
 							<ListItem data={item} key={item.id} ref={itemRef} />
 						))}
