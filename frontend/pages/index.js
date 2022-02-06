@@ -1,46 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import {
-	getTrending,
-	getPopular,
-	getTopRated,
-	getUpcoming,
-	getNowPlaying,
-} from '../src/api/tmdb';
-
-import { Carousel } from '../components/Carousel/Carousel';
+import React from 'react';
 import { List } from '../components/List';
+import { Carousel } from '../components/Carousel/Carousel';
 
-const Home = () => {
-	const [trendingList, setTrendingList] = useState([]);
-	const [nowPlayingList, setNowPlayingList] = useState([]);
-	const [popularList, setPopularList] = useState([]);
-	const [topRatedList, setTopRatedList] = useState([]);
-	const [upcomingList, setUpcomingList] = useState([]);
-	const API_KEY = process.env.TMDB_API_KEY;
+export const getStaticProps = async () => {
+	const baseURL = 'https://api.themoviedb.org/3';
+	const API_KEY = `api_key=${process.env.TMDB_API_KEY}`;
+	
+	const [trendingRes, nowPlayingRes, popularRes, topRatedRes, upcomingRes] =
+		await Promise.all([
+			fetch(`${baseURL}/trending/movie/week?${API_KEY}`),
+			fetch(`${baseURL}/movie/now_playing?region=US&language=en-US&${API_KEY}`),
+			fetch(`${baseURL}/movie/popular?region=US&language=en-US&${API_KEY}`),
+			fetch(`${baseURL}/movie/top_rated?region=US&language=en-US&${API_KEY}`),
+			fetch(`${baseURL}/movie/upcoming?region=US&language=en-US&${API_KEY}`),
+		]);
 
-	useEffect(() => {
-		const getData = async () => {
-			const res = await fetch(
-				`https://api.themoviedb.org/3/trending/movie/week?api_key=***REMOVED***`
-			);
-			const data = await res.json();
-			setTrendingList(data.results);
-		};
-		getData();
-	}, []);
+	const [
+		trendingList,
+		nowPlayingList,
+		popularList,
+		topRatedList,
+		upcomingList,
+	] = await Promise.all([
+		trendingRes.json(),
+		nowPlayingRes.json(),
+		popularRes.json(),
+		topRatedRes.json(),
+		upcomingRes.json(),
+	]);
 
-	return (
-		<div className='overflow-hidden min-h-screen relative'>
-			<Carousel slides={trendingList} autoplay />
-			<List data={trendingList} title='Trending' />
-		</div>
-	);
+	return {
+		props: {
+			trendingList,
+			nowPlayingList,
+			popularList,
+			topRatedList,
+			upcomingList,
+		},
+	};
 };
 
+const Home = (props) => (
+	<div className='overflow-hidden min-h-screen relative'>
+		<Carousel slides={props.trendingList.results} autoplay />
+		<List data={props.popularList.results} title='Popular' />
+		<List data={props.topRatedList.results} title='Top Rated' />
+		<List data={props.nowPlayingList.results} title='Now Playing' />
+		<List data={props.upcomingList.results} title='Upcoming' />
+	</div>
+);
+
 export default Home;
-/**
- * 			<List data={popularList} title='Popular' />
-			<List data={topRatedList} title='Top Rated' />
-			<List data={nowPlayingList} title='Now Playing' />
-			<List data={upcomingList} title='Upcoming' />
- */
