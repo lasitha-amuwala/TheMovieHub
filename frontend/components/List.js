@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
 import { useSwipeable } from 'react-swipeable';
-import Image from 'next/image';
-import { ListItem } from './ListItem';
+
+import ListItem from './ListItem';
 
 export const List = ({ data, title }) => {
 	const listRef = useRef(null);
