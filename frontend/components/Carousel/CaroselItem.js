@@ -18,7 +18,7 @@ export const CarouselItem = ({ slide }) => {
 				<p className='flex-grow font-medium sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl'>
 					{title}
 				</p>
-				<Link href={`/details/${id}`}>
+				<Link href={`/details/${id}`} passHref>
 					<div className='items-center hidden lg:flex flex-shrink-0 gap-2 text-base px-3 py-3 font-semibold bg-blue-700 bg-opacity-40 rounded-xl hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4'>
 						<HiOutlineInformationCircle className='w-6 h-6' />
 						More Info
@@ -41,6 +41,7 @@ export const CarouselItem = ({ slide }) => {
 					src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
 					alt={`${title.split(' ').join('-')}-poster`}
 					onLoad={() => setImageLoaded(true)}
+					priority
 				/>
 			</div>
 			<InfoCard />

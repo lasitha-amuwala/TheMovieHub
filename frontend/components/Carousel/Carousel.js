@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useInterval, usePrevious } from '../../hooks/hooks';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
-import Image from 'next/image';
 
 import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';
 import { useSwipeable } from 'react-swipeable';
 
 export const Carousel = ({ slides, autoplay }) => {
-	console.log(slides);
 	const [sliderData, setSliderData] = useState([]);
 	const [slideIndex, setSlideIndex] = useState(1);
 	const [animation, setAnimation] = useState(false);
