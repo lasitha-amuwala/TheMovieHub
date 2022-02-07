@@ -1,8 +1,6 @@
 module.exports = {
-	content: [
-		'./pages/**/*.{js,ts,jsx,tsx}',
-		'./components/**/*.{js,ts,jsx,tsx}',
-	],
+	mode: 'jit',
+	purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		backgroundColor: (theme) => ({
 			...theme('colors'),
@@ -34,11 +32,13 @@ module.exports = {
 				'56vw': '56vw',
 				'50vh': '50vh',
 				'16:9': 'calc(100vw / 1.78)',
+				'40vh': '40vh',
 			},
 			width: {
 				54: '215px',
 				'5%': 'calc(5% - 3px)',
 				'7%': 'calc(7% - 3px)',
+				'26%h': 'calc(384px * 0.65)',
 			},
 			screens: {
 				'3xl': '1600px',
