@@ -18,6 +18,9 @@ module.exports = {
 				27: '110px',
 				'16:9': 'calc(100vw / 1.78)',
 			},
+			minHeight: {
+				'40vh': '40vh',
+			},
 			minWidth: {
 				'1/3': '33.34%',
 				'1/4': '25%',
@@ -30,7 +33,6 @@ module.exports = {
 				27: '110px',
 				'56vw': '56vw',
 				'50vh': '50vh',
-				'40vh': '40vh',
 				'16:9': 'calc(100vw / 1.78)',
 			},
 			width: {
@@ -56,6 +58,9 @@ module.exports = {
 			},
 			border: {
 				1: '1px',
+			},
+			aspectRatio: {
+				'11/17': '11 / 17',
 			},
 		},
 	},

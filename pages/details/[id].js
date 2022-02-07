@@ -50,26 +50,26 @@ const Details = (data) => {
 	return (
 		<div>
 			<div
-				className='w-screen bg-cover'
+				className='bg-cover'
 				style={{
 					backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 				}}>
-				<div className='flex bg-black bg-opacity-90 h-40vh 2xl:px-20%'>
-					<div className='relative flex-none px-10 py-10'>
+				<div className='flex flex-wrap flex-col md:flex-row bg-black bg-opacity-90 min-h-40vh  2xl:px-20%'>
+					<div className='self-center flex-none pt-10 md:p-5 w-2/3 md:w-1/4 grow-0'>
 						<Image
-							layout='fill'
-							objectFit='cover'
-							className='h-full rounded-xl'
+							width={500}
+							height={700}
+							className='rounded-xl min-w-1/3'
 							src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 							alt={`${data.title}-poster`}
 						/>
 					</div>
-					<div className='p-10 flex flex-col flex-1 gap-5 text-4xl text-white'>
-						<div className='font-bold'>
-							{data.title}
-							<span className='font-light pl-4'>{`(${
-								data.release_date.split('-')[0]
-							})`}</span>
+					<div className='p-10 flex flex-col flex-1 gap-5 text-4xl text-white grow'>
+						<div className='flex flex-row flex-wrap'>
+							<div className='font-bold pr-4'>{data.title}</div>
+							<div className='font-light '>
+								{`(${data.release_date.split('-')[0]})`}
+							</div>
 						</div>
 						<div className='flex gap-3 items-center'>
 							<div className='text-sm border p-1 px-2 border-gray-400 text-gray-400 inline'>
