@@ -49,6 +49,62 @@ const Details = (data) => {
 
 	return (
 		<div>
+			<div>
+				<div
+					className='bg-cover'
+					style={{
+						backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
+					}}>
+					<div className='h-full bg-black bg-opacity-80 2xl:px-20%'>
+						<div className='flex flex-col md:flex-row p-10 gap-16'>
+							<div className='relative self-center h-96 w-26%h flex-none border-2 border-cyan-200 rounded-xl'>
+								<Image
+									layout='fill'
+									className='rounded-xl '
+									src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+									alt={`${data.title}-poster`}
+								/>
+							</div>
+							<div className='flex flex-col text-4xl text-white gap-4'>
+								<div className='flex gap-4 flex-wrap'>
+									<div className='font-bold'>{data.title}</div>
+									<div className='font-light'>
+										{`(${data.release_date.split('-')[0]})`}
+									</div>
+								</div>
+								<div className='flex gap-4'>
+									{data.rating && (
+										<div className='text-sm border p-1 px-2 border-gray-400 text-gray-400 inline'>
+											{data.rating}
+										</div>
+									)}
+									<div className='text-base'>{formatRuntime(data.runtime)}</div>
+								</div>
+								<div className='font-normal text-base md:text-lg'>
+									{data.overview}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className='h-screen'></div>
+		</div>
+	);
+};
+
+export default Details;
+
+const formatRuntime = (mins) => {
+	let min = mins % 60;
+	let h = (mins - min) / 60;
+	return `${h}h ${min}m`;
+};
+/**
+
+ */
+/**
+ * 	<div>
 			<div
 				className='bg-cover'
 				style={{
@@ -89,13 +145,4 @@ const Details = (data) => {
 			</div>
 			<div className='h-screen'></div>
 		</div>
-	);
-};
-
-export default Details;
-
-const formatRuntime = (mins) => {
-	let min = mins % 60;
-	let h = (mins - min) / 60;
-	return `${h}h ${min}m`;
-};
+ */
