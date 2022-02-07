@@ -54,7 +54,7 @@ const Details = (data) => {
 				style={{
 					backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 				}}>
-				<div className='flex flex-wrap flex-col md:flex-row bg-black bg-opacity-90 min-h-40vh  2xl:px-20%'>
+				<div className='flex flex-col md:flex-row bg-black bg-opacity-90 min-h-40vh  2xl:px-20%'>
 					<div className='self-center flex-none pt-10 md:p-5 w-2/3 md:w-1/4 grow-0'>
 						<Image
 							width={500}
