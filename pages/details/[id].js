@@ -54,30 +54,36 @@ const Details = (data) => {
 				style={{
 					backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 				}}>
-				<div className='flex flex-col md:flex-row bg-black bg-opacity-90 min-h-40vh  2xl:px-20%'>
-					<div className='self-center flex-none pt-10 md:p-5 w-2/3 md:w-1/4 grow-0'>
+				<div className='flex flex-col md:flex-row sm:gap-4 bg-black bg-opacity-80 min-h-40vh 2xl:px-20% pt-10 sm:p-10'>
+					<div
+						style={{ border: '2px solid', borderColor: 'rgba(11, 154, 187, 0.45' }}
+						className=' rounded-xl aspect-11/17 self-center flex-none w-2/3 md:w-1/4 grow-0'>
 						<Image
 							width={500}
-							height={700}
+							height={772}
 							className='rounded-xl min-w-1/3'
 							src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 							alt={`${data.title}-poster`}
 						/>
 					</div>
-					<div className='p-10 flex flex-col flex-1 gap-5 text-4xl text-white grow'>
-						<div className='flex flex-row flex-wrap'>
-							<div className='font-bold pr-4'>{data.title}</div>
+					<div className='p-10 flex flex-col flex-1 gap-5 text-white grow'>
+						<div className='flex flex-row flex-wrap text-4xl gap-2'>
+							<div className='font-bold'>{data.title}</div>
 							<div className='font-light '>
 								{`(${data.release_date.split('-')[0]})`}
 							</div>
 						</div>
 						<div className='flex gap-3 items-center'>
-							<div className='text-sm border p-1 px-2 border-gray-400 text-gray-400 inline'>
-								{data.rating}
-							</div>
+							{data.rating && (
+								<div className='text-sm border p-1 px-2 border-gray-400 text-gray-400 inline'>
+									{data.rating}
+								</div>
+							)}
 							<div className='text-base'>{formatRuntime(data.runtime)}</div>
 						</div>
-						<div className='font-normal text-lg'>{data.overview}</div>
+						<div className='font-normal text-base md:text-lg'>
+							{data.overview}
+						</div>
 					</div>
 				</div>
 			</div>
