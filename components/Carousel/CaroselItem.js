@@ -41,6 +41,9 @@ export const CarouselItem = ({ slide }) => {
 					src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
 					alt={`${title.split(' ').join('-')}-poster`}
 					onLoad={() => setImageLoaded(true)}
+					quality={100}
+					placeholder='blur'
+					blurDataURL={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
 					priority
 				/>
 			</div>

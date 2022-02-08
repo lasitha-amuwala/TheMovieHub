@@ -13,6 +13,7 @@ const ListItem = forwardRef(({ data }, ref) => {
 						className='h-auto cursor-pointer rounded-lg'
 						src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 						alt={`${data.title.split(' ').join('-')}-poster`}
+						priority
 					/>
 				</Link>
 			</li>

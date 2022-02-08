@@ -46,6 +46,7 @@ const Details = (data) => {
 	if (router.isFallback) {
 		return <div>error</div>;
 	}
+	const poster = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
 
 	return (
 		<div>
@@ -63,6 +64,8 @@ const Details = (data) => {
 									className='rounded-xl '
 									src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 									alt={`${data.title}-poster`}
+									placeholder='blur'
+									blurDataURL={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 								/>
 							</div>
 							<div className='flex flex-col text-4xl text-white gap-4'>
