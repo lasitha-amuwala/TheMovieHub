@@ -28,7 +28,9 @@ const Details = (data) => {
 						<div className='flex flex-col md:flex-row p-10 gap-16'>
 							<div className='relative self-center h-96 w-26%h flex-none border-2 border-cyan-200 rounded-xl'>
 								<Image
-									layout='fill'
+									width={11}
+									height={17}
+									layout='responsive'
 									className='rounded-xl '
 									src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 									alt={`${data.title}-poster`}
