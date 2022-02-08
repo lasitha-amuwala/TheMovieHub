@@ -4,7 +4,7 @@
 
 ::-webkit-scrollbar {
 	/* for Chrome, Safari, and Opera */
-	background: transparent;
+	background: rgba(17, 17, 17, 0.726);
 }
 
 ::-webkit-scrollbar-thumb {
