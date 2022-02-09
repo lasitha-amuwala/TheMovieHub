@@ -1,6 +1,9 @@
 module.exports = {
 	mode: 'jit',
-	content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+	content: [
+		'./pages/**/*.{js,ts,jsx,tsx}',
+		'./components/**/*.{js,ts,jsx,tsx}',
+	],
 	theme: {
 		backgroundColor: (theme) => ({
 			...theme('colors'),
@@ -19,6 +22,13 @@ module.exports = {
 			minHeight: {
 				'40vh': '40vh',
 			},
+			height: {
+				27: '110px',
+				'56vw': '56vw',
+				'50vh': '50vh',
+				'16:9': 'calc(100vw / 1.78)',
+				'40vh': '40vh',
+			},
 			minWidth: {
 				'1/3': '33.34%',
 				'1/4': '25%',
@@ -26,13 +36,6 @@ module.exports = {
 				'1/6': '16.67%',
 				'1/7': '14.29%',
 				'1/8': '12.5%',
-			},
-			height: {
-				27: '110px',
-				'56vw': '56vw',
-				'50vh': '50vh',
-				'16:9': 'calc(100vw / 1.78)',
-				'40vh': '40vh',
 			},
 			width: {
 				54: '215px',

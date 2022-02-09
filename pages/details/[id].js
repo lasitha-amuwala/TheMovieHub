@@ -24,8 +24,8 @@ const Details = (data) => {
 					style={{
 						backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 					}}>
-					<div className='h-full bg-black bg-opacity-70 2xl:px-10%'>
-						<div className='flex flex-col md:flex-row p-10 gap-16'>
+					<div className='h-full bg-black bg-opacity-70'>
+						<div className='flex flex-col md:flex-row p-10 gap-16 max-w-[var(--maxPageWidth)] m-auto'>
 							<div className='relative self-center h-96 w-65%h flex-none border-2 border-cyan-200 rounded-xl'>
 								<Image
 									width={11}
@@ -34,7 +34,6 @@ const Details = (data) => {
 									className='rounded-xl '
 									src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 									alt={`${data.title}-poster`}
-									placeholder='blur'
 									blurDataURL={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
 								/>
 							</div>
