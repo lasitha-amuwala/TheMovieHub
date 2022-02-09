@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ListItem = forwardRef(({ data }, ref) => {
 	let id = data.id || data.tv_id;
