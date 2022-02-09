@@ -24,7 +24,7 @@ const Details = (data) => {
 					style={{
 						backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 					}}>
-					<div className='h-full bg-black bg-opacity-80 2xl:px-10%'>
+					<div className='h-full bg-black bg-opacity-70 2xl:px-10%'>
 						<div className='flex flex-col md:flex-row p-10 gap-16'>
 							<div className='relative self-center h-96 w-65%h flex-none border-2 border-cyan-200 rounded-xl'>
 								<Image
@@ -41,7 +41,7 @@ const Details = (data) => {
 							<div className='flex flex-col text-4xl text-white gap-4'>
 								<div className='flex gap-4 flex-wrap'>
 									<div className='font-bold'>{data.title}</div>
-									<div className='font-light'>
+									<div className='font-light text-gray-300'>
 										{`(${data.release_date.split('-')[0]})`}
 									</div>
 								</div>
