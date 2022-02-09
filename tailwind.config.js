@@ -6,7 +6,7 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			colors: { almostBlack: '#141414' },
+			colors: { almostBlack: 'var(--primaryBackgroundColor)' },
 			maxHeight: {
 				'85vh': '85vh',
 			},

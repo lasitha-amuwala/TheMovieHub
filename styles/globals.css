@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+	--primaryBackgroundColor: #141414;
 	--maxPageWidth: 1400px;
 }
 
