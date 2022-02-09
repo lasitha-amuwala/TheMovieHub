@@ -5,6 +5,10 @@ module.exports = {
 		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
+		backgroundColor: (theme) => ({
+			...theme('colors'),
+			almostBlack: '#141414',
+		}),
 		extend: {
 			colors: { almostBlack: 'var(--primaryBackgroundColor)' },
 			maxHeight: {
