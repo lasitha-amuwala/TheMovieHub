@@ -5,29 +5,10 @@ module.exports = {
 		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		backgroundColor: (theme) => ({
-			...theme('colors'),
-			almostBlack: '#141414',
-		}),
 		extend: {
-			gradientColorStops: (theme) => ({
-				...theme('colors'),
-				almostBlack: '#141414',
-			}),
+			colors: { almostBlack: '#141414' },
 			maxHeight: {
 				'85vh': '85vh',
-				27: '110px',
-				'16:9': 'calc(100vw / 1.78)',
-			},
-			minHeight: {
-				'40vh': '40vh',
-			},
-			height: {
-				27: '110px',
-				'56vw': '56vw',
-				'50vh': '50vh',
-				'16:9': 'calc(100vw / 1.78)',
-				'40vh': '40vh',
 			},
 			minWidth: {
 				'1/3': '33.34%',
@@ -38,13 +19,9 @@ module.exports = {
 				'1/8': '12.5%',
 			},
 			width: {
-				54: '215px',
 				'5%': 'calc(5% - 3px)',
 				'7%': 'calc(7% - 3px)',
 				'65%h': 'calc(384px * 0.65)',
-			},
-			screens: {
-				'3xl': '1600px',
 			},
 			margin: {
 				'5%': '5%',
@@ -53,7 +30,6 @@ module.exports = {
 			padding: {
 				'5%': '5%',
 				'7%': '7%',
-				'10%': '10%',
 			},
 			inset: {
 				'45%': '45%',
@@ -68,14 +44,7 @@ module.exports = {
 		},
 	},
 	variants: {
-		extend: {
-			zIndex: ['hover'],
-			width: ['hover'],
-			margin: ['hover'],
-			scale: ['hover'],
-		},
+		extend: {},
 	},
 	plugins: [require('@tailwindcss/line-clamp')],
 };
-
-//	content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
