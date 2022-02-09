@@ -24,9 +24,9 @@ const Details = (data) => {
 					style={{
 						backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
 					}}>
-					<div className='h-full bg-black bg-opacity-80 2xl:px-20%'>
+					<div className='h-full bg-black bg-opacity-80 2xl:px-10%'>
 						<div className='flex flex-col md:flex-row p-10 gap-16'>
-							<div className='relative self-center h-96 w-26%h flex-none border-2 border-cyan-200 rounded-xl'>
+							<div className='relative self-center h-96 w-65%h flex-none border-2 border-cyan-200 rounded-xl'>
 								<Image
 									width={11}
 									height={17}
