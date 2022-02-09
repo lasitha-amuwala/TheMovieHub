@@ -15,10 +15,10 @@ export const Navbar = () => {
 				<div className='flex items-center text-white font-bold'>
 					<NavItem to='/' label='MovieHub'/>
 					<div className='flex pl-8 gap-4 font-normal'>
-						<NavItem label='Movies' />
-						<NavItem label='Series' />
-						<NavItem label='Profile' />
-						<NavItem label='My List' />
+						<NavItem label='Movies' to='/' />
+						<NavItem label='Series' to='/' />
+						<NavItem label='Profile' to='/' />
+						<NavItem label='My List' to='/' />
 					</div>
 				</div>
 			</div>
