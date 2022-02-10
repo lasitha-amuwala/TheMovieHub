@@ -14,7 +14,7 @@ export const Navbar = () => {
 			<div className='flex h-full items-center justify-between mx-7% md:mx-5%'>
 				<div className='flex items-center text-white font-bold'>
 					<NavItem to='/' label='MovieHub'/>
-					<div className='flex pl-16 gap-16 font-normal'>
+					<div className='flex items-center pl-16 gap-16 font-normal'>
 						<NavItem label='Movies' to='/' />
 						<NavItem label='Series' to='/' />
 						<NavItem label='Profile' to='/' />
