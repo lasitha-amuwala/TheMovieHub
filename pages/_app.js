@@ -2,6 +2,7 @@
 import '../styles/globals.css';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
+import { MobileNav } from '../components/MobileNav';
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -9,6 +10,7 @@ function MyApp({ Component, pageProps }) {
 			<div className='mt-16'>
 				<Navbar />
 				<Component {...pageProps} />
+				<MobileNav />
 				<Footer />
 			</div>
 		</>

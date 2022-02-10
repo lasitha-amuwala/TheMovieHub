@@ -10,7 +10,11 @@ module.exports = {
 			almostBlack: '#141414',
 		}),
 		extend: {
-			colors: { almostBlack: 'var(--primaryBackgroundColor)' },
+			colors: {
+				almostBlack: 'var(--primaryBackgroundColor)',
+				borderPrimary: 'var(--primaryBorder)',
+				mobileNavButton: 'var(--mobileNavButton)',
+			},
 			maxHeight: {
 				'85vh': '85vh',
 			},

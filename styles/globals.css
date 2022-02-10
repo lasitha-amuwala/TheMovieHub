@@ -4,6 +4,8 @@
 
 :root {
 	--primaryBackgroundColor: #141414;
+	--mobileNavButton: #a7a7a7;
+	--primaryBorder: #292929;
 	--maxPageWidth: 1400px;
 }
 
