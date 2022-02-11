@@ -7,11 +7,11 @@ import { MobileNav } from '../components/MobileNav';
 function MyApp({ Component, pageProps }) {
 	return (
 		<>
-			<div className='mt-16'>
+			<div className='mt-16 mb-14 md:mb-0'>
 				<Navbar />
 				<Component {...pageProps} />
-				<MobileNav />
 				<Footer />
+				<MobileNav />
 			</div>
 		</>
 	);
