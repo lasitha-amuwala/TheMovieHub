@@ -4,11 +4,13 @@
 https://moviehub-la.vercel.app/
 
 What needs to be worked on:
+
 - listItem hover animation
 - responsiveness for different screens
 - fix carousel loop animation
 
 What needs to be added:
+
 - mobile navbar / hamburger menu
 - footer description / links
 - mobile bottom navigation
@@ -25,4 +27,4 @@ What needs to be added:
 - create logo / icon
 - add dynamic titles per page
 - loading states and animation
-- fix SSR issue with carousel      
+- fix SSR issue with carousel

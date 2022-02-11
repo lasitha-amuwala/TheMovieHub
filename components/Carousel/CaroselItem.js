@@ -6,44 +6,44 @@ import Image from 'next/image';
 import { HiOutlineInformationCircle } from 'react-icons/hi';
 
 export const CarouselItem = ({ slide }) => {
-	const { title, backdrop_path, overview, id } = slide;
+  const { title, backdrop_path, overview, id } = slide;
 
-	const InfoCard = () => (
-		<div className='absolute text-white left-0 lg:left-24 2xl:left-5% bottom-0 lg:bottom-28 2xl:bottom-56 w-full lg:w-1/2 2xl:w-1/3 bg-opacity-50 bg-almostBlack px-12 py-2 sm:px-7% md:px-5% lg:px-6 lg:py-5 rounded-none lg:rounded-xl backdrop-filter backdrop-blur-md'>
-			<div className='flex items-center justify-between gap-4'>
-				<p className='flex-grow font-medium sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl'>
-					{title}
-				</p>
-				<Link href={`/details/${id}`} passHref>
-					<div className='items-center hidden lg:flex flex-shrink-0 gap-2 text-base px-3 py-3 font-semibold bg-blue-700 bg-opacity-40 rounded-xl hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4'>
-						<HiOutlineInformationCircle className='w-6 h-6' />
-						More Info
-					</div>
-				</Link>
-			</div>
-			<p className='sm:text-sm md:text-base 2xl:text-lg 2xl:font-normal my-2 lg:my-3 xl:my-4 hidden md:line-clamp-2 lg:line-clamp-3 xl:line-clamp-4 2xl:line-clamp-5'>
-				{overview}
-			</p>
-		</div>
-	);
+  const InfoCard = () => (
+    <div className='absolute left-0 bottom-0 w-full rounded-none bg-almostBlack bg-opacity-50 px-12 py-2 text-white backdrop-blur-md backdrop-filter sm:px-7% md:px-5% lg:left-24 lg:bottom-28 lg:w-1/2 lg:rounded-xl lg:px-6 lg:py-5 2xl:left-5% 2xl:bottom-56 2xl:w-1/3'>
+      <div className='flex items-center justify-between gap-4'>
+        <p className='flex-grow font-medium sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl'>
+          {title}
+        </p>
+        <Link href={`/details/${id}`} passHref>
+          <div className='hidden flex-shrink-0 items-center gap-2 rounded-xl bg-blue-700 bg-opacity-40 px-3 py-3 text-base font-semibold hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4 lg:flex'>
+            <HiOutlineInformationCircle className='h-6 w-6' />
+            More Info
+          </div>
+        </Link>
+      </div>
+      <p className='my-2 hidden sm:text-sm md:text-base md:line-clamp-2 lg:my-3 lg:line-clamp-3 xl:my-4 xl:line-clamp-4 2xl:text-lg 2xl:font-normal 2xl:line-clamp-5'>
+        {overview}
+      </p>
+    </div>
+  );
 
-	return (
-		<li className='min-w-full max-w-full max-h-85vh relative'>
-			<div className='relative w-full h-56vw'>
-				<Image
-					width={1920}
-					height={1080}
-					layout='responsive'
-					className='w-full h-full object-cover object-top relative select-none block'
-					src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
-					alt={`${title.split(' ').join('-')}-poster`}
-					quality={100}
-					placeholder='blur'
-					blurDataURL={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
-					priority
-				/>
-			</div>
-			<InfoCard />
-		</li>
-	);
+  return (
+    <li className='relative max-h-85vh min-w-full max-w-full'>
+      <div className='h-56vw relative w-full'>
+        <Image
+          width={1920}
+          height={1080}
+          layout='responsive'
+          className='relative block h-full w-full select-none object-cover object-top'
+          src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+          alt={`${title.split(' ').join('-')}-poster`}
+          quality={100}
+          placeholder='blur'
+          blurDataURL={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+          priority
+        />
+      </div>
+      <InfoCard />
+    </li>
+  );
 };

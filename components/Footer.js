@@ -1,7 +1,5 @@
 import React from 'react';
 
 export const Footer = () => {
-	return (
-		<div className=" w-full h-16 bg-black bg-opacity-30"></div>
-	);
+  return <div className=' h-16 w-full bg-black bg-opacity-30'></div>;
 };
