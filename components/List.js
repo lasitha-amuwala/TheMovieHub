@@ -57,7 +57,7 @@ export const List = ({ data, title }) => {
 			<span className='lg:absolute -top-14 2xl:-top-16 text-white md:text-2xl lg:text-3xl 2xl:text-4xl pl-1 ml-7% md:ml-5% font-medium'>
 				{title}
 			</span>
-			<div className='mt-3 relative'>
+			<div className='mt-3 relative highlights-none'>
 				{count > 0 && (
 					<div className='w-7% md:w-5% h-full rounded-r-lg cursor-pointer bg-black absolute left-0 z-50 bg-opacity-60 hover:bg-opacity-80 select-none'>
 						<HiOutlineChevronLeft

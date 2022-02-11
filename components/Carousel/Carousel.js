@@ -52,7 +52,7 @@ export const Carousel = ({ slides, autoplay }) => {
 	if (!Array.isArray(sliderData) || !sliderData.length) return null;
 
 	const SliderButton = ({ children, classes, onClick }) => {
-		const classNames = `absolute flex items-center p-2 sm:p-4 ${classes} bottom-0 sm:bottom sm:bottom-45% sm:rounded-full bg-almostBlack bg-opacity-0 sm:bg-opacity-50 sm:hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter sm:backdrop-blur`;
+		const classNames = `absolute flex items-center p-[5px] sm:p-4 ${classes} bottom-0 sm:bottom sm:bottom-45% sm:rounded-full bg-almostBlack bg-opacity-0 sm:bg-opacity-50 sm:hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter sm:backdrop-blur`;
 		return (
 			<button className={classNames} onClick={onClick}>
 				{children}

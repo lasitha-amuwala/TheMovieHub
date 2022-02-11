@@ -30,10 +30,10 @@ export const MobileNav = () => {
 	const { pathname } = useRouter();
 
 	const Button = ({ href, icon1, icon2 }) => (
-		<Link href={href}>
-			<a className='h-full aspect-square'>
+		<Link href={href} >
+			<a className='h-full aspect-square highlights-none'>
 				{React.cloneElement(href == pathname ? icon2 : icon1, {
-					className: 'h-full w-full p-3 text-mobileNavButton',
+					className: 'h-full w-full p-4 text-mobileNavButton',
 				})}
 			</a>
 		</Link>
