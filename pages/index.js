@@ -1,9 +1,13 @@
 import React from 'react';
+import Head from 'next/head';
 import { List } from '../components/List';
 import { Carousel } from '../components/Carousel/Carousel';
 
 const Home = (props) => (
   <div className='relative min-h-screen overflow-hidden'>
+    <Head>
+      <title>{process.env.title}</title>
+    </Head>
     <Carousel slides={props.trendingList.results} autoplay />
     <List data={props.popularList.results} title='Popular' />
     <List data={props.topRatedList.results} title='Top Rated' />

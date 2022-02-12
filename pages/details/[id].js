@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -18,6 +19,9 @@ const Details = (data) => {
 
   return (
     <div>
+      <Head>
+        <title>{`${data.title} - ${process.env.title}`}</title>
+      </Head>
       <div>
         <div
           className='bg-cover'

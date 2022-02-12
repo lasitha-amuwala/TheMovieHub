@@ -10,7 +10,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        <title>MovieHub</title>
         <body className='bg-almostBlack'>
           <div id='root'>
             <Main />
