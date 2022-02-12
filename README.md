@@ -1,7 +1,7 @@
 # MovieHub
 
 **Currently in development:**
-https://moviehub-la.vercel.app/
+https://themoviehub.ca/
 
 What needs to be worked on:
 
