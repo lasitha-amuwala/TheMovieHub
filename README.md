@@ -1,7 +1,7 @@
-# MovieHub
+# TheMovieHub
 
 **Currently in development:**
-https://themoviehub.ca/
+https://themoviehub.ca
 
 What needs to be worked on:
 
