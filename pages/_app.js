@@ -1,18 +1,36 @@
 // import App from 'next/app'
-import '../styles/globals.css';
+import { useEffect, useState } from 'react';
+import Router from 'next/router';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { MobileNav } from '../components/MobileNav';
+import { Spinner } from '../components/Spinner';
+import NProgress from 'nprogress';
+import '../styles/globals.css';
+import 'nprogress/nprogress.css';
+
+NProgress.configure({ showSpinner: false });
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete  =  () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 function MyApp({ Component, pageProps }) {
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
-      <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
-        <MobileNav />
-      </div>
+      {loading ? (
+        <div className='flex h-screen items-center justify-center'>
+          <Spinner />
+        </div>
+      ) : (
+        <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+          <MobileNav />
+        </div>
+      )}
     </>
   );
 }

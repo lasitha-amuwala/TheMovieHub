@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -38,6 +38,7 @@ export const CarouselItem = ({ slide }) => {
           src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
           alt={`${title.split(' ').join('-')}-poster`}
           quality={100}
+          priority
         />
       </div>
       <InfoCard />
