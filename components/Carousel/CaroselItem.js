@@ -29,18 +29,15 @@ export const CarouselItem = ({ slide }) => {
 
   return (
     <li className='relative max-h-85vh min-w-full max-w-full'>
-      <div className='h-56vw relative w-full'>
+      <div className='h-56vw block w-full'>
         <Image
-          width={1920}
-          height={1080}
+          width={17}
+          height={11}
           layout='responsive'
           className='relative block h-full w-full select-none object-cover object-top'
           src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
           alt={`${title.split(' ').join('-')}-poster`}
           quality={100}
-          placeholder='blur'
-          blurDataURL={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
-          priority
         />
       </div>
       <InfoCard />
