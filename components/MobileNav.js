@@ -32,10 +32,10 @@ const buttons = {
 export const MobileNav = () => {
   const { pathname } = useRouter();
 
-  const Button = ({ href, icon1, icon2 }) => (
-    <Link href={href}>
+  const Button = ({ data }) => (
+    <Link href={data.href}>
       <a className='highlights-none aspect-square h-full'>
-        {React.cloneElement(href == pathname ? icon2 : icon1, {
+        {React.cloneElement(data.href == pathname ? data.icon2 : data.icon1, {
           className: 'h-full w-full p-4 text-mobileNavButton',
         })}
       </a>
@@ -45,8 +45,8 @@ export const MobileNav = () => {
   return (
     <div className='fixed bottom-0 z-50 h-14 w-full border-t border-borderPrimary bg-almostBlack bg-opacity-80 backdrop-blur backdrop-filter lg:hidden'>
       <div className='flex h-full justify-around'>
-        {Object.values(buttons).map(({ href, icon1, icon2 }) => (
-          <Button href={href} icon1={icon1} icon2={icon2} />
+        {Object.keys(buttons).map((key) => (
+          <Button data={buttons[key]} key={key} />
         ))}
       </div>
     </div>
