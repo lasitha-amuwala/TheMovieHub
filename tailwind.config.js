@@ -16,6 +16,7 @@ module.exports = {
         mobileNavButton: 'var(--mobileNavButton)',
       },
       maxHeight: {
+        '40vh': '40vh',
         '85vh': '85vh',
       },
       minWidth: {
@@ -29,7 +30,6 @@ module.exports = {
       width: {
         '5%': 'calc(5% - 3px)',
         '7%': 'calc(7% - 3px)',
-        '65%h': 'calc(384px * 0.65)',
       },
       margin: {
         '5%': '5%',
