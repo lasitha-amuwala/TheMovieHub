@@ -51,27 +51,23 @@ export const Carousel = ({ slides, autoplay }) => {
   // if the datails not an array return null
   if (!Array.isArray(sliderData) || !sliderData.length) return null;
 
-  const SliderButton = ({ children, classes, onClick }) => {
-    const classNames = `absolute flex items-center p-[5px] sm:p-4 ${classes} bottom-0 sm:bottom sm:bottom-45% sm:rounded-full bg-almostBlack bg-opacity-0 sm:bg-opacity-50 sm:hover:bg-opacity-80 z-10 cursor-pointer select-none backdrop-filter sm:backdrop-blur`;
-    return (
-      <button className={classNames} onClick={onClick}>
-        {children}
-      </button>
-    );
-  };
+  const SliderButton = ({ children, classes, onClick }) => (
+    <button className={`carouselButton ${classes}`} onClick={onClick}>
+      {children}
+    </button>
+  );
 
   return (
     <div className='relative items-center justify-center '>
       <SliderButton
         onClick={() => handleClick('left')}
-        classes='left-1 sm:left-3 transform transition duration-200 hover:scale-110'
+        classes='left-1 sm:left-3 '
       >
         <HiChevronLeft className='h-7 w-7 text-white' />
       </SliderButton>
-
       <SliderButton
         onClick={() => handleClick('right')}
-        classes='right-1 sm:right-3 transform transition duration-200 hover:scale-110'
+        classes='right-1 sm:right-3'
       >
         <HiChevronRight className='h-7 w-7 text-white' />
       </SliderButton>

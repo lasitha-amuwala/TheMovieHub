@@ -5,7 +5,7 @@
 :root {
   --primaryBackgroundColor: #141414;
   --mobileNavButton: #ffffff;
-  --primaryBorder: #292929;
+  --primaryBorder: #474747;
   --maxPageWidth: 1400px;
 }
 
@@ -34,5 +34,11 @@ html {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+}
+
+@layer components {
+  .carouselButton {
+    @apply absolute bottom-0 z-10 flex transform cursor-pointer select-none items-center lg:border lg:border-borderPrimary bg-almostBlack bg-opacity-0 p-[5px] backdrop-filter transition duration-200 hover:scale-110 sm:bottom-45% sm:rounded-full sm:bg-opacity-50 sm:p-4 sm:backdrop-blur sm:hover:bg-opacity-80;
   }
 }

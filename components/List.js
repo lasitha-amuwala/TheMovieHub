@@ -59,7 +59,7 @@ export const List = ({ data, title }) => {
       </span>
       <div className='highlights-none relative mt-3'>
         {count > 0 && (
-          <div className='absolute left-0 z-50 h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
+          <div className='absolute left-0 z-10 h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
             <HiOutlineChevronLeft
               onClick={() => handleClick('left')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100'
@@ -67,7 +67,7 @@ export const List = ({ data, title }) => {
           </div>
         )}
         {(count === 0 || count !== lastIndex) && (
-          <div className='absolute right-0 z-50 h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
+          <div className='absolute right-0 z-10 h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
             <HiOutlineChevronRight
               onClick={() => handleClick('right')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100'
@@ -80,7 +80,7 @@ export const List = ({ data, title }) => {
             style={{
               display: 'flex',
               transition:
-                'transform .75s ease 0s,-webkit-transform .75s ease 0s,-moz-transform .75s ease 0s,-o-transform .75s ease 0s',
+                'transform .5s ease 0s,-webkit-transform .5s ease 0s,-moz-transform .5s ease 0s,-o-transform .5s ease 0s',
             }}
           >
             {data.map((item) => (
