@@ -6,16 +6,13 @@ import { useRouter } from 'next/router';
 const Details = (data) => {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <div>error</div>;
-  }
-  const poster = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
-
   const formatRuntime = (mins) => {
     let min = mins % 60;
     let h = (mins - min) / 60;
     return `${h}h ${min}m`;
   };
+
+  if (router.isFallback) return <div>error</div>;
 
   return (
     <div>
@@ -119,52 +116,3 @@ export const getStaticProps = async ({ params }) => {
     return { notFound: true };
   }
 };
-/**
- *           <Image
-            layout='fill'
-            src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
-            alt={`${data.title}-poster`}
-          />
- */
-/*
-        <div
-          className='bg-cover'
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`,
-          }}
-        >
-          <div className='h-full bg-black bg-opacity-70'>
-              <div className='m-auto flex max-w-[var(--maxPageWidth)] flex-col gap-16 p-10 md:flex-row'>
-              <div className='block h-96 w-65%h flex-none self-center rounded-xl border-2 border-cyan-200'>
-                <Image
-                  width={11}
-                  height={17}
-                  layout='responsive'
-                  className='rounded-xl '
-                  src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-                  alt={`${data.title}-poster`}
-                />
-              </div>
-              <div className='flex flex-col gap-4 text-4xl text-white'>
-                <div className='flex flex-wrap gap-4'>
-                  <div className='font-bold'>{data.title}</div>
-                  <div className='font-light text-gray-300'>
-                    {`(${data.release_date.split('-')[0]})`}
-                  </div>
-                </div>
-                <div className='flex gap-4'>
-                  {data.rating && (
-                    <div className='inline border border-gray-400 p-1 px-2 text-sm text-gray-400'>
-                      {data.rating}
-                    </div>
-                  )}
-                  <div className='text-base'>{formatRuntime(data.runtime)}</div>
-                </div>
-                <div className='text-base font-normal md:text-lg'>
-                  {data.overview}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        */
