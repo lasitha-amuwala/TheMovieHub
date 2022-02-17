@@ -76,12 +76,8 @@ export const List = ({ data, title }) => {
         )}
         <div {...handlers} className='z-10 select-none px-7% md:px-5%'>
           <ul
+          className='flex netflixTransiiton'
             ref={listRef}
-            style={{
-              display: 'flex',
-              transition:
-                'transform .5s ease 0s,-webkit-transform .5s ease 0s,-moz-transform .5s ease 0s,-o-transform .5s ease 0s',
-            }}
           >
             {data.map((item) => (
               <ListItem data={item} key={item.id} ref={itemRef} />
