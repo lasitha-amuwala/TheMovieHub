@@ -9,10 +9,12 @@ const Home = (props) => (
       <title>{process.env.title}</title>
     </Head>
     <Carousel slides={props.trendingList.results} autoplay />
-    <List data={props.popularList.results} title='Popular' />
-    <List data={props.topRatedList.results} title='Top Rated' />
-    <List data={props.nowPlayingList.results} title='Now Playing' />
-    <List data={props.upcomingList.results} title='Upcoming' />
+    <div className='flex flex-col gap-9'>
+      <List data={props.popularList.results} title='Popular' />
+      <List data={props.topRatedList.results} title='Top Rated' />
+      <List data={props.nowPlayingList.results} title='Now Playing' />
+      <List data={props.upcomingList.results} title='Upcoming' />
+    </div>
   </div>
 );
 
