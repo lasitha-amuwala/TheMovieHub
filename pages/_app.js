@@ -9,6 +9,7 @@ import NProgress from 'nprogress';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
 import { Hydrate, QueryClientProvider, QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 NProgress.configure({ showSpinner: false });
 Router.onRouteChangeStart = () => NProgress.start();
@@ -16,13 +17,12 @@ Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 function MyApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
   const [queryClient] = useState(
     () =>
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 1000,
+            staleTime: 60 * 1000,
           },
         },
       })
@@ -30,19 +30,14 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        {loading ? (
-          <div className='flex h-screen items-center justify-center'>
-            <Spinner />
-          </div>
-        ) : (
-          <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
-            <Navbar />
-            <Component {...pageProps} />
-            <Footer />
-            <MobileNav />
-          </div>
-        )}
+        <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+          <MobileNav />
+        </div>
       </Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
