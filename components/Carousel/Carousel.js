@@ -5,8 +5,12 @@ import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';
 import { useSwipeable } from 'react-swipeable';
+import { useQuery } from 'react-query';
+import { apiQueries } from '../../utils/http-client/apiQueries';
 
-export const Carousel = ({ slides, autoplay }) => {
+export const Carousel = ({ autoplay }) => {
+  const { data: slides, isLoading } = useQuery(apiQueries.trending.movies());
+
   const [sliderData, setSliderData] = useState([]);
   const [slideIndex, setSlideIndex] = useState(1);
   const [animation, setAnimation] = useState(false);
@@ -24,8 +28,8 @@ export const Carousel = ({ slides, autoplay }) => {
 
   // Add first element to the end of the list to create an infinite carousel
   useEffect(() => {
-    if (slides.length > 0) {
-      let list = slides.concat(slides[0]);
+    if (slides.results.length > 0) {
+      let list = slides.results.concat(slides.results[0]);
       list.unshift(list[list.length - 2]);
       setSliderData(list);
       setLastIndex(list.length - 1);
