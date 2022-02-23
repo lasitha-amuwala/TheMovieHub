@@ -9,23 +9,19 @@ module.exports = {
       ...theme('colors'),
       almostBlack: '#141414',
     }),
+
     extend: {
       colors: {
         almostBlack: 'var(--primaryBackgroundColor)',
         borderPrimary: 'var(--primaryBorder)',
         mobileNavButton: 'var(--mobileNavButton)',
       },
+      screens: {
+        '3x1': '2100px',
+      },
       maxHeight: {
         '40vh': '40vh',
         '85vh': '85vh',
-      },
-      minWidth: {
-        '1/3': '33.34%',
-        '1/4': '25%',
-        '1/5': '20%',
-        '1/6': '16.67%',
-        '1/7': '14.29%',
-        '1/8': '12.5%',
       },
       width: {
         '5%': 'calc(5% - 3px)',
@@ -45,9 +41,6 @@ module.exports = {
       },
       border: {
         1: '1px',
-      },
-      aspectRatio: {
-        '11/17': '11 / 17',
       },
     },
   },
