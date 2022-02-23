@@ -42,3 +42,31 @@ html {
     @apply absolute bottom-0 z-10 flex transform cursor-pointer select-none items-center bg-almostBlack bg-opacity-0 p-[5px] backdrop-filter transition duration-200 hover:scale-110 sm:bottom-45% sm:rounded-full sm:bg-opacity-50 sm:p-4 sm:backdrop-blur sm:hover:bg-opacity-80 lg:border lg:border-borderPrimary;
   }
 }
+
+.list li{
+  transition-duration: 300ms;
+}
+
+.list:hover li {
+  -webkit-transform: translateX(-25%);
+  transform: translateX(-25%);
+  transition-duration: 300ms;
+}
+
+.list:hover li:hover {
+  -webkit-transform: scaleX(1.5);
+  transition-duration: 300ms;
+}
+
+.list:hover li:hover ~ li {
+  -webkit-transform: translateX(25%);
+  transform: translateX(25%);
+  transition-duration: 300ms;
+}
+
+.netflixTransiiton {
+  transition: transform 0.5s ease 0s;
+  -webkit-transform: 0.5s ease 0s;
+  -moz-transform: 0.5s ease 0s;
+  -o-transform: 0.5s ease 0s;
+}

@@ -29,7 +29,7 @@ export const CarouselItem = ({ slide }) => {
 
   return (
     <li className='relative max-h-85vh min-w-full max-w-full'>
-      <div className='h-56vw block w-full'>
+      <div className='block'>
         <Image
           width={17}
           height={11}
