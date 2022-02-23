@@ -8,30 +8,42 @@ import { Spinner } from '../components/Spinner';
 import NProgress from 'nprogress';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
+import { Hydrate, QueryClientProvider, QueryClient } from 'react-query';
 
 NProgress.configure({ showSpinner: false });
 Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete  =  () => NProgress.done();
+Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
-
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000,
+          },
+        },
+      })
+  );
   return (
-    <>
-      {loading ? (
-        <div className='flex h-screen items-center justify-center'>
-          <Spinner />
-        </div>
-      ) : (
-        <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-          <MobileNav />
-        </div>
-      )}
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        {loading ? (
+          <div className='flex h-screen items-center justify-center'>
+            <Spinner />
+          </div>
+        ) : (
+          <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
+            <Navbar />
+            <Component {...pageProps} />
+            <Footer />
+            <MobileNav />
+          </div>
+        )}
+      </Hydrate>
+    </QueryClientProvider>
   );
 }
 
