@@ -1,3 +1,4 @@
+/*
 export default function handler(req, res) {
   const { endpoint, ...queryStrings } = req.query;
   const query = new URLSearchParams(queryStrings);
@@ -8,3 +9,4 @@ export default function handler(req, res) {
   } catch (error) {}
   res.end(`Post: ${query}`);
 }
+*/
