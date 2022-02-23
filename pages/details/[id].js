@@ -5,12 +5,23 @@ import { useRouter } from 'next/router';
 import { apiQueries } from '../../utils/http-client/apiQueries';
 import { QueryClient, useQuery, dehydrate } from 'react-query';
 
+export const getServerSideProps = async ({ params }) => {
+  try {
+    const id = params.id;
+    const queryClient = new QueryClient();
+    await queryClient.fetchQuery(apiQueries.movies.movie(id));
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } catch (e) {
+    console.error(e);
+    return { notFound: true };
+  }
+};
+
 const Details = () => {
   const { query, isFallback } = useRouter();
   const { data } = useQuery(apiQueries.movies.movie(query.id));
 
   let movie = filterData(data);
-  console.log('hi');
 
   if (isFallback) return <div>error</div>;
 
@@ -85,24 +96,6 @@ const Details = () => {
 };
 
 export default Details;
-/*
-export const getStaticPaths = async () => {
-  return { paths: [], fallback: true };
-};
-*/
-export const getServerSideProps = async ({ params }) => {
-  const id = params.id;
-  try {
-    const queryClient = new QueryClient();
-    await queryClient.prefetchQuery('movies');
-    await queryClient.fetchQuery(apiQueries.movies.movie(id));
-    return { props: { dehydratedState: dehydrate(queryClient) } };
-  } catch (e) {
-    console.error(e);
-    return { notFound: true };
-  }
-};
-//dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
 
 const formatRuntime = (mins) => {
   let min = mins % 60;
