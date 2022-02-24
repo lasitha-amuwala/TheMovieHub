@@ -34,12 +34,12 @@ const Home = () => {
   ] = fetchData();
 
   return (
-    <div className='relative min-h-screen overflow-hidden'>
+    <div className='overflow-hidden'>
       <Head>
         <title>{process.env.title}</title>
       </Head>
       <Carousel autoplay />
-      <div className='flex flex-col gap-9'>
+      <div className='flex flex-col sm:gap-2 md:gap-4 lg:gap-6 2xl:gap-9'>
         <List data={popular.results} title='Popular' />
         <List data={topRated.results} title='Top Rated' />
         <List data={nowPlaying.results} title='Now Playing' />
