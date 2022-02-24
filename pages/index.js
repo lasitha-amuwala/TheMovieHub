@@ -19,23 +19,31 @@ export const getServerSideProps = async () => {
 };
 
 const Home = () => {
-  const { data: trendingList } = useQuery(apiQueries.trending.movies());
-  const { data: nowPlayingList } = useQuery(apiQueries.movies.nowPlaying());
-  const { data: popularList } = useQuery(apiQueries.movies.popular());
-  const { data: topRatedList } = useQuery(apiQueries.movies.topRated());
-  const { data: upcomingList } = useQuery(apiQueries.movies.upcoming());
+  const fetchData = () => [
+    useQuery(apiQueries.movies.nowPlaying()),
+    useQuery(apiQueries.movies.popular()),
+    useQuery(apiQueries.movies.topRated()),
+    useQuery(apiQueries.movies.upcoming()),
+  ];
+
+  const [
+    { data: nowPlaying, isLoading: isNowPlayingLoading },
+    { data: popular, isLoading: isPopularLoading },
+    { data: topRated, isLoading: isTopRatedLoading },
+    { data: upcoming, isLoading: isUpcomingLoading },
+  ] = fetchData();
 
   return (
     <div className='relative min-h-screen overflow-hidden'>
       <Head>
         <title>{process.env.title}</title>
       </Head>
-      <Carousel slides={trendingList.results} autoplay />
+      <Carousel autoplay />
       <div className='flex flex-col gap-9'>
-        <List data={popularList.results} title='Popular' />
-        <List data={topRatedList.results} title='Top Rated' />
-        <List data={nowPlayingList.results} title='Now Playing' />
-        <List data={upcomingList.results} title='Upcoming' />
+        <List data={popular.results} title='Popular' />
+        <List data={topRated.results} title='Top Rated' />
+        <List data={nowPlaying.results} title='Now Playing' />
+        <List data={upcoming.results} title='Upcoming' />
       </div>
     </div>
   );

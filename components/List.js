@@ -70,15 +70,12 @@ export const List = ({ data, title }) => {
           <div className='absolute right-0 z-10 h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
             <HiOutlineChevronRight
               onClick={() => handleClick('right')}
-              className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100'
+              className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100 '
             />
           </div>
         )}
-        <div {...handlers} className='z-10 select-none px-7% md:px-5%'>
-          <ul
-          className='flex netflixTransiiton'
-            ref={listRef}
-          >
+        <div {...handlers} className='select-none px-7% md:px-5%'>
+          <ul className='list netflixTransiiton flex' ref={listRef}>
             {data.map((item) => (
               <ListItem data={item} key={item.id} ref={itemRef} />
             ))}
