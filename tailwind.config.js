@@ -17,7 +17,7 @@ module.exports = {
         mobileNavButton: 'var(--mobileNavButton)',
       },
       screens: {
-        '3x1': '2100px',
+        '3xl': '2100px',
       },
       maxHeight: {
         '40vh': '40vh',
