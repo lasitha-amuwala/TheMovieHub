@@ -1,32 +1,24 @@
 // import App from 'next/app'
 import { useEffect, useState } from 'react';
-import Router from 'next/router';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { MobileNav } from '../components/MobileNav';
-import { Spinner } from '../components/Spinner';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { Hydrate, QueryClientProvider } from 'react-query';
+import { customQueryClient } from '../utils/http-client/QueryClient';
 import NProgress from 'nprogress';
+import Router from 'next/router';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
-import { Hydrate, QueryClientProvider, QueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 
+// Configure NProgress bar
 NProgress.configure({ showSpinner: false });
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 function MyApp({ Component, pageProps }) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 60 * 1000,
-          },
-        },
-      })
-  );
+  const [queryClient] = useState(() => customQueryClient());
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
