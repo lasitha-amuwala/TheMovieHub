@@ -45,20 +45,3 @@ export const CarouselItem = ({ slide }) => {
     </li>
   );
 };
-/**
- *     <li className='relative max-h-85vh min-w-full max-w-full'>
-      <div className='block'>
-        <Image
-          width={17}
-          height={11}
-          layout='responsive'
-          className='relative block h-full w-full select-none object-cover object-top'
-          src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
-          alt={`${title.split(' ').join('-')}-poster`}
-          quality={100}
-          priority
-        />
-      </div>
-      <InfoCard />
-    </li>
- */

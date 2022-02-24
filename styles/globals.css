@@ -44,30 +44,32 @@ html {
   }
 }
 
-.list li {
-  transition-duration: 300ms;
-}
+@screen sm {
+  .list li {
+    transition-duration: 300ms;
+  }
 
-.list:hover li {
-  -webkit-transform: translateX(-25%);
-  transform: translateX(-25%);
-  transition-duration: 300ms;
-}
+  .list:hover li {
+    -webkit-transform: translateX(-25%);
+    transform: translateX(-25%);
+    transition-duration: 300ms;
+  }
 
-.list:hover li:hover {
-  -webkit-transform: scaleX(1.5);
-  transition-duration: 300ms;
-}
+  .list:hover li:hover {
+    -webkit-transform: scaleX(1.5);
+    transition-duration: 300ms;
+  }
 
-.list:hover li:hover ~ li {
-  -webkit-transform: translateX(25%);
-  transform: translateX(25%);
-  transition-duration: 300ms;
-}
+  .list:hover li:hover ~ li {
+    -webkit-transform: translateX(25%);
+    transform: translateX(25%);
+    transition-duration: 300ms;
+  }
 
-.netflixTransiiton {
-  transition: transform 0.5s ease 0s;
-  -webkit-transform: 0.5s ease 0s;
-  -moz-transform: 0.5s ease 0s;
-  -o-transform: 0.5s ease 0s;
+  .netflixTransiiton {
+    transition: transform 0.5s ease 0s;
+    -webkit-transform: 0.5s ease 0s;
+    -moz-transform: 0.5s ease 0s;
+    -o-transform: 0.5s ease 0s;
+  }
 }
