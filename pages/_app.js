@@ -5,7 +5,7 @@ import { Footer } from '../components/Footer';
 import { MobileNav } from '../components/MobileNav';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate, QueryClientProvider } from 'react-query';
-import { customQueryClient } from '../utils/http-client/QueryClient';
+import { customQueryClient } from '../utils/http-client/queryClient';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import '../styles/globals.css';
