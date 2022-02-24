@@ -51,6 +51,8 @@ const Details = () => {
                     layout='responsive'
                     className='rounded-xl'
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    placeholder='blur'
+                    blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     alt={`${movie.title}-poster`}
                     quality={100}
                   />
