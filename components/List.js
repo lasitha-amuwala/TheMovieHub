@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
-import { useSwipeable } from 'react-swipeable';
-
 import ListItem from './ListItem';
 
 export const List = ({ data, title }) => {
@@ -27,11 +25,6 @@ export const List = ({ data, title }) => {
     else if (window.innerWidth > 640) setWindowWidth(5);
     else setWindowWidth(6);
   };
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handleClick('right'),
-    onSwipedRight: () => handleClick('left'),
-  });
 
   useEffect(() => {
     let cl = listRef.current;
