@@ -9,7 +9,7 @@ export const CarouselItem = ({ slide }) => {
   const { title, backdrop_path, overview, id } = slide;
 
   const InfoCard = () => (
-    <div className='absolute left-0 bottom-0 w-full rounded-none bg-almostBlack bg-opacity-50 px-12 py-2 text-white backdrop-blur-md backdrop-filter sm:px-7% md:px-5% lg:left-24 lg:bottom-28 lg:w-1/2 lg:rounded-xl lg:px-6 lg:py-5 2xl:left-5% 2xl:bottom-56 2xl:w-1/3'>
+    <div className='absolute left-0 bottom-0 w-full rounded-none bg-almostBlack bg-opacity-50 px-12 py-2 text-white backdrop-blur-md backdrop-filter sm:px-7% md:px-5% lg:left-24 lg:bottom-28 lg:w-1/2 lg:rounded-xl lg:px-6 lg:py-5 2xl:left-5% 2xl:w-1/3'>
       <div className='flex items-center justify-between gap-4'>
         <p className='flex-grow font-medium sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl'>
           {title}
@@ -31,9 +31,7 @@ export const CarouselItem = ({ slide }) => {
     <li className='relative h-full min-w-full'>
       <div className='relative h-full w-full'>
         <Image
-          height={9}
-          width={16}
-          layout='responsive'
+          layout='fill'
           className='relative block h-full w-full select-none object-cover object-top'
           src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
           alt={`${title.split(' ').join('-')}-poster`}

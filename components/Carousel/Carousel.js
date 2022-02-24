@@ -65,14 +65,14 @@ export const Carousel = ({ autoplay }) => {
   // if the datails not an array return null
   if (isLoading || isError) {
     return (
-      <div className='h-[55.5vw] max-h-85vh pb-24 '>
+      <div className='h-[85vw] max-h-85vh pb-24 '>
         <SkeletonItem w='100%' h='100%' />
       </div>
     );
   }
 
   return (
-    <div className='relative h-[55.5vw] max-h-85vh w-full overflow-hidden'>
+    <div className='relative h-[85vw] max-h-85vh w-full overflow-hidden'>
       <SliderButton
         onClick={() => handleClick('left')}
         classes='left-1 sm:left-3 '
