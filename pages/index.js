@@ -38,7 +38,7 @@ const Home = () => {
       <Head>
         <title>{process.env.title}</title>
       </Head>
-      <Carousel  />
+      <Carousel autoplay />
       <div className='flex flex-col gap-9'>
         <List data={popular.results} title='Popular' />
         <List data={topRated.results} title='Top Rated' />

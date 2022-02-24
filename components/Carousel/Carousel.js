@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useInterval, usePrevious } from '../../hooks/hooks';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
-
 import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';
 import { useSwipeable } from 'react-swipeable';
 import { useQuery } from 'react-query';
 import { apiQueries } from '../../utils/http-client/apiQueries';
+import SkeletonItem from '../SkeletonItem';
 
 export const Carousel = ({ autoplay }) => {
-  const { data: slides, isLoading } = useQuery(apiQueries.trending.movies());
+  const {
+    data: slides,
+    isLoading,
+    isError,
+  } = useQuery(apiQueries.trending.movies());
 
   const [sliderData, setSliderData] = useState([]);
   const [slideIndex, setSlideIndex] = useState(1);
@@ -52,17 +56,23 @@ export const Carousel = ({ autoplay }) => {
   const handleIndex = (i) => setSlideIndex(i);
   const handleAnimation = (i) => setAnimation(i);
 
-  // if the datails not an array return null
-  if (!Array.isArray(sliderData) || !sliderData.length) return null;
-
   const SliderButton = ({ children, classes, onClick }) => (
     <button className={`carouselButton ${classes}`} onClick={onClick}>
       {children}
     </button>
   );
 
+  // if the datails not an array return null
+  if (isLoading || isError) {
+    return (
+      <div className='h-[56.25vw] max-h-85vh pb-24 '>
+        <SkeletonItem w='100%' h='100%' />
+      </div>
+    );
+  }
+
   return (
-    <div className='relative items-center justify-center '>
+    <div className='relative h-[56.25vw] max-h-85vh w-full overflow-hidden'>
       <SliderButton
         onClick={() => handleClick('left')}
         classes='left-1 sm:left-3 '
@@ -75,7 +85,7 @@ export const Carousel = ({ autoplay }) => {
       >
         <HiChevronRight className='h-7 w-7 text-white' />
       </SliderButton>
-      <div {...handlers} className='relative w-full overflow-hidden'>
+      <div {...handlers} className='h-full w-full'>
         <Track
           animation={animation}
           slideIndex={slideIndex}
@@ -84,7 +94,7 @@ export const Carousel = ({ autoplay }) => {
           handleIndex={handleIndex}
           handleAnimation={handleAnimation}
         >
-          <ul className='relative flex list-none'>
+          <ul className='flex h-full w-full list-none'>
             {sliderData.map((data, i) => (
               <CarouselItem slide={data} key={i} />
             ))}

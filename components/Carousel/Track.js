@@ -22,6 +22,7 @@ export const Track = ({ handleAnimation, handleIndex, ...props }) => {
     'transform .75s ease 0s,-webkit-transform .75s ease 0s,-moz-transform .75s ease 0s,-o-transform .75s ease 0s';
   return (
     <div
+      className='h-full w-full'
       ref={ref}
       onTransitionEnd={handleLoop}
       style={{ transition: props.animation && transition }}

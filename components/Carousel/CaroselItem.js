@@ -28,7 +28,25 @@ export const CarouselItem = ({ slide }) => {
   );
 
   return (
-    <li className='relative max-h-85vh min-w-full max-w-full'>
+    <li className='relative h-full min-w-full'>
+      <div className='relative h-full w-full'>
+        <Image
+          height={9}
+          width={16}
+          layout='responsive'
+          className='relative block h-full w-full select-none object-cover object-top'
+          src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+          alt={`${title.split(' ').join('-')}-poster`}
+          quality={100}
+          priority
+        />
+      </div>
+      <InfoCard />
+    </li>
+  );
+};
+/**
+ *     <li className='relative max-h-85vh min-w-full max-w-full'>
       <div className='block'>
         <Image
           width={17}
@@ -43,5 +61,4 @@ export const CarouselItem = ({ slide }) => {
       </div>
       <InfoCard />
     </li>
-  );
-};
+ */

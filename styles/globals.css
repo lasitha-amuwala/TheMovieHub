@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --primaryBackgroundColor: rgb(20, 20, 20);
+  --primaryBackgroundColor: #141414;
   --mobileNavButton: #ffffff;
   --primaryBorder: #474747;
+  --skeletonColor: #1e1e1e;
   --maxPageWidth: 1400px;
 }
 
@@ -43,7 +44,7 @@ html {
   }
 }
 
-.list li{
+.list li {
   transition-duration: 300ms;
 }
 
