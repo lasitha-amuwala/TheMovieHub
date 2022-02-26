@@ -72,8 +72,8 @@ const Details = () => {
                     )}
                     <div className=''>{movie.duration}</div>
                     <div className='flex gap-2 sm:gap-4'>
-                      {movie.genres.map(({ name }) => (
-                        <div>{name}</div>
+                      {movie.genres.map(({ id, name }) => (
+                        <div key={id}>{name}</div>
                       ))}
                     </div>
                   </div>
