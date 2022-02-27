@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --primaryBackgroundColor: #141414;
+  --primaryBackgroundColor: rgb(20, 20, 20);
   --mobileNavButton: #ffffff;
   --primaryBorder: #474747;
   --skeletonColor: #1e1e1e;
@@ -44,7 +44,7 @@ html {
   }
 }
 
-@screen sm {
+@screen lg {
   .list li {
     transition-duration: 300ms;
   }
