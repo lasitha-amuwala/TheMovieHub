@@ -52,7 +52,7 @@ export const List = ({ data, title }) => {
       </span>
       <div className='highlights-none relative pt-2 md:pt-4 lg:pt-0'>
         {count > 0 && (
-          <div className='hidden sm:block absolute left-0 z-10 h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
+          <div className='hidden lg:block absolute left-0 z-10 h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
             <HiOutlineChevronLeft
               onClick={() => handleClick('left')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100'
@@ -60,14 +60,14 @@ export const List = ({ data, title }) => {
           </div>
         )}
         {(count === 0 || count !== lastIndex) && (
-          <div className='hidden sm:block absolute right-0 z-10 h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
+          <div className='hidden lg:block absolute right-0 z-10 h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
             <HiOutlineChevronRight
               onClick={() => handleClick('right')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100 '
             />
           </div>
         )}
-        <div className='select-none px-3 sm:px-7% md:px-5% overflow-scroll sm:overflow-visible scrollbar-hide sm:scrollbar-default' >
+        <div className='select-none px-3 snap-x sm:px-7% md:px-5% overflow-scroll lg:overflow-visible scrollbar-hide lg:scrollbar-default' >
           <ul className='list netflixTransiiton flex' ref={listRef}>
             {data.map((item) => (
               <ListItem data={item} key={item.id} ref={itemRef} />

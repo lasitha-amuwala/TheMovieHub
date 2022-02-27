@@ -6,7 +6,7 @@ const ListItem = forwardRef(({ data }, ref) => {
   let id = data.id || data.tv_id;
   return (
     data.poster_path && (
-      <li className='item relative z-0 min-w-[33.33%] px-1 sm:min-w-[25%] sm:px-[6px] md:min-w-[20%] lg:min-w-[16.66%] xl:min-w-[14.29%] 3xl:min-w-[12.5%] 3xl:px-3'>
+      <li className='item snap-center relative z-0 min-w-[33.33%] px-1 sm:min-w-[25%] sm:px-[6px] md:min-w-[20%] lg:min-w-[16.66%] xl:min-w-[14.29%] 3xl:min-w-[12.5%] 3xl:px-3'>
         <Link href={`/details/${id}`}>
           <a className='relative'>
             <img
