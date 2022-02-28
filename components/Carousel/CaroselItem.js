@@ -31,9 +31,7 @@ export const CarouselItem = ({ slide }) => {
     <li className='relative h-full min-w-full'>
       <div className='relative h-full w-full'>
         <Image
-          width={1920}
-          height={1080}
-          layout='responsive'
+          layout='fill'
           className='relative block h-full w-full select-none object-cover object-top'
           src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
           alt={`${title.split(' ').join('-')}-poster`}
