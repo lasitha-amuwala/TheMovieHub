@@ -2,8 +2,8 @@ import { httpClient } from './httpClient';
 import { createUrl } from './httpClientUtils';
 const { get } = httpClient;
 
-const USParams = { region: 'US', language: 'en-US' };
-
+//const USParams = { region: 'US', language: 'en-US' };
+const USParams = {};
 export const apiQueries = {
   movies: {
     movie: (id) => ({
