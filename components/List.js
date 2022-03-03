@@ -47,12 +47,12 @@ export const List = ({ data, title }) => {
 
   return (
     <div className='group relative mt-5 w-full text-white lg:mt-0 lg:mb-20 2xl:mb-24'>
-      <span className='-top-14 ml-3 text-xl sm:ml-7% pl-1 font-medium text-white md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
+      <span className='-top-14 ml-3 pl-1 text-xl font-medium text-white sm:ml-7% md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
         {title}
       </span>
       <div className='highlights-none relative pt-2 md:pt-4 lg:pt-0'>
         {count > 0 && (
-          <div className='hidden lg:block absolute left-0 z-10 h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
+          <div className='absolute left-0 z-10 hidden h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5% lg:block'>
             <HiOutlineChevronLeft
               onClick={() => handleClick('left')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100'
@@ -60,15 +60,15 @@ export const List = ({ data, title }) => {
           </div>
         )}
         {(count === 0 || count !== lastIndex) && (
-          <div className='hidden lg:block absolute right-0 z-10 h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5%'>
+          <div className='absolute right-0 z-10 hidden h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5% lg:block'>
             <HiOutlineChevronRight
               onClick={() => handleClick('right')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100 '
             />
           </div>
         )}
-        <div className='select-none px-3 snap-x sm:px-7% md:px-5% overflow-scroll lg:overflow-visible scrollbar-hide lg:scrollbar-default' >
-          <ul className='list netflixTransiiton flex' ref={listRef}>
+        <div className='select-none overflow-x-scroll px-3 scrollbar-hide sm:px-7% md:px-5% lg:overflow-visible lg:scrollbar-default'>
+          <ul className='list lg:netflixTransiiton flex' ref={listRef}>
             {data.map((item) => (
               <ListItem data={item} key={item.id} ref={itemRef} />
             ))}
