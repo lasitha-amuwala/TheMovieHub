@@ -44,7 +44,7 @@ export const MobileNav = () => {
   );
 
   return (
-    <div className='fixed bottom-0 z-50 h-14 w-full border-t border-borderPrimary bg-almostBlack bg-opacity-80 backdrop-blur backdrop-filter lg:hidden'>
+    <div className='fixed bottom-0 z-50 h-14 w-full border-t border-borderPrimary bg-almostBlack bg-opacity-80 backdrop-blur backdrop-filter sm:hidden'>
       <div className='flex h-full justify-around'>
         {Object.keys(buttons).map((key) => (
           <Button data={buttons[key]} key={key} />
