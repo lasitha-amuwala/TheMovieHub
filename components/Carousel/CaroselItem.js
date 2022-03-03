@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-
+import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
-//import Image from 'next/image';
 import Image from '../Image';
 import { HiOutlineInformationCircle } from 'react-icons/hi';
 import { Spinner } from '../Spinner';
+
 export const CarouselItem = ({ slide }) => {
   const { title, backdrop_path, overview, id } = slide;
 
   const [isImageLoaded, setImageIsLoaded] = useState(false);
+
+  const onLoad = useCallback(() => {
+    setImageIsLoaded(true);
+  }, []);
 
   const InfoCard = () => (
     <div className='absolute left-0 bottom-0 w-full rounded-none bg-almostBlack bg-opacity-50 px-12 py-2 text-white backdrop-blur-md backdrop-filter sm:px-7% md:px-5% lg:left-24 lg:bottom-28 lg:w-1/2 lg:rounded-xl lg:px-6 lg:py-5 2xl:left-5% 2xl:w-1/3'>
@@ -38,9 +41,9 @@ export const CarouselItem = ({ slide }) => {
           src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
           alt={`${title.split(' ').join('-')}-poster`}
           quality={100}
-          placeholder='blur'
-          blurDataURL={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
+          onLoad={onLoad}
         />
+        {!isImageLoaded && <Spinner />}
       </div>
       <InfoCard />
     </li>
