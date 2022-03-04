@@ -14,7 +14,7 @@ export const Navbar = () => {
       <div className='mx-7% flex h-full items-center justify-between text-white md:mx-5%'>
         <div className='highlights-none flex items-center font-bold'>
           <NavItem to='/' label='MovieHub' />
-          <div className='hidden items-center gap-16 pl-16 font-normal lg:flex '>
+          <div className='hidden items-center gap-16 pl-16 font-normal sm:flex '>
             <NavItem label='Movies' to='/' />
             <NavItem label='Series' to='/' />
             <NavItem label='Profile' to='/' />
