@@ -6,16 +6,34 @@ const ListItem = forwardRef(({ data }, ref) => {
   let id = data.id || data.tv_id;
   return (
     data.poster_path && (
-      <li className='item relative z-0 min-w-[33.33%] px-1 sm:min-w-[25%] sm:px-[6px] md:min-w-[20%] lg:min-w-[16.66%] xl:min-w-[14.29%] 3xl:min-w-[12.5%] 3xl:px-3'>
+      <li className='item listWidth h-full shrink-0 overflow-hidden px-1 transition-all duration-700 sm:px-[6px] 3xl:px-3'>
         <Link href={`/details/${id}`}>
           <a className='relative'>
-            <img
-              ref={ref}
-              layout='fill'
-              className='h-auto cursor-pointer rounded-md transition-all duration-300 hover:ring'
-              src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-              alt={`${data.title.split(' ').join('-')}-poster`}
-            />
+            <div className='relative'>
+              <img
+                ref={ref}
+                className='item-poster absolute cursor-pointer rounded-md transition-opacity duration-500'
+                src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
+                alt={`${data.title.split(' ').join('-')}-poster`}
+              />
+            </div>
+            <div className='item-cover relative h-full rounded-md opacity-0 transition-opacity duration-500'>
+              <div className='h-full rounded-md bg-backgroundShadow'>
+                <Image
+                  width={500}
+                  height={350}
+                  layout='responsive'
+                  objectFit='cover'
+                  quality={100}
+                  className='cursor-pointer rounded-t-md opacity-100'
+                  src={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`}
+                  alt={`${data.title.split(' ').join('-')}-poster`}
+                />
+                <div className='flex p-2 text-center'>
+                  <div>{data.title}</div>
+                </div>
+              </div>
+            </div>
           </a>
         </Link>
       </li>

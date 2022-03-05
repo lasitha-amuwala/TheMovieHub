@@ -39,20 +39,22 @@ export const List = ({ data, title }) => {
 
       let remainder = length - num * count;
       let translate = remainder < num ? count - 1 + remainder / num : count;
-      cl.style.transform = `translateX(${translate * -100}%)`;
+      cl.style.transform = `translateX(${translate * -100}%) translateX(${
+        translate * 1
+      }px)`;
     }
   }, [count, windowWidth, length]);
 
   useEffect(() => window.addEventListener('resize', handleResize), []);
 
   return (
-    <div className='group relative mt-5 w-full text-white lg:mt-0 lg:mb-20 2xl:mb-24'>
-      <span className='-top-14 ml-3 pl-1 text-xl font-medium text-white sm:ml-7% md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
+    <div className='group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
+      <span className='-top-14 ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
         {title}
       </span>
-      <div className='highlights-none relative pt-2 md:pt-4 lg:pt-0'>
+      <div className='highlights-none relative mt-2 h-full md:mt-4 lg:mt-0'>
         {count > 0 && (
-          <div className='absolute left-0 z-10 hidden h-full w-7% cursor-pointer select-none rounded-r-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5% lg:block'>
+          <div className='w-7% absolute left-0 z-10 hidden h-full cursor-pointer select-none rounded-r-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
             <HiOutlineChevronLeft
               onClick={() => handleClick('left')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100'
@@ -60,15 +62,15 @@ export const List = ({ data, title }) => {
           </div>
         )}
         {(count === 0 || count !== lastIndex) && (
-          <div className='absolute right-0 z-10 hidden h-full w-7% cursor-pointer select-none rounded-l-lg bg-black bg-opacity-60 hover:bg-opacity-80 md:w-5% lg:block'>
+          <div className='w-7% absolute right-0 z-10 hidden h-full cursor-pointer select-none rounded-l-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
             <HiOutlineChevronRight
               onClick={() => handleClick('right')}
               className='h-full w-full transform opacity-0 transition duration-200 hover:scale-125 group-hover:opacity-100 '
             />
           </div>
         )}
-        <div className='select-none overflow-x-scroll px-3 scrollbar-hide sm:px-7% md:px-5% lg:overflow-visible lg:scrollbar-default'>
-          <ul className='list lg:netflixTransiiton flex' ref={listRef}>
+        <div className='listHeight select-none overflow-x-scroll px-3 transition-all duration-700 scrollbar-hide hover:-translate-x-[3%] sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%'>
+          <ul className='list sm:netflixTransiiton flex h-full' ref={listRef}>
             {data.map((item) => (
               <ListItem data={item} key={item.id} ref={itemRef} />
             ))}

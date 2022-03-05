@@ -12,7 +12,8 @@ module.exports = {
 
     extend: {
       colors: {
-        almostBlack: 'var(--primaryBackgroundColor)',
+        almostBlack: 'var(--BackgroundColor)',
+        backgroundShadow: 'var(--BackgroundColorShadow)',
         borderPrimary: 'var(--primaryBorder)',
         mobileNavButton: 'var(--mobileNavButton)',
       },
@@ -22,10 +23,6 @@ module.exports = {
       maxHeight: {
         '40vh': '40vh',
         '85vh': '85vh',
-      },
-      width: {
-        '5%': 'calc(5% - 3px)',
-        '7%': 'calc(7% - 3px)',
       },
       margin: {
         '5%': '5%',
