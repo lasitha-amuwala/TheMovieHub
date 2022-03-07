@@ -11,12 +11,14 @@ export const apiQueries = {
       queryFn: () =>
         get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
     }),
+    movieVideos: (id) => ({
+      queryKey: ['movies', id, 'videos'],
+      queryFn: () =>
+        get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
+    }),
     nowPlaying: () => ({
       queryKey: ['movies', 'nowPlaying'],
-      queryFn: () =>
-        get(
-          createUrl(`/movie/now_playing`, { region: 'US', language: 'en-US' })
-        ),
+      queryFn: () => get(createUrl(`/movie/now_playing`, USParams)),
     }),
     popular: () => ({
       queryKey: ['movies', 'popular'],
