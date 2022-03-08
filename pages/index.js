@@ -3,11 +3,12 @@ import Head from 'next/head';
 import { List } from '../components/List';
 import { Carousel } from '../components/Carousel/Carousel';
 import { QueryClient, useQuery, dehydrate } from 'react-query';
-import { apiQueries } from '../utils/http-client/apiQueries';
+import { apiQueries } from '../src/http-client/apiQueries';
 
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient();
   await Promise.all([
+    queryClient.fetchQuery(apiQueries.common.configuration()),
     queryClient.fetchQuery(apiQueries.trending.movies()),
     queryClient.fetchQuery(apiQueries.movies.nowPlaying()),
     queryClient.fetchQuery(apiQueries.movies.popular()),
