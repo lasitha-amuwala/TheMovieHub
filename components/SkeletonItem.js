@@ -7,7 +7,7 @@ const SkeletonItem = ({ w, h, circle }) => {
   return (
     <div
       className='animate-pulse bg-[color:var(--skeletonColor)]'
-      style={{ width, height, borderRadius: circle? '50px' : '10px' }}
+      style={{ width, height, borderRadius: circle ? '50px' : '10px' }}
     ></div>
   );
 };

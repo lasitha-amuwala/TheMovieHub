@@ -6,5 +6,5 @@ module.exports = {
   images: {
     domains: ['image.tmdb.org'],
   },
-  experimental: { optimizeCss: true }
+  experimental: { optimizeCss: true },
 };
