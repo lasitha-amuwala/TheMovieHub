@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import useApiConfiguration from '../src/useApiConfig';
+import { object } from 'sharp/lib/is';
 
 const ListItem = forwardRef(({ data }, ref) => {
   const { getImageUrl } = useApiConfiguration();

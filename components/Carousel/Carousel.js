@@ -98,8 +98,8 @@ export const Carousel = ({ autoplay }) => {
           handleAnimation={handleAnimation}
         >
           <ul className='flex h-full w-full list-none'>
-            {sliderData.map((data, i) => (
-              <CarouselItem slide={data} key={i} />
+            {sliderData.map((data, index) => (
+              <CarouselItem slide={data} index={index} key={data.id} />
             ))}
           </ul>
         </Track>

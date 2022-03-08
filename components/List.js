@@ -49,12 +49,12 @@ export const List = ({ data, title }) => {
 
   return (
     <div className='list listHeight group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
-      <span className='sm:odd:-top-14 ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
+      <span className='ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
         {title}
       </span>
       <div className='highlights-none relative mt-2 h-full md:mt-4 lg:mt-0'>
         {count > 0 && (
-          <div className='w-[7%] absolute left-0 z-10 hidden h-full cursor-pointer select-none rounded-r-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
+          <div className='absolute left-0 z-10 hidden h-full w-[7%] cursor-pointer select-none rounded-r-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
             <HiOutlineChevronLeft
               onClick={() => handleClick('left')}
               className='h-full w-full transform opacity-0 transition-transform duration-200 hover:scale-125 group-hover:opacity-100'
