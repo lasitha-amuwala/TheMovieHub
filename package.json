@@ -16,11 +16,13 @@
     "react-icons": "^4.2.0",
     "react-query": "^3.34.16",
     "react-swipeable": "^6.2.0",
+    "sharp": "^0.30.2",
     "tailwind-scrollbar-hide": "^1.1.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "dev": "next dev",
+    "prod": "next build && next start",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
