@@ -8,7 +8,9 @@ import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';
 import { useInterval } from '../../src/hooks/useInterval';
 import { usePrevious } from '../../src/hooks/usePrevious';
+import { usePageVisibility } from '../../src/hooks/usePageVisibility';
 import { apiQueries } from '../../src/http-client/apiQueries';
+
 import SkeletonItem from '../SkeletonItem';
 
 export const Carousel = ({ autoplay }) => {
@@ -22,16 +24,20 @@ export const Carousel = ({ autoplay }) => {
   const [slideIndex, setSlideIndex] = useState(1);
   const [animation, setAnimation] = useState(false);
   const [lastIndex, setLastIndex] = useState(0);
-  const [delay, setDelay] = useState(10000);
-
+  const [delay, setDelay] = useState(15000);
+  const [isVisible, setIsVisible] = useState();
   const prevIndex = usePrevious(slideIndex);
   // enable auto play every set interval
-  useInterval(() => handleClick('right'), autoplay ? delay : null);
+  useInterval(() => handleClick('right'), autoplay && isVisible ? delay : null);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => handleClick('right'),
     onSwipedRight: () => handleClick('left'),
   });
+
+  let visible;
+  if (typeof window !== 'undefined') visible = usePageVisibility();
+  useEffect(() => setIsVisible(visible), [visible]);
 
   // Add first element to the end of the list to create an infinite carousel
   useEffect(() => {
@@ -99,7 +105,7 @@ export const Carousel = ({ autoplay }) => {
         >
           <ul className='flex h-full w-full list-none'>
             {sliderData.map((data, index) => (
-              <CarouselItem slide={data} index={index} key={data.id} />
+              <CarouselItem slide={data} index={index} key={index} />
             ))}
           </ul>
         </Track>
