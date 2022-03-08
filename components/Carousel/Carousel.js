@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useInterval, usePrevious } from '../../hooks/hooks';
+
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
-import { Track } from './Track';
-import { CarouselItem } from './CaroselItem';
 import { useSwipeable } from 'react-swipeable';
 import { useQuery } from 'react-query';
-import { apiQueries } from '../../utils/http-client/apiQueries';
+
+import { Track } from './Track';
+import { CarouselItem } from './CaroselItem';
+import { useInterval } from '../../src/hooks/useInterval';
+import { usePrevious } from '../../src/hooks/usePrevious';
+import { apiQueries } from '../../src/http-client/apiQueries';
 import SkeletonItem from '../SkeletonItem';
 
 export const Carousel = ({ autoplay }) => {
@@ -72,7 +75,7 @@ export const Carousel = ({ autoplay }) => {
   }
 
   return (
-    <div className='relative h-[70vw] sm:h-[56vw] max-h-85vh w-full overflow-hidden'>
+    <div className='relative h-[70vw] max-h-85vh w-full overflow-hidden sm:h-[56vw]'>
       <SliderButton
         onClick={() => handleClick('left')}
         classes='left-1 sm:left-3 '

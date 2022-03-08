@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { apiQueries } from '../../utils/http-client/apiQueries';
+import { apiQueries } from '../../src/http-client/apiQueries';
 import { QueryClient, useQuery, dehydrate } from 'react-query';
 
 export const getServerSideProps = async ({ params }) => {
@@ -39,6 +39,7 @@ const Details = () => {
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
             alt={`${movie.title}-poster`}
             placeholder='blur'
+            unoptimized={true}
             blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
           />
           <div className='z-1 relative h-full'>
@@ -55,6 +56,7 @@ const Details = () => {
                     blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     alt={`${movie.title}-poster`}
                     quality={100}
+                    unoptimized={true}
                   />
                 </div>
                 <div className='flex flex-col justify-center gap-6 py-5 text-white'>
