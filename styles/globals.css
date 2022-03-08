@@ -4,7 +4,7 @@
 
 :root {
   --BackgroundColor: rgb(20, 20, 20);
-  --BackgroundColorShadow: rgb(5, 5, 5);
+  --BackgroundColorShadow: rgb(8, 8, 8);
   --mobileNavButton: #ffffff;
   --primaryBorder: #474747;
   --skeletonColor: #1e1e1e;
@@ -57,15 +57,25 @@ html {
   }
 }
 
-@screen sm {
-  .item:hover .item-poster {
-    opacity: 0;
-  }
-  .item:hover .item-cover {
-    opacity: 1;
-  }
+.track,
+.list:hover .track {
+  transition: transform 500ms;
 }
-
+.item,
+.item:hover {
+  will-change: transform, opacity;
+  transition: width 500ms 1s;
+}
+.item-cover,
+.item:hover .item-poster {
+  opacity: 0;
+  transition: opacity 500ms 1s;
+}
+.item-poster,
+.item:hover .item-cover {
+  opacity: 1;
+  transition: opacity 500ms 1s;
+}
 
 /*
 @screen lg {

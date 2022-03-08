@@ -37,7 +37,7 @@ export const MobileNav = () => {
       <a className='highlights-none aspect-square h-full'>
         {React.cloneElement(data.href == pathname ? data.icon2 : data.icon1, {
           className:
-            'h-full w-full p-4 active:scale-[1.3] transition duration-500 text-mobileNavButton',
+            'h-full w-full p-4 active:scale-[1.3] transition-transform duration-500 text-mobileNavButton',
         })}
       </a>
     </Link>

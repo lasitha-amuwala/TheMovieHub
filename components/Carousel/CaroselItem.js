@@ -42,6 +42,8 @@ export const CarouselItem = ({ slide }) => {
           alt={`${title.split(' ').join('-')}-poster`}
           quality={100}
           onLoad={onLoad}
+          priority
+          unoptimized={true}
         />
         {!isImageLoaded && <Spinner />}
       </div>

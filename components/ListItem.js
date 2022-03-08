@@ -1,37 +1,41 @@
 import React, { forwardRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import useApiConfiguration from '../src/useApiConfig';
 
 const ListItem = forwardRef(({ data }, ref) => {
-  let id = data.id || data.tv_id;
+  const { getImageUrl } = useApiConfiguration();
+
   return (
     data.poster_path && (
-      <li className='item listWidth h-full shrink-0 overflow-hidden px-1 transition-all duration-700 sm:px-[6px] 3xl:px-3'>
-        <Link href={`/details/${id}`}>
-          <a className='relative'>
-            <div className='relative'>
-              <img
-                ref={ref}
-                className='item-poster absolute cursor-pointer rounded-md transition-opacity duration-500'
-                src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`}
-                alt={`${data.title.split(' ').join('-')}-poster`}
-              />
-            </div>
-            <div className='item-cover relative h-full rounded-md opacity-0 transition-opacity duration-500'>
-              <div className='h-full rounded-md bg-backgroundShadow'>
+      <li
+        ref={ref}
+        className='item listWidth listHeight shrink-0 px-1 sm:px-[6px] 3xl:px-3 '
+      >
+        <Link href={`/details/${data.id}`}>
+          <a>
+            <div className='relative h-full overflow-hidden rounded-lg'>
+              <div className='item-cover block h-full bg-backgroundShadow'>
                 <Image
-                  width={500}
-                  height={350}
+                  width={3}
+                  height={2}
                   layout='responsive'
                   objectFit='cover'
-                  quality={100}
-                  className='cursor-pointer rounded-t-md opacity-100'
-                  src={`https://image.tmdb.org/t/p/w500/${data.backdrop_path}`}
+                  src={getImageUrl(data.backdrop_path, { original: false })}
                   alt={`${data.title.split(' ').join('-')}-poster`}
                 />
-                <div className='flex p-2 text-center'>
-                  <div>{data.title}</div>
-                </div>
+                <div className='p-2'>{data.title}</div>
+              </div>
+              <div className='item-poster absolute top-0 block h-full w-full'>
+                <Image
+                  width={2}
+                  height={3}
+                  layout='responsive'
+                  objectFit='cover'
+                  objectPosition='top'
+                  src={getImageUrl(data.poster_path, { original: false })}
+                  alt={`${data.title.split(' ').join('-')}-poster`}
+                />
               </div>
             </div>
           </a>
