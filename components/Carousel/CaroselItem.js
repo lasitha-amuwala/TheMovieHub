@@ -1,11 +1,11 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import InfoCard from './InfoCard';
 import { Spinner } from '../Spinner';
 
 export const CarouselItem = ({ slide, index }) => {
-  const [isImageLoaded, setImageIsLoaded] = React.useState(false);
-  const onLoad = React.useCallback(() => setImageIsLoaded(true), []);
+  const [isImageLoaded, setImageIsLoaded] = useState(false);
+  const onLoad = useCallback(() => setImageIsLoaded(true), []);
 
   return (
     <li className='relative h-full min-w-full'>

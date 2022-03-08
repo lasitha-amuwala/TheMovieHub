@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
 import ListItem from './ListItem';
 

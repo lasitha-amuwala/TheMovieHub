@@ -1,21 +1,19 @@
-import React from 'react';
+import { useRef, useEffect } from 'react';
 
 export const useInterval = (callback, delay) => {
   // custome hook created by Dan Abramov
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
-  const savedCallback = React.useRef();
+  const savedCallback = useRef();
 
   // Remember the latest callback.
-  React.useEffect(() => {
+  useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
   // Set up the interval.
-  React.useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
+  useEffect(() => {
+    const tick = () => savedCallback.current();
     if (delay !== null) {
       let id = setInterval(tick, delay);
       return () => clearInterval(id);

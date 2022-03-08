@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { List } from '../components/List';
+import { List } from '../components/List/List';
 import { Carousel } from '../components/Carousel/Carousel';
 import { QueryClient, useQuery, dehydrate } from 'react-query';
 import { apiQueries } from '../src/http-client/apiQueries';
