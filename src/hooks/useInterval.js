@@ -22,9 +22,3 @@ export const useInterval = (callback, delay) => {
     }
   }, [delay]);
 };
-
-export const usePrevious = (value) => {
-  const ref = useRef(null);
-  useEffect(() => (ref.current = value), [value]);
-  return ref.current;
-};
