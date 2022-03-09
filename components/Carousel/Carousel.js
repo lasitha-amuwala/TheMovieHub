@@ -24,9 +24,15 @@ export const Carousel = ({ autoplay }) => {
   const [slideIndex, setSlideIndex] = useState(1);
   const [animation, setAnimation] = useState(false);
   const [lastIndex, setLastIndex] = useState(0);
-  const [delay, setDelay] = useState(15000);
   const [isVisible, setIsVisible] = useState();
+  const [delay, setDelay] = useState(15000);
+
   const prevIndex = usePrevious(slideIndex);
+
+  // checks if page is active, pauses autoplay interval if inactive
+  const visible = typeof window !== 'undefined' && usePageVisibility();
+  useEffect(() => setIsVisible(visible), [visible]);
+
   // enable auto play every set interval
   useInterval(() => handleClick('right'), autoplay && isVisible ? delay : null);
 
@@ -34,10 +40,6 @@ export const Carousel = ({ autoplay }) => {
     onSwipedLeft: () => handleClick('right'),
     onSwipedRight: () => handleClick('left'),
   });
-
-  let visible;
-  if (typeof window !== 'undefined') visible = usePageVisibility();
-  useEffect(() => setIsVisible(visible), [visible]);
 
   // Add first element to the end of the list to create an infinite carousel
   useEffect(() => {

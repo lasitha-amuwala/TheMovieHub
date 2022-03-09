@@ -48,7 +48,7 @@ export const List = ({ data, title }) => {
   useEffect(() => window.addEventListener('resize', handleResize), []);
 
   return (
-    <div className='list listHeight group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
+    <div className='list group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
       <span className='ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
         {title}
       </span>

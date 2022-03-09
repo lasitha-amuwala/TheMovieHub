@@ -18,11 +18,12 @@ const ListItem = forwardRef(({ data }, ref) => {
         <Link href={`/details/${data.id}`}>
           <a>
             <div className='relative h-full overflow-hidden rounded-lg'>
-              <div className='item-cover block h-full bg-backgroundShadow'>
+              <div className='item-cover block h-full bg-backgroundShadow '>
                 <Image
                   width={3}
                   height={2}
                   layout='responsive'
+                  className='rounded-t-lg'
                   objectFit='cover'
                   src={getImageUrl(data.backdrop_path, { original: false })}
                   alt={`${data.title.split(' ').join('-')}-poster`}
@@ -34,6 +35,7 @@ const ListItem = forwardRef(({ data }, ref) => {
                   width={2}
                   height={3}
                   layout='responsive'
+                  className='rounded-lg'
                   objectFit='cover'
                   objectPosition='top'
                   src={getImageUrl(data.poster_path, { original: false })}

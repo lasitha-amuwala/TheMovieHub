@@ -53,7 +53,7 @@ html {
     @apply w-[33.33%] sm:w-[25%] hover:sm:w-[37.5%] md:w-[20%] hover:md:w-[30%] lg:w-[16.66%] hover:lg:w-[25%] xl:w-[14.29%] hover:xl:w-[21.435%] 3xl:w-[12.5%] hover:3xl:w-[18.75%];
   }
   .listHeight {
-    @apply h-[calc((100vw-1.5rem-(4px*6))/3*1.5)] sm:h-[calc((86vw-(6px*9))/4*1.5)] md:h-[calc((90vw-(6px*11))/5*1.5)] lg:h-[calc(((90vw-(6px*13))/6)*1.5)] xl:h-[calc((90vw-6px*15)/7*1.5)] 3xl:h-[calc((90vw-0.75rem*17)/8*1.5)];
+    @apply h-[calc((100vw-24px-(4px*6))/3*1.5)] sm:h-[calc((86vw-(6px*9))/4*1.5)] md:h-[calc((90vw-(6px*11))/5*1.5)] lg:h-[calc(((90vw-(6px*13))/6)*1.5)] xl:h-[calc((90vw-6px*15)/7*1.5)] 3xl:h-[calc((90vw-0.75rem*17)/8*1.5)];
   }
 }
 
@@ -64,17 +64,17 @@ html {
 .item,
 .item:hover {
   will-change: transform, opacity;
-  transition: width 500ms 1s;
+  transition: width 500ms 500ms;
 }
 .item-cover,
 .item:hover .item-poster {
   opacity: 0;
-  transition: opacity 500ms 1s;
+  transition: opacity 500ms 500ms;
 }
 .item-poster,
 .item:hover .item-cover {
   opacity: 1;
-  transition: opacity 500ms 1s;
+  transition: opacity 500ms 500ms;
 }
 
 /*
