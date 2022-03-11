@@ -21,8 +21,8 @@ const ListItem = forwardRef(({ data, index, numPerList, onItemHover }, ref) => {
       >
         <Link href={`/details/${data.id}`}>
           <a>
-            <div className='list2 relative h-full overflow-hidden rounded-lg hover:ring-2 hover:ring-borderPrimary'>
-              <div className='item-cover block h-full bg-backgroundShadow '>
+            <div className='list2 relative h-full overflow-hidden rounded-lg sm:hover:ring-2 sm:hover:ring-borderPrimary'>
+              <div className='item-cover hidden h-full bg-backgroundShadow sm:block '>
                 <Image
                   width={16}
                   height={9}
