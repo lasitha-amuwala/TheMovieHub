@@ -7,15 +7,9 @@ export const List = ({ data, title }) => {
   const itemRef = useRef(null);
 
   const [count, setCount] = useState(0);
-  const [lastIndex, setLastIndex] = useState(1);
   const [windowWidth, setWindowWidth] = useState(0);
-
-  const length = data.length;
-
-  const handleClick = (direction) => {
-    if (direction === 'left') setCount((c) => (c > 0 ? c - 1 : 0));
-    else setCount((c) => (c < lastIndex ? c + 1 : lastIndex));
-  };
+  const [numItems, setNumItems] = useState(0);
+  const [numPages, setNumPages] = useState(0);
 
   const handleResize = () => {
     if (window.innerWidth > 1536) setWindowWidth(1);
@@ -26,24 +20,50 @@ export const List = ({ data, title }) => {
     else setWindowWidth(6);
   };
 
-  useEffect(() => {
-    let cl = listRef.current;
-    let ci = itemRef.current;
+  const setStates = () => {
+    const numItemsOnScreen = Math.round(listRef.current.clientWidth / itemRef.current.clientWidth);
+    const numTotalItems = Math.round(listRef.current.scrollWidth / itemRef.current.clientWidth);
+    const numOfPages = Math.ceil(numTotalItems / numItemsOnScreen);
+    setNumItems(numTotalItems);
+    setNumPages(numOfPages);
+  };
 
-    if (cl && cl.clientWidth && ci && ci.clientWidth) {
-      let num = Math.floor(cl.clientWidth / ci.clientWidth);
-      let newLastIndex = Math.abs(Math.ceil(length / num) - 1);
+  const handleLeftClick = () => handleClick('left');
+  const handleRightClick = () => handleClick('right');
 
-      setLastIndex(newLastIndex);
-      if (count > newLastIndex) setCount(newLastIndex);
-
-      let remainder = length - num * count;
-      let translate = remainder < num ? count - 1 + remainder / num : count;
-      cl.style.transform = `translateX(${translate * -100}%) translateX(${
-        translate * 1
-      }px)`;
+  const onItemHover = data => {
+    /*
+    console.log(data);
+    if (data == true) {
+      listRef.current.style.transition = 'transform 500ms 200ms;';
+      listRef.current.style.transform = `translateX(-${itemRef.current.clientWidth}px)`;
+    } else {
+      const str = listRef.current.style.transform;
+      const str2 = Number(str.substring(str.indexOf('(') + 1, str.lastIndexOf('px)')));
+      listRef.current.style.transform = `translateX(-${str2 + itemRef.current.clientWidth}px)`;
     }
-  }, [count, windowWidth, length]);
+    */
+  };
+
+  const handleClick = direction => {
+    setStates();
+    if (direction == 'left') {
+      setCount(count ? count - 1 : 0);
+    } else {
+      setCount(count >= numPages - 1 ? numPages : count + 1);
+    }
+  };
+
+  useEffect(() => {
+    setStates();
+
+    const list = listRef.current;
+    const translate = list.clientWidth * count;
+    const scrollDiff = list.scrollWidth - list.clientWidth;
+    const newTranslate = translate > scrollDiff ? list.scrollWidth - list.clientWidth : translate;
+
+    list.style.transform = `translateX(-${newTranslate}px)`;
+  }, [count, numItems, numPages]);
 
   useEffect(() => window.addEventListener('resize', handleResize), []);
 
@@ -53,26 +73,34 @@ export const List = ({ data, title }) => {
         {title}
       </span>
       <div className='highlights-none relative mt-2 h-full md:mt-4 lg:mt-0'>
-        {count > 0 && (
+        {!!count && (
           <div className='absolute left-0 z-10 hidden h-full w-[7%] cursor-pointer select-none rounded-r-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
             <HiOutlineChevronLeft
-              onClick={() => handleClick('left')}
+              onClick={handleLeftClick}
               className='h-full w-full transform opacity-0 transition-transform duration-200 hover:scale-125 group-hover:opacity-100'
             />
           </div>
         )}
-        {(count === 0 || count !== lastIndex) && (
+        {count < numPages - 1 && (
           <div className='absolute right-0 z-10 hidden h-full w-[7%] cursor-pointer select-none rounded-l-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
             <HiOutlineChevronRight
-              onClick={() => handleClick('right')}
+              onClick={handleRightClick}
               className='h-full w-full transform opacity-0 transition-transform duration-200 hover:scale-125 group-hover:opacity-100'
             />
           </div>
         )}
-        <div className='track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%'>
+        <div
+          className={`track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%`}
+        >
           <ul className='sm:netflixTransiiton flex h-full' ref={listRef}>
-            {data.map((item) => (
-              <ListItem data={item} key={item.id} ref={itemRef} />
+            {data.map((item, index) => (
+              <ListItem
+                data={item}
+                index={index}
+                key={item.id}
+                ref={itemRef}
+                onItemHover={onItemHover}
+              />
             ))}
           </ul>
         </div>
