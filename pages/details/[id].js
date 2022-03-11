@@ -39,13 +39,13 @@ const Details = () => {
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
             alt={`${movie.title}-poster`}
             placeholder='blur'
-            unoptimized={true}
             blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+            priority
           />
           <div className='z-1 relative h-full'>
             <div className='h-full bg-black bg-opacity-50 backdrop-blur-3xl backdrop-filter'>
               <div className='m-auto flex h-full max-w-[var(--maxPageWidth)] flex-col gap-10 p-8 lg:flex-row lg:gap-16 lg:p-16 2xl:gap-20 2xl:p-20'>
-                <div className='block h-full w-[calc(40vh*0.7)] flex-none self-center rounded-xl lg:w-[calc((40vh-80px)*0.65)]'>
+                <div className='block h-full w-[calc(40vh*0.7)] flex-none self-center rounded-xl drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] lg:w-[calc((40vh-80px)*0.65)]'>
                   <Image
                     width={500}
                     height={750}
@@ -56,7 +56,6 @@ const Details = () => {
                     blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     alt={`${movie.title}-poster`}
                     quality={100}
-                    unoptimized={true}
                   />
                 </div>
                 <div className='flex flex-col justify-center gap-6 py-5 text-white'>
@@ -80,9 +79,7 @@ const Details = () => {
                     </div>
                   </div>
                   {movie.tagline && (
-                    <div className='font-normal italic text-gray-300'>
-                      {movie.tagline}
-                    </div>
+                    <div className='font-normal italic text-gray-300'>{movie.tagline}</div>
                   )}
                   <div>
                     <div className='pb-2 text-xl font-bold'>Overview</div>
@@ -101,17 +98,15 @@ const Details = () => {
 
 export default Details;
 
-const formatRuntime = (mins) => {
+const formatRuntime = mins => {
   let min = mins % 60;
   let h = (mins - min) / 60;
   return `${h}h ${min}m`;
 };
 
-const filterData = (data) => {
+const filterData = data => {
   try {
-    let release_dates = data.release_dates.results.find(
-      (elem) => elem.iso_3166_1 == 'US'
-    );
+    let release_dates = data.release_dates.results.find(elem => elem.iso_3166_1 == 'US');
     // filter thorugh the list of ratings and return the latest
     let rating = release_dates.release_dates.reduce((a, b) => {
       return new Date(a.release_date) > new Date(b.release_date) ? a : b;
