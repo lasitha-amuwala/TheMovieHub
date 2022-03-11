@@ -32,7 +32,7 @@ const ListItem = forwardRef(({ data, index, numPerList, onItemHover }, ref) => {
                   src={getImageUrl(data.backdrop_path, { original: false })}
                   alt={`${data.title.split(' ').join('-')}-poster`}
                 />
-                <div className='p-2'>{data.title}</div>
+                <div className='p-1 px-3 text-lg font-medium'>{data.title}</div>
               </div>
               <div className='item-poster absolute top-0 block h-full w-full '>
                 <Image

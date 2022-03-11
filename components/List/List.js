@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
 import ListItem from './ListItem';
+import ListButton from './ListButton';
 
 export const List = ({ data, title }) => {
   const listRef = useRef(null);
@@ -69,25 +70,23 @@ export const List = ({ data, title }) => {
 
   return (
     <div className='list group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
-      <span className='ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-2xl lg:absolute lg:text-3xl 2xl:-top-16 2xl:text-4xl'>
+      <span className='ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-xl lg:absolute lg:text-2xl 2xl:-top-16 2xl:text-3xl 3xl:text-4xl'>
         {title}
       </span>
       <div className='highlights-none relative mt-2 h-full md:mt-4 lg:mt-0'>
         {!!count && (
-          <div className='absolute left-0 z-10 hidden h-full w-[7%] cursor-pointer select-none rounded-r-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
-            <HiOutlineChevronLeft
-              onClick={handleLeftClick}
-              className='h-full w-full transform opacity-0 transition-transform duration-200 hover:scale-125 group-hover:opacity-100'
-            />
-          </div>
+          <ListButton
+            icon={<HiOutlineChevronLeft />}
+            className='left-0 rounded-r-md'
+            onClick={handleLeftClick}
+          />
         )}
         {count < numPages - 1 && (
-          <div className='absolute right-0 z-10 hidden h-full w-[7%] cursor-pointer select-none rounded-l-md bg-black bg-opacity-60 hover:bg-opacity-80 sm:block md:w-[calc(5.05%-6px)] 3xl:w-[calc(5.05%-0.75rem)]'>
-            <HiOutlineChevronRight
-              onClick={handleRightClick}
-              className='h-full w-full transform opacity-0 transition-transform duration-200 hover:scale-125 group-hover:opacity-100'
-            />
-          </div>
+          <ListButton
+            icon={<HiOutlineChevronRight />}
+            className='right-0 rounded-l-md'
+            onClick={handleRightClick}
+          />
         )}
         <div
           className={`track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%`}
