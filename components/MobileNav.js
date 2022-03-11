@@ -1,21 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import {
-  RiFilmLine,
-  RiFilmFill,
-  RiSearchLine,
-  RiSearchFill,
-} from 'react-icons/ri';
+import { RiFilmLine, RiFilmFill, RiSearchLine, RiSearchFill } from 'react-icons/ri';
 
-import {
-  BsTv,
-  BsTvFill,
-  BsHouse,
-  BsHouseFill,
-  BsBookmarks,
-  BsBookmarksFill,
-} from 'react-icons/bs';
+import { BsTv, BsTvFill, BsHouse, BsHouseFill, BsBookmarks, BsBookmarksFill } from 'react-icons/bs';
 
 /**
  * icon1 = button icon when not selected
@@ -23,10 +11,10 @@ import {
  */
 const buttons = {
   home: { href: '/', icon1: <BsHouse />, icon2: <BsHouseFill /> },
-  movies: { href: '/movies', icon1: <RiFilmLine />, icon2: <RiFilmFill /> },
+  movies: { href: '/Movies', icon1: <RiFilmLine />, icon2: <RiFilmFill /> },
   search: { href: '/search', icon1: <RiSearchLine />, icon2: <RiSearchFill /> },
-  shows: { href: '/shows', icon1: <BsTv />, icon2: <BsTvFill /> },
-  list: { href: '/list', icon1: <BsBookmarks />, icon2: <BsBookmarksFill /> },
+  shows: { href: '/Series', icon1: <BsTv />, icon2: <BsTvFill /> },
+  list: { href: '/MyList', icon1: <BsBookmarks />, icon2: <BsBookmarksFill /> },
 };
 
 export const MobileNav = () => {
@@ -46,7 +34,7 @@ export const MobileNav = () => {
   return (
     <div className='fixed bottom-0 z-50 h-14 w-full border-t border-borderPrimary bg-almostBlack bg-opacity-80 backdrop-blur backdrop-filter sm:hidden'>
       <div className='flex h-full justify-around'>
-        {Object.keys(buttons).map((key) => (
+        {Object.keys(buttons).map(key => (
           <Button data={buttons[key]} key={key} />
         ))}
       </div>
