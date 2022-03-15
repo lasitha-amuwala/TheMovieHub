@@ -1,5 +1,5 @@
 // import App from 'next/app'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { MobileNav } from '../components/MobileNav';
@@ -19,6 +19,22 @@ Router.onRouteChangeError = () => NProgress.done();
 
 function MyApp({ Component, pageProps }) {
   const [queryClient] = useState(() => customQueryClient());
+
+  // Temperarily stop animations on window resize for better performance
+  useEffect(() => {
+    addEventListener('resize', handleResize);
+    return () => removeEventListener('resize', handleResize);
+  }, []);
+
+  let resizeTimer;
+  const handleResize = () => {
+    document.body.classList.add('resize-animation-stopper');
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove('resize-animation-stopper');
+    }, 100);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
