@@ -62,11 +62,16 @@ html {
   }
 }
 
-.item-cover{
+.item-cover {
   opacity: 0;
 }
 
 @screen sm {
+  .hideFistChild .item:first-child {
+    width: 0px;
+    transition: all 500ms 200ms;
+    padding: 0px;
+  }
   .track:hover {
     transition: transform 500ms 200ms;
   }
@@ -77,7 +82,7 @@ html {
   .item,
   .item:hover {
     will-change: transform, opacity;
-    transition: width 500ms 200ms;
+    transition: all 500ms 200ms;
   }
   .item-cover,
   .item:hover .item-poster {

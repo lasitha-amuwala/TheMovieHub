@@ -8,65 +8,61 @@ export const List = ({ data, title }) => {
   const itemRef = useRef(null);
 
   const [count, setCount] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
-  const [numItems, setNumItems] = useState(0);
   const [numPages, setNumPages] = useState(0);
+  const [hoverList, setHoverList] = useState([]);
+  const [hover, setHover] = useState(false);
 
-  const handleResize = () => {
-    if (window.innerWidth > 1536) setWindowWidth(1);
-    else if (window.innerWidth > 1280) setWindowWidth(2);
-    else if (window.innerWidth > 1024) setWindowWidth(3);
-    else if (window.innerWidth > 768) setWindowWidth(4);
-    else if (window.innerWidth > 640) setWindowWidth(5);
-    else setWindowWidth(6);
+  const handleLeftClick = () => handleClick('left');
+  const handleRightClick = () => handleClick('right');
+
+  const handleClick = direction => {
+    setStates();
+
+    direction == 'left'
+      ? setCount(c => (c ? c - 1 : 0))
+      : setCount(c => (c >= numPages - 1 ? numPages : c + 1));
   };
+
+  const onItemHover = (isHover, index) =>
+    setHover(isHover && hoverList[count] == index + 1 ? true : false);
 
   const setStates = () => {
     const numItemsOnScreen = Math.round(listRef.current.clientWidth / itemRef.current.clientWidth);
     const numTotalItems = Math.round(listRef.current.scrollWidth / itemRef.current.clientWidth);
     const numOfPages = Math.ceil(numTotalItems / numItemsOnScreen);
-    setNumItems(numTotalItems);
+
+    const hoverItems = Array(numTotalItems) // create an array of numTotalItems
+      .fill()
+      .map((x, i) => i);
+    hoverItems = hoverItems.filter(i => i % numItemsOnScreen == 0); // filter array with indexes divisible by numOfItemsOnScreen
+    hoverItems.shift(0);
+    hoverItems.push(numTotalItems);
+
+    setHoverList(hoverItems);
     setNumPages(numOfPages);
   };
 
-  const handleLeftClick = () => handleClick('left');
-  const handleRightClick = () => handleClick('right');
-
-  const onItemHover = data => {
-    /*
-    console.log(data);
-    if (data == true) {
-      listRef.current.style.transition = 'transform 500ms 200ms;';
-      listRef.current.style.transform = `translateX(-${itemRef.current.clientWidth}px)`;
-    } else {
-      const str = listRef.current.style.transform;
-      const str2 = Number(str.substring(str.indexOf('(') + 1, str.lastIndexOf('px)')));
-      listRef.current.style.transform = `translateX(-${str2 + itemRef.current.clientWidth}px)`;
-    }
-    */
-  };
-
-  const handleClick = direction => {
-    setStates();
-    if (direction == 'left') {
-      setCount(count ? count - 1 : 0);
-    } else {
-      setCount(count >= numPages - 1 ? numPages : count + 1);
-    }
+  let resizeTimer;
+  const handleResize = () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      setStates();
+    }, 100);
   };
 
   useEffect(() => {
-    setStates();
+    addEventListener('resize', handleResize);
+    return () => removeEventListener('resize', handleResize);
+  }, []);
 
+  useEffect(() => {
+    setStates();
     const list = listRef.current;
     const translate = list.clientWidth * count;
     const scrollDiff = list.scrollWidth - list.clientWidth;
     const newTranslate = translate > scrollDiff ? list.scrollWidth - list.clientWidth : translate;
-
     list.style.transform = `translateX(-${newTranslate}px)`;
-  }, [count, numItems, numPages]);
-
-  useEffect(() => window.addEventListener('resize', handleResize), []);
+  }, [count]);
 
   return (
     <div className='list group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
@@ -91,7 +87,10 @@ export const List = ({ data, title }) => {
         <div
           className={`track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%`}
         >
-          <ul className='sm:netflixTransiiton flex h-full' ref={listRef}>
+          <ul
+            className={`${hover && 'hideFistChild'} sm:netflixTransiiton flex h-full`}
+            ref={listRef}
+          >
             {data.map((item, index) => (
               <ListItem
                 data={item}
