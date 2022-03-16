@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { apiQueries } from '../../src/http-client/apiQueries';
 import { QueryClient, useQuery, dehydrate } from 'react-query';
+import { getMovieYear } from '../../src/movieUtils';
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -45,12 +46,12 @@ const Details = () => {
           <div className='z-1 relative h-full'>
             <div className='h-full bg-black bg-opacity-50 backdrop-blur-3xl backdrop-filter'>
               <div className='m-auto flex h-full max-w-[var(--maxPageWidth)] flex-col gap-10 p-8 lg:flex-row lg:gap-16 lg:p-16 2xl:gap-20 2xl:p-20'>
-                <div className='block h-full w-[calc(40vh*0.7)] flex-none self-center rounded-xl drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] lg:w-[calc((40vh-80px)*0.65)]'>
+                <div className='block h-full w-[calc(40vh*0.7)] flex-none self-center rounded-md drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] lg:w-[calc((40vh-80px)*0.65)]'>
                   <Image
                     width={500}
                     height={750}
                     layout='responsive'
-                    className='rounded-xl'
+                    className='rounded-md'
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     placeholder='blur'
                     blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -62,7 +63,7 @@ const Details = () => {
                   <div className='spacing text-3xl font-bold sm:text-5xl'>
                     {movie.title}
                     <span className='text-2xl font-light text-gray-300 sm:text-4xl'>
-                      {` (${movie.release_date.split('-')[0]})`}
+                      {` (${getMovieYear(movie.release_date)})`}
                     </span>
                   </div>
                   <div className='flex flex-wrap items-center gap-2 sm:gap-4 lg:gap-4'>

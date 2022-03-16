@@ -69,81 +69,28 @@ html {
 @screen sm {
   .hideFistChild .item:first-child {
     width: 0px;
-    transition: all 500ms 200ms;
+    transition: all 400ms 300ms;
     padding: 0px;
   }
   .track:hover {
-    transition: transform 500ms 200ms;
+    transition: transform 400ms 300ms;
   }
   .track,
   .list:hover .track {
-    transition: transform 500ms 200ms;
+    transition: transform 400ms 300ms;
   }
   .item,
   .item:hover {
     will-change: transform, opacity;
-    transition: all 500ms 200ms;
+    transition: all 400ms 300ms;
   }
   .item-cover,
   .item:hover .item-poster {
-    opacity: 0;
-    transition: opacity 500ms 200ms;
+    transition: opacity 400ms 300ms;
   }
   .item-poster,
   .item:hover .item-cover {
     opacity: 1;
-    transition: opacity 500ms 200ms;
+    transition: opacity 400ms 300ms;
   }
 }
-
-/*
-@screen lg {
-  .list li {
-    transition-duration: 300ms;
-  }
-
-  .list:hover li {
-    -webkit-transform: translateX(-25%);
-    transform: translateX(-25%);
-    transition-duration: 300ms;
-  }
-
-  .list:hover li:hover {
-    transition-duration: 300ms;
-  }
-
-  .list:hover li:hover ~ li {
-    -webkit-transform: translateX(25%);
-    transform: translateX(25%);
-    transition-duration: 300ms;
-  }
-}
-@apply w-[33.33%] sm:w-[25%] hover:sm:w-[37.5%] md:w-[20%] hover:md:w-[30%] lg:w-[16.66%] hover:lg:w-[25%] xl:w-[14.29%] hover:xl:w-[21.435%] 3xl:w-[12.5%] hover:3xl:w-[18.75%];
-*/
-
-/*
-@screen lg {
-  .track:hover {
-    @apply transform md:-translate-x-[5%] lg:-translate-x-[4%] 3xl:-translate-x-[3%];
-    transition: transform 500ms 200ms;
-  }
-  .track,
-  .list:hover .track {
-    transition: transform 500ms 200ms;
-  }
-  .item,
-  .item:hover {
-    will-change: transform, opacity;
-    transition: width 500ms 200ms;
-  }
-  .item-cover,
-  .item:hover .item-poster {
-    opacity: 0;
-    transition: opacity 500ms 200ms;
-  }
-  .item-poster,
-  .item:hover .item-cover {
-    opacity: 1;
-    transition: opacity 500ms 200ms;
-  }
-}*/

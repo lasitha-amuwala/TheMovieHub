@@ -1,26 +1,27 @@
 import { useState, useCallback } from 'react';
-import Image from 'next/image';
+import NextImage from '../NextImage';
+import useApiConfiguration from '../../src/useApiConfig';
 import InfoCard from './InfoCard';
 import { Spinner } from '../Spinner';
 
 export const CarouselItem = ({ slide, index }) => {
+  const { getImageUrl } = useApiConfiguration();
+
   const [isImageLoaded, setImageIsLoaded] = useState(false);
   const onLoad = useCallback(() => setImageIsLoaded(true), []);
 
   return (
     <li className='relative h-full min-w-full'>
-      <div className='relative h-full w-full'>
-        <Image
-          layout='fill'
-          quality={100}
-          onLoad={onLoad}
-          priority={index == 1}
-          className='relative block h-full w-full select-none object-cover object-top'
-          src={`https://image.tmdb.org/t/p/original/${slide.backdrop_path}`}
-          alt={`${slide.title.split(' ').join('-')}-poster`}
-        />
-        {!isImageLoaded && <Spinner />}
-      </div>
+      <NextImage
+        src={getImageUrl(slide.backdrop_path, { original: true })}
+        alt={`${slide.title.split(' ').join('-')}-poster`}
+        className='relative block h-full w-full select-none object-cover object-top'
+        layout='fill'
+        quality={100}
+        onLoad={onLoad}
+        priority={index == 1}
+      />
+      {!isImageLoaded && <Spinner />}
       <InfoCard slide={slide} />
     </li>
   );

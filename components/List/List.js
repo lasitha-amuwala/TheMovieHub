@@ -2,10 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
 import ListItem from './ListItem';
 import ListButton from './ListButton';
+import { useQuery } from 'react-query';
 
-export const List = ({ data, title }) => {
+export const List = ({ query, title }) => {
   const listRef = useRef(null);
   const itemRef = useRef(null);
+
+  const { data } = useQuery(query);
 
   const [count, setCount] = useState(0);
   const [numPages, setNumPages] = useState(0);
@@ -31,12 +34,9 @@ export const List = ({ data, title }) => {
     const numTotalItems = Math.round(listRef.current.scrollWidth / itemRef.current.clientWidth);
     const numOfPages = Math.ceil(numTotalItems / numItemsOnScreen);
 
-    const hoverItems = Array(numTotalItems) // create an array of numTotalItems
-      .fill()
-      .map((x, i) => i);
-    hoverItems = hoverItems.filter(i => i % numItemsOnScreen == 0); // filter array with indexes divisible by numOfItemsOnScreen
+    const hoverItems = Object.keys(data.results).filter(key => key % numItemsOnScreen == 0 && key);
     hoverItems.shift(0);
-    hoverItems.push(numTotalItems);
+    hoverItems.push(numTotalItems.toString());
 
     setHoverList(hoverItems);
     setNumPages(numOfPages);
@@ -84,14 +84,12 @@ export const List = ({ data, title }) => {
             onClick={handleRightClick}
           />
         )}
-        <div
-          className={`track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%`}
-        >
+        <div className='track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%'>
           <ul
             className={`${hover && 'hideFistChild'} sm:netflixTransiiton flex h-full`}
             ref={listRef}
           >
-            {data.map((item, index) => (
+            {data.results.map((item, index) => (
               <ListItem
                 data={item}
                 index={index}

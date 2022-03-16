@@ -9,11 +9,11 @@ const useApiConfiguration = () => {
   });
 
   const getImageUrl = useCallback(
-    (path, { original }) => {
+    (path, options) => {
       const { images } = configuration;
       const { secure_base_url } = images;
 
-      return `${secure_base_url}/${original ? 'original' : 'w500'}${path}`;
+      return `${secure_base_url}/${options && options.original ? 'original' : 'w500'}${path}`;
     },
     [configuration]
   );

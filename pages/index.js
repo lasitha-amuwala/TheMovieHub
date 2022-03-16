@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { List } from '../components/List/List';
 import { Carousel } from '../components/Carousel/Carousel';
-import { QueryClient, useQuery, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from 'react-query';
 import { apiQueries } from '../src/http-client/apiQueries';
 
 export const getServerSideProps = async () => {
@@ -19,34 +19,19 @@ export const getServerSideProps = async () => {
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Home = () => {
-  const fetchData = () => [
-    useQuery(apiQueries.movies.nowPlaying()),
-    useQuery(apiQueries.movies.popular()),
-    useQuery(apiQueries.movies.topRated()),
-    useQuery(apiQueries.movies.upcoming()),
-  ];
-
-  const [
-    { data: nowPlaying, isLoading: isNowPlayingLoading },
-    { data: popular, isLoading: isPopularLoading },
-    { data: topRated, isLoading: isTopRatedLoading },
-    { data: upcoming, isLoading: isUpcomingLoading },
-  ] = fetchData();
-
-  return (
-    <div className='overflow-hidden'>
-      <Head>
-        <title>{process.env.title}</title>
-      </Head>
-      <Carousel autoplay />
-      <div className='flex flex-col sm:gap-2 md:gap-4 lg:gap-6 2xl:gap-9'>
-        <List data={popular.results} title='Popular' />
-        <List data={topRated.results} title='Top Rated' />
-        <List data={nowPlaying.results} title='Now Playing' />
-        <List data={upcoming.results} title='Upcoming' />
-      </div>
+const Home = () => (
+  <div className='overflow-hidden'>
+    <Head>
+      <title>{process.env.title}</title>
+    </Head>
+    <Carousel autoplay />
+    <div className='flex flex-col sm:gap-2 md:gap-4 lg:gap-6 2xl:gap-9'>
+      <List query={apiQueries.movies.popular()} title='Popular' />
+      <List query={apiQueries.movies.nowPlaying()} title='Now Playing' />
+      <List query={apiQueries.movies.upcoming()} title='Upcoming' />
+      <List query={apiQueries.movies.topRated()} title='Top Rated' />
     </div>
-  );
-};
+  </div>
+);
+
 export default Home;
