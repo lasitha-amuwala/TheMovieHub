@@ -21,7 +21,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
       >
         <Link href={`/details/${data.id}`}>
           <a>
-            <div className='list2 relative h-full overflow-hidden rounded-md transition delay-200 sm:hover:ring-2 sm:hover:ring-borderPrimary'>
+            <div className='relative h-full overflow-hidden rounded-md transition delay-200 sm:hover:ring-2 sm:hover:ring-borderPrimary'>
               <div className='item-poster relative top-0 block h-full w-full object-fill '>
                 <NextImage
                   layout='fill'
@@ -46,9 +46,9 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                     alt={data.title}
                   />
                 </div>
-                <div className='flex h-full flex-col justify-center p-1 px-3 text-sm md:text-base xl:text-lg 2xl:p-3 2xl:px-4 2xl:text-xl 3xl:px-5'>
+                <div className='2x1:text-base flex h-full flex-col justify-center p-1 px-3 text-sm md:p-2 md:px-3 md:text-sm lg:text-base 2xl:p-3 2xl:px-4 3xl:px-5 3xl:text-lg'>
                   <div className='grow font-medium line-clamp-1'>{data.title}</div>
-                  <div className='flex grow items-center justify-between text-gray-300'>
+                  <div className='flex grow justify-between text-gray-300'>
                     <div>{getMovieYear(data.release_date)}</div>
                     <div className='flex items-center gap-2'>
                       <MdOutlineStar className='fill-yellow-400' />

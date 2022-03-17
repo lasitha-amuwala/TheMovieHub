@@ -55,10 +55,10 @@ html {
     @apply absolute bottom-0 z-10 flex transform cursor-pointer select-none items-center bg-almostBlack bg-opacity-0 p-[5px] backdrop-filter transition duration-200 hover:scale-110 sm:bottom-45% sm:rounded-full sm:bg-opacity-50 sm:p-4 sm:backdrop-blur sm:hover:bg-opacity-80 lg:border lg:border-borderPrimary;
   }
   .listWidth {
-    @apply w-[33.33%] sm:w-[25%] hover:sm:w-[50%] md:w-[20%] hover:md:w-[40%] lg:w-[16.67%] hover:lg:w-[33.34%] xl:w-[14.29%] hover:xl:w-[28.57%] 3xl:w-[12.5%] hover:3xl:w-[25%];
+    @apply w-[33.33%] sm:w-[25%] hover:sm:w-[50%] md:w-[20%] hover:md:w-[40%] lg:w-[16.67%] hover:lg:w-[33.34%] xl:w-[14.29%] hover:xl:w-[28.57%] 2xl:w-[12.5%] hover:2xl:w-[25%] 3xl:w-[11.11%] hover:3xl:w-[22.22%];
   }
   .listHeight {
-    @apply h-[calc((100vw-24px-(4px*6))/3*1.5)] sm:h-[calc((86vw-(6px*9))/4*1.5)] md:h-[calc((90vw-(6px*11))/5*1.5)] lg:h-[calc(((90vw-(6px*13))/6)*1.5)] xl:h-[calc((90vw-6px*15)/7*1.5)] 3xl:h-[calc((90vw-0.75rem*17)/8*1.5)];
+    @apply h-[calc((100vw-24px-(4px*6))/3*1.5)] sm:h-[calc((86vw-(6px*9))/4*1.5)] md:h-[calc((90vw-(6px*11))/5*1.5)] lg:h-[calc(((90vw-(6px*13))/6)*1.5)] xl:h-[calc((90vw-6px*15)/7*1.5)] 2xl:h-[calc((90vw-6px*17)/8*1.5)] 3xl:h-[calc((90vw-0.75rem*19)/9*1.5)];
   }
 }
 
