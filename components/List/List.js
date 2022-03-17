@@ -12,34 +12,26 @@ export const List = ({ query, title }) => {
 
   const [count, setCount] = useState(0);
   const [numPages, setNumPages] = useState(0);
-  const [hoverList, setHoverList] = useState([]);
+  const [numItemsOnScreen, setNumItemsOnScreen] = useState([]);
   const [hover, setHover] = useState(false);
 
   const handleLeftClick = () => handleClick('left');
   const handleRightClick = () => handleClick('right');
 
-  const handleClick = direction => {
-    setStates();
+  const onItemHover = (isHover, i) =>
+    setHover(isHover && ((i + 1) % numItemsOnScreen == 0 || i == data.results.length - 1));
 
+  const handleClick = direction =>
     direction == 'left'
       ? setCount(c => (c ? c - 1 : 0))
       : setCount(c => (c >= numPages - 1 ? numPages : c + 1));
-  };
-
-  const onItemHover = (isHover, index) =>
-    setHover(isHover && hoverList[count] == index + 1 ? true : false);
 
   const setStates = () => {
     const numItemsOnScreen = Math.round(listRef.current.clientWidth / itemRef.current.clientWidth);
     const numTotalItems = Math.round(listRef.current.scrollWidth / itemRef.current.clientWidth);
-    const numOfPages = Math.ceil(numTotalItems / numItemsOnScreen);
-
-    const hoverItems = Object.keys(data.results).filter(key => key % numItemsOnScreen == 0 && key);
-    hoverItems.shift(0);
-    hoverItems.push(numTotalItems.toString());
-
-    setHoverList(hoverItems);
-    setNumPages(numOfPages);
+    const numPages = Math.ceil(numTotalItems / numItemsOnScreen);
+    setNumItemsOnScreen(numItemsOnScreen);
+    setNumPages(numPages);
   };
 
   let resizeTimer;
@@ -56,13 +48,14 @@ export const List = ({ query, title }) => {
   }, []);
 
   useEffect(() => {
-    setStates();
     const list = listRef.current;
     const translate = list.clientWidth * count;
     const scrollDiff = list.scrollWidth - list.clientWidth;
     const newTranslate = translate > scrollDiff ? list.scrollWidth - list.clientWidth : translate;
     list.style.transform = `translateX(-${newTranslate}px)`;
   }, [count]);
+
+  useEffect(() => setStates(), []);
 
   return (
     <div className='list group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
