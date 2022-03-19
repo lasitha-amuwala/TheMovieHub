@@ -3,13 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --BackgroundColor: #121212;
-  --BackgroundColorShadow: #050505;
-  --mobileNavButton: #ffffff;
-  --primaryBorder: #474747;
-  --skeletonColor: #1e1e1e;
   --maxPageWidth: 1400px;
-  --accentBlue:#005596;
 }
 
 /* Scroll Bar */

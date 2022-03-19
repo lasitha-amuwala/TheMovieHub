@@ -1,21 +1,15 @@
 module.exports = {
   mode: 'jit',
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    backgroundColor: (theme) => ({
-      ...theme('colors'),
-      almostBlack: 'rgb(18,18,18)',
-    }),
-
     extend: {
       colors: {
-        almostBlack: 'var(--BackgroundColor)',
-        backgroundShadow: 'var(--BackgroundColorShadow)',
-        borderPrimary: 'var(--primaryBorder)',
-        mobileNavButton: 'var(--mobileNavButton)',
+        almostBlack: '#121212',
+        backgroundShadow: '#050505',
+        accentBlue: '#005596',
+        mobileNavButton: '#ffffff',
+        borderPrimary: '#474747',
+        skeletonColor: '#1e1e1e',
       },
       screens: {
         '3xl': '2100px',
@@ -44,8 +38,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/line-clamp'),
-    require('tailwind-scrollbar-hide'),
-  ],
+  plugins: [require('@tailwindcss/line-clamp'), require('tailwind-scrollbar-hide')],
 };

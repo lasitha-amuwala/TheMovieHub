@@ -1,108 +1,29 @@
 import React from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { apiQueries } from '../../src/http-client/apiQueries';
-import { QueryClient, useQuery, dehydrate } from 'react-query';
-import { getMovieYear } from '../../src/movieUtils';
+import { QueryClient, dehydrate, useQueries } from 'react-query';
+
+import Title from '../../components/Title';
+import Carousel from '../../components/NewCarousel';
+import DetailsHeader from '../../components/DetailsHeader';
+import MovieCastCard from '../../components/MovieCastCard';
+import MovieImageCard from '../../components/MovieImageCard';
 
 export const getServerSideProps = async ({ params }) => {
   try {
-    const id = params.id;
     const queryClient = new QueryClient();
-    await queryClient.fetchQuery(apiQueries.movies.movie(id));
+    await Promise.all([
+      queryClient.fetchQuery(apiQueries.common.configuration()),
+      queryClient.fetchQuery(apiQueries.movies.movie(params.id)),
+      queryClient.fetchQuery(apiQueries.people.movie(params.id)),
+      queryClient.fetchQuery(apiQueries.movies.movieVideos(params.id)),
+    ]);
+
     return { props: { dehydratedState: dehydrate(queryClient) } };
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     return { notFound: true };
   }
-};
-
-const Details = () => {
-  const { query, isFallback } = useRouter();
-  const { data } = useQuery(apiQueries.movies.movie(query.id));
-
-  let movie = filterData(data);
-
-  if (isFallback) return <div>error</div>;
-
-  return (
-    <div>
-      <Head>
-        <title>{`${movie.title} - ${process.env.title}`}</title>
-      </Head>
-      <div className='max-h-none h-full w-full lg:overflow-hidden '>
-        <div className='relative h-full w-full'>
-          <Image
-            layout='fill'
-            objectFit='cover'
-            objectPosition='top'
-            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-            alt={`${movie.title}-poster`}
-            placeholder='blur'
-            blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-            priority
-          />
-          <div className='z-1 relative h-full'>
-            <div className='h-full bg-black bg-opacity-50 backdrop-blur-3xl backdrop-filter'>
-              <div className='m-auto flex h-full max-w-[var(--maxPageWidth)] flex-col gap-10 p-8 lg:flex-row lg:gap-16 lg:p-16 2xl:gap-20 2xl:p-20'>
-                <div className='block h-full w-[calc(40vh*0.7)] flex-none self-center rounded-md drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] lg:w-[calc((40vh-80px)*0.65)]'>
-                  <Image
-                    width={500}
-                    height={750}
-                    layout='responsive'
-                    className='rounded-md'
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    placeholder='blur'
-                    blurDataURL={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={`${movie.title}-poster`}
-                    quality={100}
-                  />
-                </div>
-                <div className='flex flex-col justify-center gap-6 py-5 text-white'>
-                  <div className='spacing text-3xl font-bold sm:text-5xl'>
-                    {movie.title}
-                    <span className='text-2xl font-light text-gray-300 sm:text-4xl'>
-                      {` (${getMovieYear(movie.release_date)})`}
-                    </span>
-                  </div>
-                  <div className='flex flex-wrap items-center gap-2 sm:gap-4 lg:gap-4'>
-                    {movie.rating && (
-                      <div className='inline border border-gray-300 p-[0.4rem] py-[0.2rem] leading-none text-gray-300 sm:text-sm'>
-                        {movie.rating}
-                      </div>
-                    )}
-                    <div className=''>{movie.duration}</div>
-                    <div className='flex gap-2 sm:gap-4'>
-                      {movie.genres.map(({ id, name }) => (
-                        <div key={id}>{name}</div>
-                      ))}
-                    </div>
-                  </div>
-                  {movie.tagline && (
-                    <div className='font-normal italic text-gray-300'>{movie.tagline}</div>
-                  )}
-                  <div>
-                    <div className='pb-2 text-xl font-bold'>Overview</div>
-                    <div className='font-normal'>{movie.overview}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className=''></div>
-    </div>
-  );
-};
-
-export default Details;
-
-const formatRuntime = mins => {
-  let min = mins % 60;
-  let h = (mins - min) / 60;
-  return `${h}h ${min}m`;
 };
 
 const filterData = data => {
@@ -113,17 +34,53 @@ const filterData = data => {
       return new Date(a.release_date) > new Date(b.release_date) ? a : b;
     });
 
-    delete data.release_dates;
-    delete data.production_companies;
-    delete data.production_countries;
-    delete data.spoken_languages;
-    delete data.adult;
-
     data.rating = rating.certification;
-    data.duration = formatRuntime(data.runtime);
 
     return data;
   } catch {
     return data;
   }
 };
+
+const Details = () => {
+  const { query, isFallback } = useRouter();
+
+  const results = useQueries([
+    apiQueries.movies.movie(query.id),
+    apiQueries.people.movie(query.id),
+    apiQueries.movies.movieVideos(query.id),
+  ]);
+
+  const [{ data: movieData }, { data: castData }, { data: videoData }] = results;
+
+  let movie = filterData(movieData);
+
+  if (isFallback) return <div>error</div>;
+
+  return (
+    <>
+      <Title title={movie.title} />
+      <DetailsHeader movie={movie} />
+      <div className='m-auto w-full max-w-[var(--maxPageWidth)] text-white'>
+        <div className='my-10 mx-8 lg:mx-16 2xl:mx-20'>
+          <Carousel
+            label='Cast'
+            data={castData.cast}
+            visibleSlides={6}
+            component={<MovieCastCard />}
+            isIntrinsicHeight
+          />
+          <Carousel
+            label='Videos'
+            data={videoData.results}
+            visibleSlides={4}
+            component={<MovieImageCard />}
+            isIntrinsicHeight
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Details;

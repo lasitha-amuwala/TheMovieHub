@@ -12,15 +12,17 @@ export const apiQueries = {
     }),
   },
   movies: {
-    movie: (id) => ({
+    movie: id => ({
       queryKey: ['movies', id],
-      queryFn: () =>
-        get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
+      queryFn: () => get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
     }),
-    movieVideos: (id) => ({
+    movieImages: id => ({
+      queryKey: ['movies', id, 'images'],
+      queryFn: () => get(createUrl(`/movie/${id}/images`)),
+    }),
+    movieVideos: id => ({
       queryKey: ['movies', id, 'videos'],
-      queryFn: () =>
-        get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
+      queryFn: () => get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
     }),
     nowPlaying: () => ({
       queryKey: ['movies', 'nowPlaying'],
@@ -43,6 +45,12 @@ export const apiQueries = {
     movies: () => ({
       queryKey: ['trending', 'movies'],
       queryFn: () => get(createUrl('/trending/movie/week')),
+    }),
+  },
+  people: {
+    movie: id => ({
+      queryKey: ['people', 'movie', id],
+      queryFn: () => get(createUrl(`/movie/${id}/credits`)),
     }),
   },
 };
