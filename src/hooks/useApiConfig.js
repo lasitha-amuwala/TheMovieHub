@@ -1,4 +1,4 @@
-import { apiQueries } from './http-client/apiQueries';
+import { apiQueries } from '../http-client/apiQueries';
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 

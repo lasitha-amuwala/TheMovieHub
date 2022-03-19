@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import NextImage from '../NextImage';
-import useApiConfiguration from '../../src/useApiConfig';
+import useApiConfiguration from '../../src/hooks/useApiConfig';
 import InfoCard from './InfoCard';
 import { Spinner } from '../Spinner';
 

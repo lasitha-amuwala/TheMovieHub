@@ -10,7 +10,7 @@ const InfoCard = ({ slide }) => {
           {slide.title}
         </p>
         <Link href={`/details/${slide.id}`} passHref>
-          <div className='hidden flex-shrink-0 items-center gap-2 rounded-xl bg-blue-700 bg-opacity-40 px-3 py-3 text-base font-semibold hover:bg-opacity-60 focus:bg-opacity-60 focus:ring-4 lg:flex'>
+          <div className='hidden flex-shrink-0 items-center gap-2 rounded-xl bg-accentBlue bg-opacity-50 px-3 py-3 text-base font-semibold hover:bg-opacity-80 focus:bg-opacity-60 focus:ring-4 lg:flex'>
             <HiOutlineInformationCircle className='h-6 w-6' />
             More Info
           </div>
