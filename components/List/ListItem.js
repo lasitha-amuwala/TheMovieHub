@@ -19,7 +19,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
         onMouseLeave={onMouseOut}
         className={`item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-[6px] lg:px-2 3xl:px-3`}
       >
-        <Link href={`/details/${data.id}`}>
+        <Link href={`/movie/${data.id}`}>
           <a>
             <div className='relative h-full overflow-hidden rounded-md transition delay-700 sm:hover:ring-2 sm:hover:ring-cardHover'>
               <div className='item-poster relative top-0 block h-full w-full object-fill '>

@@ -12,8 +12,8 @@ const BaseCarousel = ({ data, visibleSlides, component, label, ...rest }) => (
     {label && <div className='ml-2 text-2xl font-semibold'>{label}</div>}
     <div className='group relative my-3 mb-5'>
       <CarouselProvider
-        totalSlides={data.length}
         visibleSlides={visibleSlides}
+        totalSlides={data.length}
         step={visibleSlides}
         {...rest}
       >
@@ -24,11 +24,13 @@ const BaseCarousel = ({ data, visibleSlides, component, label, ...rest }) => (
           <HiChevronRight className='h-full w-full' />
         </ButtonNext>
         <div className='flex w-full justify-end'>
-          {data.map((slide, index) => index % visibleSlides == 0 && <Dot slide={index} />)}
+          {data.map((slide, i) => i % visibleSlides == 0 && <Dot key={i} slide={i} />)}
         </div>
         <Slider className='py-2'>
-          {data.map((slide, index) => (
-            <Slide index={index}>{React.cloneElement(component, { data: slide })}</Slide>
+          {data.map((slide, i) => (
+            <Slide key={i} index={i}>
+              {React.cloneElement(component, { data: slide })}
+            </Slide>
           ))}
         </Slider>
       </CarouselProvider>

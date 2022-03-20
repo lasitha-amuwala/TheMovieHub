@@ -1,7 +1,7 @@
 import React from 'react';
-import NextImage from './NextImage';
-import PageMargin from './PageMargin';
-import { getMovieYear, minsToDuration } from '../src/movieUtils';
+import NextImage from '../NextImage';
+import PageMargin from '../PageMargin';
+import { getMovieYear, minsToDuration } from '../../src/movieUtils';
 
 const DetailsHeader = ({ movie }) => (
   <div className='max-h-none h-full w-full lg:overflow-hidden'>

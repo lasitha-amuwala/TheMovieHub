@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import NextImage from './NextImage';
-import useApiConfiguration from '../src/hooks/useApiConfig';
+import NextImage from '../NextImage';
+import useApiConfiguration from '../../src/hooks/useApiConfig';
 import { MdPerson } from 'react-icons/md';
 
 const MovieCastCard = ({ data }) => (
