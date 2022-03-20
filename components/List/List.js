@@ -58,8 +58,8 @@ export const List = ({ query, title }) => {
   useEffect(() => setStates(), []);
 
   return (
-    <div className='list group relative mt-5 w-full text-white lg:mt-0 lg:mb-12 2xl:mb-12'>
-      <span className='ml-3 h-full pl-1 text-xl font-medium text-white sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-xl lg:absolute lg:text-2xl 2xl:-top-16 2xl:text-3xl 3xl:text-4xl'>
+    <div className='list group relative mt-5 w-full lg:mt-0 lg:mb-12 2xl:mb-12'>
+      <span className='ml-3 h-full pl-1 text-xl font-medium sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-xl lg:absolute lg:text-2xl 2xl:-top-16 2xl:text-3xl 3xl:text-4xl'>
         {title}
       </span>
       <div className='highlights-none relative mt-2 h-full md:mt-4 lg:mt-0'>
@@ -79,7 +79,7 @@ export const List = ({ query, title }) => {
         )}
         <div className='track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%'>
           <ul
-            className={`${hover && 'hideFistChild'} sm:netflixTransiiton flex h-full`}
+            className={`${hover && 'hideFistChild'} sm:netflixTransition flex h-full`}
             ref={listRef}
           >
             {data.results.map((item, index) => (

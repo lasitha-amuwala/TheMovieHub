@@ -14,11 +14,7 @@ import { apiQueries } from '../../src/http-client/apiQueries';
 import SkeletonItem from '../SkeletonItem';
 
 export const Carousel = ({ autoplay }) => {
-  const {
-    data: slides,
-    isLoading,
-    isError,
-  } = useQuery(apiQueries.trending.movies());
+  const { data: slides, isLoading, isError } = useQuery(apiQueries.trending.movies());
 
   const [sliderData, setSliderData] = useState([]);
   const [slideIndex, setSlideIndex] = useState(1);
@@ -34,11 +30,11 @@ export const Carousel = ({ autoplay }) => {
   useEffect(() => setIsVisible(visible), [visible]);
 
   // enable auto play every set interval
-  useInterval(() => handleClick('right'), autoplay && isVisible ? delay : null);
+  useInterval(() => handleClickRight, autoplay && isVisible ? delay : null);
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => handleClick('right'),
-    onSwipedRight: () => handleClick('left'),
+    onSwipedLeft: () => handleClickRight(),
+    onSwipedRight: () => handleClickLeft(),
   });
 
   // Add first element to the end of the list to create an infinite carousel
@@ -51,7 +47,9 @@ export const Carousel = ({ autoplay }) => {
     }
   }, [slides]);
 
-  const handleClick = (direction) => {
+  const handleClickLeft = () => handleClick('left');
+  const handleClickRight = () => handleClick('right');
+  const handleClick = direction => {
     (slideIndex === 0 && prevIndex === lastIndex) ||
     (slideIndex === lastIndex && prevIndex === lastIndex)
       ? setAnimation(false)
@@ -60,12 +58,12 @@ export const Carousel = ({ autoplay }) => {
     setDelay(delay + 1);
 
     direction === 'left'
-      ? setSlideIndex((idx) => (idx <= 0 ? lastIndex : idx - 1))
-      : setSlideIndex((idx) => (idx >= lastIndex ? 0 : idx + 1));
+      ? setSlideIndex(idx => (idx <= 0 ? lastIndex : idx - 1))
+      : setSlideIndex(idx => (idx >= lastIndex ? 0 : idx + 1));
   };
 
-  const handleIndex = (i) => setSlideIndex(i);
-  const handleAnimation = (i) => setAnimation(i);
+  const handleIndex = i => setSlideIndex(i);
+  const handleAnimation = i => setAnimation(i);
 
   const SliderButton = ({ children, classes, onClick }) => (
     <button className={`carouselButton ${classes}`} onClick={onClick}>
@@ -84,17 +82,11 @@ export const Carousel = ({ autoplay }) => {
 
   return (
     <div className='relative h-[70vw] max-h-85vh w-full overflow-hidden sm:h-[56vw]'>
-      <SliderButton
-        onClick={() => handleClick('left')}
-        classes='left-1 sm:left-3 '
-      >
-        <HiChevronLeft className='h-7 w-7 text-white' />
+      <SliderButton onClick={handleClickLeft} classes='left-1 sm:left-3 '>
+        <HiChevronLeft className='h-7 w-7' />
       </SliderButton>
-      <SliderButton
-        onClick={() => handleClick('right')}
-        classes='right-1 sm:right-3'
-      >
-        <HiChevronRight className='h-7 w-7 text-white' />
+      <SliderButton onClick={handleClickRight} classes='right-1 sm:right-3'>
+        <HiChevronRight className='h-7 w-7' />
       </SliderButton>
       <div {...handlers} className='h-full w-full'>
         <Track

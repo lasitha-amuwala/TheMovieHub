@@ -4,7 +4,8 @@ import { apiQueries } from '../../src/http-client/apiQueries';
 import { QueryClient, dehydrate, useQueries } from 'react-query';
 
 import Title from '../../components/Title';
-import Carousel from '../../components/NewCarousel';
+import PageMargin from '../../components/PageMargin';
+import BaseCarousel from '../../components/BaseCarousel';
 import DetailsHeader from '../../components/DetailsHeader';
 import MovieCastCard from '../../components/MovieCastCard';
 import MovieImageCard from '../../components/MovieImageCard';
@@ -61,24 +62,22 @@ const Details = () => {
     <>
       <Title title={movie.title} />
       <DetailsHeader movie={movie} />
-      <div className='m-auto w-full max-w-[var(--maxPageWidth)] text-white'>
-        <div className='my-10 mx-8 lg:mx-16 2xl:mx-20'>
-          <Carousel
-            label='Cast'
-            data={castData.cast}
-            visibleSlides={6}
-            component={<MovieCastCard />}
-            isIntrinsicHeight
-          />
-          <Carousel
-            label='Videos'
-            data={videoData.results}
-            visibleSlides={4}
-            component={<MovieImageCard />}
-            isIntrinsicHeight
-          />
-        </div>
-      </div>
+      <PageMargin padding className='py-10'>
+        <BaseCarousel
+          label='Cast'
+          data={castData.cast}
+          visibleSlides={6}
+          component={<MovieCastCard />}
+          isIntrinsicHeight
+        />
+        <BaseCarousel
+          label='Videos'
+          data={videoData.results}
+          visibleSlides={4}
+          component={<MovieImageCard />}
+          isIntrinsicHeight
+        />
+      </PageMargin>
     </>
   );
 };

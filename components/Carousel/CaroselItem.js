@@ -14,7 +14,7 @@ export const CarouselItem = ({ slide, index }) => {
     <li className='relative h-full min-w-full'>
       <NextImage
         src={getImageUrl(slide.backdrop_path, { original: true })}
-        alt={`${slide.title.split(' ').join('-')}-poster`}
+        alt={slide.title}
         className='relative block h-full w-full select-none object-cover object-top'
         layout='fill'
         quality={100}

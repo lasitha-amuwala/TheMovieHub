@@ -17,11 +17,11 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
         ref={ref}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseOut}
-        className={`item listWidth listHeight shrink-0 px-1 drop-shadow-[0_7px_7px_rgba(0,0,0,0.3)] sm:px-[6px] 3xl:px-3`}
+        className={`item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-[6px] lg:px-2 3xl:px-3`}
       >
         <Link href={`/details/${data.id}`}>
           <a>
-            <div className='relative h-full overflow-hidden rounded-md transition delay-200 sm:hover:ring-2 sm:hover:ring-borderPrimary'>
+            <div className='relative h-full overflow-hidden rounded-md transition delay-700 sm:hover:ring-2 sm:hover:ring-cardHover'>
               <div className='item-poster relative top-0 block h-full w-full object-fill '>
                 <NextImage
                   layout='fill'

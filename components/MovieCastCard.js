@@ -5,11 +5,11 @@ import useApiConfiguration from '../src/hooks/useApiConfig';
 import { MdPerson } from 'react-icons/md';
 
 const MovieCastCard = ({ data }) => (
-  <div className='mx-2 h-full rounded-xl bg-[rgb(10,10,10)] p-1 duration-300 hover:bg-[rgb(35,35,35)] lg:p-3'>
+  <div className='mx-2 h-full rounded-xl bg-card p-1 duration-300 hover:bg-cardHover lg:p-3'>
     <Link href={'/'}>
       <a>
         <div className='flex h-full flex-col gap-3'>
-          <div className='relative aspect-square shrink-0'>
+          <div className='relative aspect-square shrink-0 drop-shadow-md'>
             {data.profile_path ? (
               <NextImage
                 src={useApiConfiguration().getImageUrl(data.profile_path)}

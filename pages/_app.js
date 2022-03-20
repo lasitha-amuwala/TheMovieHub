@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <div className='mt-14 mb-14 lg:mt-16 lg:mb-0'>
+        <div className='mt-14 mb-14 text-white lg:mt-16 lg:mb-0'>
           <Navbar />
           <Component {...pageProps} />
           <Footer />

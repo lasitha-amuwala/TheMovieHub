@@ -11,7 +11,7 @@ export const Navbar = () => {
 
   return (
     <div className='bg fixed top-0 z-50 h-14 w-full bg-almostBlack bg-opacity-80 backdrop-blur backdrop-filter lg:h-16'>
-      <div className='mx-7% flex h-full items-center justify-between text-white md:mx-5%'>
+      <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>
         <div className='highlights-none flex items-center font-bold'>
           <NavItem to='/' label='MovieHub' />
           <div className='hidden items-center gap-16 pl-16 font-normal sm:flex '>

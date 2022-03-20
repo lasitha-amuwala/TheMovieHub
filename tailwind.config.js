@@ -6,6 +6,8 @@ module.exports = {
       colors: {
         almostBlack: '#121212',
         backgroundShadow: '#050505',
+        card: '#1e1e1e',
+        cardHover: '#323232',
         accentBlue: '#005596',
         mobileNavButton: '#ffffff',
         borderPrimary: '#474747',
