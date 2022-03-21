@@ -7,7 +7,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 // Configure NProgress bar
 NProgress.configure({ showSpinner: false });
