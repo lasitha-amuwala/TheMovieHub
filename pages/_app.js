@@ -10,6 +10,7 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
+import Layout from '../components/layout';
 
 // Configure NProgress bar
 NProgress.configure({ showSpinner: false });
@@ -39,10 +40,9 @@ function MyApp({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <div className='mt-14 mb-14 text-white lg:mt-16 lg:mb-0'>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-          <MobileNav />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </div>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
