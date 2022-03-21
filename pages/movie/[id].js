@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { apiQueries } from '../../src/http-client/apiQueries';
-import { QueryClient, dehydrate, useQueries } from 'react-query';
+import { QueryClient, dehydrate, useQuery } from 'react-query';
 
 import Title from '../../components/Title';
+import VideoModal from '../../components/VideoModal';
 import PageMargin from '../../components/PageMargin';
-import BaseCarousel from '../../components/BaseCarousel';
-import DetailsHeader from '../../components/DetailsHeader';
-import MovieCastCard from '../../components/MovieCastCard';
-import MovieImageCard from '../../components/MovieImageCard';
+import DetailsHeader from '../../components/Movie/DetailsHeader';
+import MovieCastCarousel from '../../components/Movie/MovieCastCarousel';
+import MovieVideoCarousel from '../../components/Movie/MovieVideoCarousel';
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -43,43 +43,23 @@ const filterData = data => {
   }
 };
 
-const Details = () => {
-  const { query, isFallback } = useRouter();
+const Movie = () => {
+  const router = useRouter();
+  const { data: movieData } = useQuery(apiQueries.movies.movie(router.query.id));
+  const movie = filterData(movieData);
 
-  const results = useQueries([
-    apiQueries.movies.movie(query.id),
-    apiQueries.people.movie(query.id),
-    apiQueries.movies.movieVideos(query.id),
-  ]);
-
-  const [{ data: movieData }, { data: castData }, { data: videoData }] = results;
-
-  let movie = filterData(movieData);
-
-  if (isFallback) return <div>error</div>;
-
+  if (router.isFallback) return <div>error</div>;
   return (
     <>
       <Title title={movie.title} />
       <DetailsHeader movie={movie} />
       <PageMargin padding className='py-10'>
-        <BaseCarousel
-          label='Cast'
-          data={castData.cast}
-          visibleSlides={6}
-          component={<MovieCastCard />}
-          isIntrinsicHeight
-        />
-        <BaseCarousel
-          label='Videos'
-          data={videoData.results}
-          visibleSlides={4}
-          component={<MovieImageCard />}
-          isIntrinsicHeight
-        />
+        <MovieCastCarousel id={router.query.id} />
+        <MovieVideoCarousel id={router.query.id} />
       </PageMargin>
+      <VideoModal />
     </>
   );
 };
 
-export default Details;
+export default Movie;
