@@ -15,7 +15,9 @@ export const CarouselItem = ({ slide, index }) => {
       <NextImage
         src={getImageUrl(slide.backdrop_path, { original: true })}
         alt={slide.title}
-        className='relative block h-full w-full select-none object-cover object-top'
+        className='select-none'
+        objectFit='cover'
+        objectPosition='top'
         layout='fill'
         quality={100}
         onLoad={onLoad}

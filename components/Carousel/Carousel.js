@@ -82,12 +82,6 @@ export const Carousel = ({ autoplay }) => {
 
   return (
     <div className='relative h-[70vw] max-h-85vh w-full overflow-hidden sm:h-[56vw]'>
-      <SliderButton onClick={handleClickLeft} classes='left-1 sm:left-3 '>
-        <HiChevronLeft className='h-7 w-7' />
-      </SliderButton>
-      <SliderButton onClick={handleClickRight} classes='right-1 sm:right-3'>
-        <HiChevronRight className='h-7 w-7' />
-      </SliderButton>
       <div {...handlers} className='h-full w-full'>
         <Track
           animation={animation}
@@ -104,6 +98,12 @@ export const Carousel = ({ autoplay }) => {
           </ul>
         </Track>
       </div>
+      <SliderButton onClick={handleClickLeft} classes='left-1 sm:left-3 '>
+        <HiChevronLeft className='h-7 w-7' />
+      </SliderButton>
+      <SliderButton onClick={handleClickRight} classes='right-1 sm:right-3'>
+        <HiChevronRight className='h-7 w-7' />
+      </SliderButton>
       <div className='absolute bottom-0 h-1/6 w-full from-almostBlack lg:bg-gradient-to-t'></div>
     </div>
   );
