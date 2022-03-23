@@ -8,13 +8,14 @@ const MovieVideoCard = ({ data }) => {
 
   return (
     <>
-      <Link href={`/movie/${router.query.id}?v=${data.key}`}>
+      <Link href={`/movie/${router.query.movieId}?v=${data.key}`}>
         <a>
           <div className='mx-2 flex h-full flex-col overflow-hidden rounded-lg bg-card duration-300 hover:bg-cardHover'>
             <div className='relative aspect-video'>
               <NextImage
                 src={`http://img.youtube.com/vi/${data.key}/hqdefault.jpg`}
                 layout='fill'
+                objectFit='cover'
               />
             </div>
             <div className='flex grow flex-col justify-center p-3 text-center'>

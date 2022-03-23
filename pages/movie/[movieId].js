@@ -15,9 +15,9 @@ export const getServerSideProps = async ({ params }) => {
     const queryClient = new QueryClient();
     await Promise.all([
       queryClient.fetchQuery(apiQueries.common.configuration()),
-      queryClient.fetchQuery(apiQueries.movies.movie(params.id)),
-      queryClient.fetchQuery(apiQueries.people.movie(params.id)),
-      queryClient.fetchQuery(apiQueries.movies.movieVideos(params.id)),
+      queryClient.fetchQuery(apiQueries.movies.movie(params.movieId)),
+      queryClient.fetchQuery(apiQueries.people.movie(params.movieId)),
+      queryClient.fetchQuery(apiQueries.movies.movieVideos(params.movieId)),
     ]);
 
     return { props: { dehydratedState: dehydrate(queryClient) } };
@@ -45,7 +45,7 @@ const filterData = data => {
 
 const Movie = () => {
   const router = useRouter();
-  const { data: movieData } = useQuery(apiQueries.movies.movie(router.query.id));
+  const { data: movieData } = useQuery(apiQueries.movies.movie(router.query.movieId));
   const movie = filterData(movieData);
 
   if (router.isFallback) return <div>error</div>;
@@ -54,8 +54,8 @@ const Movie = () => {
       <Title title={movie.title} />
       <DetailsHeader movie={movie} />
       <PageMargin padding className='py-10'>
-        <MovieCastCarousel id={router.query.id} />
-        <MovieVideoCarousel id={router.query.id} />
+        <MovieCastCarousel id={router.query.movieId} />
+        <MovieVideoCarousel id={router.query.movieId} />
       </PageMargin>
       <VideoModal />
     </>
