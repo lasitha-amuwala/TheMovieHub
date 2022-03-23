@@ -13,7 +13,7 @@ const MovieVideoCard = ({ data }) => {
           <div className='mx-2 flex h-full flex-col overflow-hidden rounded-lg bg-card duration-300 hover:bg-cardHover'>
             <div className='relative aspect-video'>
               <NextImage
-                src={`http://img.youtube.com/vi/${data.key}/maxresdefault.jpg`}
+                src={`http://img.youtube.com/vi/${data.key}/hqdefault.jpg`}
                 layout='fill'
               />
             </div>
