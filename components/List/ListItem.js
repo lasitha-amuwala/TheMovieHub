@@ -21,7 +21,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
       >
         <Link href={`/movie/${data.id}`}>
           <a>
-            <div className='relative h-full overflow-hidden rounded-md transition delay-700 sm:hover:ring-2 sm:hover:ring-cardHover'>
+            <div className='relative h-full overflow-hidden rounded-md'>
               <div className='item-poster relative top-0 block h-full w-full object-fill '>
                 <NextImage
                   layout='fill'
@@ -32,9 +32,10 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                   blurDataURL='/placeholder.png'
                   src={getImageUrl(data.poster_path)}
                   alt={data.title}
+                  unoptimized={true}
                 />
               </div>
-              <div className='item-cover absolute top-0 flex h-full w-full flex-col bg-backgroundShadow'>
+              <div className='item-cover absolute top-0 flex h-full w-full flex-col  bg-black bg-opacity-40 backdrop-blur-2xl'>
                 <div className='sm:block'>
                   <NextImage
                     width={16}
@@ -44,6 +45,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                     objectFit='cover'
                     src={getImageUrl(data.backdrop_path)}
                     alt={data.title}
+                    unoptimized={true}
                   />
                 </div>
                 <div className='2x1:text-base flex h-full flex-col justify-center p-1 px-3 text-sm md:p-2 md:px-3 md:text-sm lg:text-base 2xl:p-3 2xl:px-4 2xl:text-xl 3xl:p-5 3xl:text-2xl'>
