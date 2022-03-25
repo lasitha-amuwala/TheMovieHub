@@ -16,7 +16,7 @@ export const getServerSideProps = async ({ params }) => {
     await Promise.all([
       queryClient.fetchQuery(apiQueries.common.configuration()),
       queryClient.fetchQuery(apiQueries.movies.movie(params.movieId)),
-      queryClient.fetchQuery(apiQueries.people.movie(params.movieId)),
+      queryClient.fetchQuery(apiQueries.movies.credits(params.movieId)),
       queryClient.fetchQuery(apiQueries.movies.movieVideos(params.movieId)),
     ]);
 

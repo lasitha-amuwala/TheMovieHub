@@ -34,7 +34,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                   alt={data.title}
                 />
               </div>
-              <div className='item-cover absolute top-0 flex h-full w-full flex-col  bg-black bg-opacity-40 backdrop-blur-2xl'>
+              <div className='item-cover absolute top-0 flex h-full w-full flex-col bg-black bg-opacity-70 backdrop-blur-xl'>
                 <div className='sm:block'>
                   <NextImage
                     width={16}

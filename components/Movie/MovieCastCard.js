@@ -6,7 +6,7 @@ import { MdPerson } from 'react-icons/md';
 
 const MovieCastCard = ({ data }) => (
   <div className='mx-2 h-full rounded-xl bg-card p-1 duration-300 hover:bg-cardHover lg:p-3'>
-    <Link href={'/'}>
+    <Link href={`/person/${data.id}`}>
       <a>
         <div className='flex h-full flex-col gap-3'>
           <div className='relative aspect-square shrink-0 drop-shadow-md'>

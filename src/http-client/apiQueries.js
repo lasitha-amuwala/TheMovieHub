@@ -40,6 +40,10 @@ export const apiQueries = {
       queryKey: ['movies', 'upcoming'],
       queryFn: () => get(createUrl(`/movie/upcoming`, USParams)),
     }),
+    credits: id => ({
+      queryKey: ['credits', 'movie', id],
+      queryFn: () => get(createUrl(`/movie/${id}/credits`)),
+    }),
   },
   trending: {
     movies: () => ({
@@ -48,9 +52,9 @@ export const apiQueries = {
     }),
   },
   people: {
-    movie: id => ({
-      queryKey: ['people', 'movie', id],
-      queryFn: () => get(createUrl(`/movie/${id}/credits`)),
+    person: id => ({
+      queryKey: ['people', id],
+      queryFn: () => get(createUrl(`/person/${id}`)),
     }),
   },
 };

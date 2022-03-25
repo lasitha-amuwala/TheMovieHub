@@ -5,7 +5,7 @@ import BaseCarousel from '../BaseCarousel';
 import MovieCastCard from './MovieCastCard';
 
 const MovieCastCarousel = ({ id }) => {
-  const { data } = useQuery(apiQueries.people.movie(id));
+  const { data } = useQuery(apiQueries.movies.credits(id));
 
   return (
     <BaseCarousel
