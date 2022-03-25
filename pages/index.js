@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import { List } from '../components/List/List';
-import { Carousel } from '../components/Carousel/Carousel';
+import { List } from '../components/list/List';
+import { Carousel } from '../components/carousel/Carousel';
 import { QueryClient, dehydrate } from 'react-query';
 import { apiQueries } from '../src/http-client/apiQueries';
 
