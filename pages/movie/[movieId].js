@@ -6,9 +6,9 @@ import { QueryClient, dehydrate, useQuery } from 'react-query';
 import Title from '../../components/Title';
 import VideoModal from '../../components/VideoModal';
 import PageMargin from '../../components/PageMargin';
-import MovieHeader from '../../components/movie/MovieHeader';
-import MovieCastCarousel from '../../components/movie/MovieCastCarousel';
-import MovieVideoCarousel from '../../components/movie/MovieVideoCarousel';
+import MovieHeader from '../../components/Movie/MovieHeader';
+import MovieCastCarousel from '../../components/Movie/MovieCastCarousel';
+import MovieVideoCarousel from '../../components/Movie/MovieVideoCarousel';
 
 export const getServerSideProps = async ({ params }) => {
   try {
