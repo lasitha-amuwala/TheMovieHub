@@ -29,28 +29,28 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
               <div className='item-poster relative top-0 block h-full w-full object-fill '>
                 <NextImage
                   layout='fill'
+                  src={getImageUrl(data.poster_path)}
+                  alt={data.title}
                   className='rounded-md'
                   objectFit='cover'
                   objectPosition='top'
                   placeholder='blur'
                   blurDataURL='/placeholder.png'
-                  src={getImageUrl(data.poster_path)}
-                  alt={data.title}
+                  unoptimized
                 />
               </div>
               <div className='item-cover absolute top-0 flex h-full w-full flex-col bg-black bg-opacity-70 backdrop-blur-xl'>
                 <div className='aspect-[8.5/16] w-full sm:block'>
-                  {renderBackdrop && (
-                    <NextImage
-                      width={16}
-                      height={8.5}
-                      layout='responsive'
-                      className='rounded-t-md'
-                      objectFit='cover'
-                      src={getImageUrl(data.backdrop_path, { original: true })}
-                      alt={data.title}
-                    />
-                  )}
+                  <NextImage
+                    width={16}
+                    height={8.5}
+                    src={getImageUrl(data.backdrop_path, { original: renderBackdrop })}
+                    alt={data.title}
+                    layout='responsive'
+                    className='rounded-t-md'
+                    objectFit='cover'
+                    unoptimized
+                  />
                 </div>
                 <div className='2x1:text-base flex h-full flex-col justify-center p-1 px-3 text-sm md:p-2 md:px-3 md:text-sm lg:text-base 2xl:p-3 2xl:px-4 2xl:text-xl 3xl:p-5 3xl:text-2xl'>
                   <div className='grow font-medium line-clamp-1'>{data.title}</div>
