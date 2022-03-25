@@ -7,7 +7,7 @@ const ListButton = ({ icon, onClick, className }) => (
     {React.cloneElement(icon, {
       onClick,
       className:
-        'h-full w-full opacity-0 transition-transform duration-200 hover:scale-125 group-hover:opacity-100',
+        'h-full w-full opacity-0 duration-200 hover:scale-125 group-hover:opacity-100',
     })}
   </div>
 );
