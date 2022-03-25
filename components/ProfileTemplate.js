@@ -5,17 +5,19 @@ import PageMargin from './PageMargin';
 const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
   return (
     <div className='relative h-full w-full'>
-      <NextImage
-        layout='fill'
-        objectFit='cover'
-        objectPosition='top'
-        src={backdropSrc}
-        alt={backdropAlt}
-        placeholder='blur'
-        blurDataURL={backdropSrc}
-        priority
-        unoptimized
-      />
+      {backdropSrc && (
+        <NextImage
+          layout='fill'
+          objectFit='cover'
+          objectPosition='top'
+          src={backdropSrc}
+          alt={backdropAlt}
+          placeholder='blur'
+          blurDataURL={backdropSrc}
+          priority
+          unoptimized
+        />
+      )}
       <div className='h-full w-full bg-black bg-opacity-50 backdrop-blur-3xl'>
         <PageMargin padding className='py-10 lg:py-12'>
           <div className='flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row sm:items-center lg:gap-12'>

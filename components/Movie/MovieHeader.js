@@ -8,9 +8,9 @@ const MovieHeader = ({ movie }) => {
 
   return (
     <ProfileTemplate
-      imageSrc={getImageUrl(movie.poster_path)}
+      imageSrc={getImageUrl(movie.poster_path, { original: true })}
       imageAlt={movie.title}
-      backdropSrc={getImageUrl(movie.backdrop_path)}
+      backdropSrc={getImageUrl(movie.backdrop_path, { original: true })}
       backdropAlt={movie.title}
     >
       <div className='flex flex-col justify-center gap-6 py-5'>
