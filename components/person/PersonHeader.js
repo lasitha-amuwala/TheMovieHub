@@ -12,6 +12,7 @@ const PersonHeader = ({ person }) => {
     >
       <div className='flex flex-col justify-center gap-6 py-5'>
         <div className='text-3xl font-bold sm:text-5xl'>{person.name}</div>
+        {person.biography}
       </div>
     </ProfileTemplate>
   );

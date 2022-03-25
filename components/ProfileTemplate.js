@@ -23,8 +23,8 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
           <div className='flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row sm:items-center lg:gap-12'>
             <div className='relative h-full px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:px-0'>
               <NextImage
-                width={2}
-                height={3}
+                width={200}
+                height={300}
                 layout='responsive'
                 className='rounded-lg'
                 src={imageSrc}
