@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import IconButton from './IconButton';
 import { MdClose } from 'react-icons/md';
 
 Modal.setAppElement('#__next');
@@ -27,8 +28,10 @@ const BaseModal = ({ isOpen, onRequestClose, label, title, children }) => {
     <Modal style={modalStyles} isOpen={isOpen} onRequestClose={onRequestClose} contentLabel={label}>
       <div className='flex h-12 items-center py-2 px-4 text-xl text-white'>
         <div className='grow'>{title}</div>
-        <button onClick={onRequestClose} className='rounded-full bg-opacity-0 p-2 hover:bg-white	hover:bg-opacity-5'>
-          <MdClose className='' />
+        <button onClick={onRequestClose}>
+          <IconButton>
+            <MdClose />
+          </IconButton>
         </button>
       </div>
       {children}
