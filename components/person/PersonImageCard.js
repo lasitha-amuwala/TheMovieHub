@@ -17,6 +17,7 @@ const PersonImageCard = ({ data }) => {
                 src={getImageUrl(data.file_path)}
                 layout='fill'
                 objectFit='cover'
+                unoptimized
               />
             </div>
           </div>
