@@ -16,11 +16,11 @@ export const apiQueries = {
       queryKey: ['movies', id],
       queryFn: () => get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
     }),
-    movieImages: id => ({
+    images: id => ({
       queryKey: ['movies', id, 'images'],
       queryFn: () => get(createUrl(`/movie/${id}/images`)),
     }),
-    movieVideos: id => ({
+    videos: id => ({
       queryKey: ['movies', id, 'videos'],
       queryFn: () => get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
     }),
@@ -54,7 +54,19 @@ export const apiQueries = {
   people: {
     person: id => ({
       queryKey: ['people', id],
-      queryFn: () => get(createUrl(`/person/${id}`)),
+      queryFn: () => get(createUrl(`/person/${id}`, {append_to_response: 'external_ids'})),
+    }),
+    movieCredits: id => ({
+      queryKey: ['people', id, 'credits', 'movie'],
+      queryFn: () => get(createUrl(`/person/${id}/movie_credits`)),
+    }),
+    tvCredits: id => ({
+      queryKey: ['people', id, 'credits', 'tv'],
+      queryFn: () => get(createUrl(`/person/${id}/tv_credits`)),
+    }),
+    images: id => ({
+      queryKey: ['people', id, 'images'],
+      queryFn: () => get(createUrl(`/person/${id}/images`)),
     }),
   },
 };
