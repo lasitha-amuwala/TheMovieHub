@@ -1,23 +1,20 @@
 import React from 'react';
-import ProfileTemplate from '../ProfileTemplate';
-import { getMovieYear, minsToDuration } from '../../src/movieUtils';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import ProfileTemplate from '../person/ProfileTemplate';
+import { getYearFromDate, minsToDuration } from '../../src/commonUtils';
 
 const MovieHeader = ({ movie }) => {
-  const { getImageUrl } = useApiConfiguration();
-
   return (
     <ProfileTemplate
-      imageSrc={getImageUrl(movie.poster_path, { original: true })}
+      imageSrc={movie.poster_path}
       imageAlt={movie.title}
-      backdropSrc={getImageUrl(movie.backdrop_path, { original: true })}
+      backdropSrc={movie.backdrop_path}
       backdropAlt={movie.title}
     >
       <div className='flex flex-col justify-center gap-6 py-5'>
         <div className='text-3xl font-bold sm:text-5xl'>
           {movie.title}
           <span className='text-2xl font-light text-gray-300 sm:text-4xl'>
-            {` (${getMovieYear(movie.release_date)})`}
+            {` (${getYearFromDate(movie.release_date)})`}
           </span>
         </div>
         <div className='flex flex-wrap items-center gap-2 sm:gap-4 lg:gap-4'>

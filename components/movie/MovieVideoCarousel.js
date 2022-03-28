@@ -5,7 +5,7 @@ import BaseCarousel from '../BaseCarousel';
 import MovieVideoCard from './MovieVideoCard';
 
 const MovieVideoCarousel = ({ id }) => {
-  const { data } = useQuery(apiQueries.movies.movieVideos(id));
+  const { data } = useQuery(apiQueries.movies.videos(id));
 
   return (
     <BaseCarousel
