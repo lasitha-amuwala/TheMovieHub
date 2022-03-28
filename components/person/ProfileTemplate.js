@@ -26,7 +26,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
       >
         <PageMargin padding className='py-10 lg:py-12'>
           <div className='flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row lg:gap-12'>
-            <div className='relative h-full self-center border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:px-0'>
+            <div className='relative h-full sm:self-center border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:px-0'>
               {imageSrc ? (
                 <NextImage
                   width={200}

@@ -30,7 +30,7 @@ const ReadMore = ({ lines, text, bg }) => {
         <div className={`flex justify-end bg-gradient-to-r from-transparent to-${bg}`}>
           <button
             onClick={() => setTruncated(!truncated)}
-            className={`bg-${bg} rounded-lg py-0 px-2 font-bold text-accentBlue transition-colors duration-150 hover:text-accentBlueHover`}
+            className={`bg-${bg} rounded-lg py-0 px-2 font-semibold text-accentBlue transition-colors duration-150 hover:text-accentBlueHover`}
           >
             {truncated ? 'Read More' : 'Show Less'}
           </button>
