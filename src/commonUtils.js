@@ -1,6 +1,11 @@
-export const getMovieYear = date => {
+export const getYearFromDate = date => {
   if (!date) return null;
   return new Date(date).getFullYear();
+};
+
+export const getLocaleDate = date => {
+  if (!date) return null;
+  return new Date(date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 };
 
 export const minsToDuration = mins => {
