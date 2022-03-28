@@ -14,7 +14,7 @@ const PersonImageCard = ({ data }) => {
           <div className='mx-2 flex h-full flex-col overflow-hidden rounded-lg bg-card duration-300 hover:bg-cardHover'>
             <div className='relative aspect-[2/3]'>
               <NextImage
-                src={getImageUrl(data.file_path, { original: true })}
+                src={getImageUrl(data.file_path)}
                 layout='fill'
                 objectFit='cover'
               />
