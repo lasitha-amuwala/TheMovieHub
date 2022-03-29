@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseModal from './BaseModal';
-import VideoPlayer from './VideoPlayer';
+import VideoPlayer from '../VideoPlayer';
 import { useRouter } from 'next/router';
 
 const VideoModal = ({ title }) => {

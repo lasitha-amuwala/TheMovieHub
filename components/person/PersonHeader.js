@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileTemplate from './ProfileTemplate';
+import ProfileTemplate from '../ProfileTemplate';
 import { getLocaleDate } from '../../src/commonUtils';
 import { FaInstagram, FaFacebook, FaTwitter, FaImdb } from 'react-icons/fa';
 import IconButton from '../IconButton';

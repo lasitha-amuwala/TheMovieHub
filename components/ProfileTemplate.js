@@ -1,8 +1,8 @@
 import React from 'react';
-import NextImage from '../NextImage';
-import PageMargin from '../PageMargin';
-import PersonPlaceholder from '../PersonPlaceholder';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import NextImage from './NextImage';
+import PageMargin from './PageMargin';
+import PersonPlaceholder from './PersonPlaceholder';
+import useApiConfiguration from '../src/hooks/useApiConfig';
 
 const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
   const { getImageUrl } = useApiConfiguration();
@@ -26,7 +26,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
       >
         <PageMargin padding className='py-10 lg:py-12'>
           <div className='flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row lg:gap-12'>
-            <div className='relative h-full sm:self-center border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:px-0'>
+            <div className='relative h-full border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:self-center sm:px-0'>
               {imageSrc ? (
                 <NextImage
                   width={200}
@@ -37,6 +37,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                   alt={imageAlt}
                   quality={100}
                   unoptimized
+                  priority={!backdropSrc}
                 ></NextImage>
               ) : (
                 <PersonPlaceholder />

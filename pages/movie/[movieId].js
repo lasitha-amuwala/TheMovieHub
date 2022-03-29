@@ -4,7 +4,7 @@ import { apiQueries } from '../../src/http-client/apiQueries';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 
 import Title from '../../components/Title';
-import VideoModal from '../../components/VideoModal';
+import VideoModal from '../../components/modals/VideoModal';
 import PageMargin from '../../components/PageMargin';
 import MovieHeader from '../../components/movie/MovieHeader';
 import MovieCastCarousel from '../../components/movie/MovieCastCarousel';

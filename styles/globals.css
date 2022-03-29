@@ -74,7 +74,7 @@ html {
   }
   .item,
   .item-cover {
-    transition: 250ms 500ms ease-out all;
+    transition: 150ms 1s ease-out all;
     will-change: transform, opacity;
   }
 }

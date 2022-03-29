@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import IconButton from './IconButton';
+import IconButton from '../IconButton';
 import { MdClose } from 'react-icons/md';
 
 Modal.setAppElement('#__next');
@@ -8,11 +8,10 @@ Modal.setAppElement('#__next');
 const modalStyles = {
   overlay: {
     zIndex: 99999,
-    backgroundColor: 'rgb(0,0,0,0.7)',
+    backgroundColor: 'rgb(0,0,0,0.5)',
   },
   content: {
     opacity: 100,
-    width: '90vw',
     maxWidth: 1200,
     margin: 'auto',
     height: 'max-content',

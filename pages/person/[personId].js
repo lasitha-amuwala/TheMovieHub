@@ -5,6 +5,7 @@ import { apiQueries } from '../../src/http-client/apiQueries';
 import PersonHeader from '../../components/person/PersonHeader';
 import PersonImageCarousel from '../../components/person/PersonImageCarousel';
 import PageMargin from '../../components/PageMargin';
+import ImageModal from '../../components/modals/ImageModal';
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -39,9 +40,10 @@ const Person = () => {
   return (
     <>
       <PersonHeader person={personData} />
-      <PageMargin padding>
+      <PageMargin padding className='py-10'>
         <PersonImageCarousel id={personId} />
       </PageMargin>
+      <ImageModal />
     </>
   );
 };
