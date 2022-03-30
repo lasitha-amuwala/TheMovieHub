@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { QueryClient, dehydrate, useQuery, useQueries } from 'react-query';
+import { QueryClient, dehydrate, useQueries } from 'react-query';
 import { apiQueries } from '../../src/http-client/apiQueries';
 import PersonHeader from '../../components/person/PersonHeader';
 import PersonImageCarousel from '../../components/person/PersonImageCarousel';
@@ -28,13 +28,18 @@ export const getServerSideProps = async ({ params }) => {
 const Person = () => {
   const router = useRouter();
   const { personId } = router.query;
+
   const results = useQueries([
     apiQueries.people.person(personId),
     apiQueries.people.movieCredits(personId),
     apiQueries.people.tvCredits(personId),
+    apiQueries.people.images(personId),
   ]);
 
-  const [{ data: personData }, { data: movieCredits }, { data: tvCredits }] = results;
+  const [{ data: personData }, { data: movieCredits }, { data: tvCredits }, { data: imageData }] =
+    results;
+
+  const imagePaths = imageData.profiles.map(({ file_path }) => file_path.substring(1));
 
   if (router.isFallback) return <div>error</div>;
   return (
@@ -43,7 +48,7 @@ const Person = () => {
       <PageMargin padding className='py-10'>
         <PersonImageCarousel id={personId} />
       </PageMargin>
-      <ImageModal />
+      <ImageModal title={personData.name} paths={imagePaths} />
     </>
   );
 };
