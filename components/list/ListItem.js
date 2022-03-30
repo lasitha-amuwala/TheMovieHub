@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import Link from 'next/link';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 import { MdOutlineStar } from 'react-icons/md';
@@ -7,13 +7,9 @@ import { getYearFromDate } from '../../src/commonUtils';
 
 const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
   const { getImageUrl } = useApiConfiguration();
-  const [renderBackdrop, setRenderBackdrop] = useState(false);
 
   const onMouseOut = () => onItemHover(false, index);
-  const onMouseEnter = () => {
-    onItemHover(true, index);
-    setRenderBackdrop(true);
-  };
+  const onMouseEnter = () => onItemHover(true, index);
 
   return (
     data.poster_path && (
@@ -44,7 +40,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                   <NextImage
                     width={16}
                     height={8.5}
-                    src={getImageUrl(data.backdrop_path, { original: renderBackdrop })}
+                    src={getImageUrl(data.backdrop_path)}
                     alt={data.title}
                     layout='responsive'
                     className='rounded-t-md'
