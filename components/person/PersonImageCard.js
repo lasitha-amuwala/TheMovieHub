@@ -9,7 +9,7 @@ const PersonImageCard = ({ data }) => {
   const { getImageUrl } = useApiConfiguration();
 
   return (
-    <div className='mx-2 flex h-full flex-col overflow-hidden rounded duration-300'>
+    <div className='mx-2 flex h-full flex-col overflow-hidden rounded drop-shadow-md duration-300'>
       <Link href={`/person/${router.query.personId}?i=${data.file_path.substring(1)}`}>
         <a>
           <div className='relative aspect-[2/3]'>

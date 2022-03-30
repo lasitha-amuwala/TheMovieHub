@@ -29,7 +29,7 @@ const renderSocials = (key, value) => {
   if (!value || !socials.hasOwnProperty(id)) return null;
   return (
     <a href={socials[id].url + value} key={key}>
-      <IconButton>{socials[id].icon}</IconButton>
+      <IconButton icon={socials[id].icon} />
     </a>
   );
 };

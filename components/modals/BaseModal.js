@@ -25,13 +25,9 @@ const modalStyles = {
 const BaseModal = ({ isOpen, onRequestClose, label, title, children }) => {
   return (
     <Modal style={modalStyles} isOpen={isOpen} onRequestClose={onRequestClose} contentLabel={label}>
-      <div className='flex h-14 items-center py-2 px-4 text-xl text-white'>
+      <div className='flex h-14 items-center px-4 text-lg text-white'>
         <div className='grow'>{title}</div>
-        <button onClick={onRequestClose}>
-          <IconButton>
-            <MdClose />
-          </IconButton>
-        </button>
+        <IconButton icon={<MdClose />} onClick={onRequestClose} />
       </div>
       {children}
     </Modal>
