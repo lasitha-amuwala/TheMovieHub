@@ -10,7 +10,7 @@ const PersonImageCarousel = ({ id }) => {
     <BaseCarousel
       label='Images'
       data={data.profiles}
-      visibleSlides={6}
+      visibleSlides={8}
       component={<PersonImageCard />}
       isIntrinsicHeight
     />
