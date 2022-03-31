@@ -28,7 +28,7 @@ const ImageModal = ({ title, paths }) => {
     <BaseModal
       title={title}
       isOpen={!!router.query.i}
-      onRequestClose={() => router.push(`/person/${router.query.personId}`)}
+      onRequestClose={() => router.push(router.asRoute, undefined, { shallow: true })}
       contentLabel='image modal'
     >
       <div className='relative text-white'>

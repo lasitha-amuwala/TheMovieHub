@@ -5,6 +5,8 @@ import useApiConfiguration from '../../src/hooks/useApiConfig';
 import PersonPlaceholder from '../PersonPlaceholder';
 
 const MovieCastCard = ({ data }) => {
+  const { getImageUrl } = useApiConfiguration();
+
   return (
     <div className='mx-2 h-full rounded-xl bg-card p-1 duration-300 hover:bg-cardHover lg:p-3'>
       <Link href={`/person/${data.id}`}>
@@ -13,7 +15,7 @@ const MovieCastCard = ({ data }) => {
             <div className='relative aspect-square shrink-0 drop-shadow-md'>
               {data.profile_path && (
                 <NextImage
-                  src={useApiConfiguration().getImageUrl(data.profile_path)}
+                  src={getImageUrl(data.profile_path)}
                   layout='fill'
                   objectFit='cover'
                   className='rounded-lg'

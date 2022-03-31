@@ -1,14 +1,14 @@
 import React from 'react';
 import NextImage from '../NextImage';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from '../../src/hooks/useRouter';
 
 const MovieVideoCard = ({ data }) => {
   const router = useRouter();
 
   return (
     <>
-      <Link href={`/movie/${router.query.movieId}?v=${data.key}`}>
+      <Link href={{ pathname: router.asRoute, query: { v: data.key } }} shallow>
         <a>
           <div className='mx-2 flex h-full flex-col overflow-hidden rounded-lg bg-card duration-300 hover:bg-cardHover'>
             <div className='relative aspect-video'>

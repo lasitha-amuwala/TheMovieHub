@@ -5,7 +5,6 @@ import { apiQueries } from '../../src/http-client/apiQueries';
 import PersonHeader from '../../components/person/PersonHeader';
 import PersonImageCarousel from '../../components/person/PersonImageCarousel';
 import PageMargin from '../../components/PageMargin';
-import ImageModal from '../../components/modals/ImageModal';
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -33,22 +32,18 @@ const Person = () => {
     apiQueries.people.person(personId),
     apiQueries.people.movieCredits(personId),
     apiQueries.people.tvCredits(personId),
-    apiQueries.people.images(personId),
   ]);
 
-  const [{ data: personData }, { data: movieCredits }, { data: tvCredits }, { data: imageData }] =
-    results;
-
-  const imagePaths = imageData.profiles.map(({ file_path }) => file_path.substring(1));
+  const [{ data: personData }, { data: movieCredits }, { data: tvCredits }] = results;
 
   if (router.isFallback) return <div>error</div>;
   return (
     <>
       <PersonHeader person={personData} />
       <PageMargin padding className='py-10'>
-        <PersonImageCarousel id={personId} />
+        <PersonImageCarousel id={personId} title={personData.name} />
       </PageMargin>
-      <ImageModal title={personData.name} paths={imagePaths} />
+      <div className='h-screen'></div>
     </>
   );
 };
