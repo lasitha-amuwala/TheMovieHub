@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { apiQueries } from '../../src/http-client/apiQueries';
+import { tmdb } from '../../src/http-client/tmdb';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 
 import Title from '../../components/Title';
@@ -13,10 +13,10 @@ export const getServerSideProps = async ({ params }) => {
   try {
     const queryClient = new QueryClient();
     await Promise.all([
-      queryClient.fetchQuery(apiQueries.common.configuration()),
-      queryClient.fetchQuery(apiQueries.movies.movie(params.movieId)),
-      queryClient.fetchQuery(apiQueries.movies.credits(params.movieId)),
-      queryClient.fetchQuery(apiQueries.movies.videos(params.movieId)),
+      queryClient.fetchQuery(tmdb.common.configuration()),
+      queryClient.fetchQuery(tmdb.movies.movie(params.movieId)),
+      queryClient.fetchQuery(tmdb.movies.credits(params.movieId)),
+      queryClient.fetchQuery(tmdb.movies.videos(params.movieId)),
     ]);
 
     return { props: { dehydratedState: dehydrate(queryClient) } };
@@ -44,7 +44,7 @@ const filterData = data => {
 
 const Movie = () => {
   const router = useRouter();
-  const { data: movieData } = useQuery(apiQueries.movies.movie(router.query.movieId));
+  const { data: movieData } = useQuery(tmdb.movies.movie(router.query.movieId));
   const movie = filterData(movieData);
 
   if (router.isFallback) return <div>error</div>;

@@ -9,12 +9,12 @@ import { CarouselItem } from './CaroselItem';
 import { useInterval } from '../../src/hooks/useInterval';
 import { usePrevious } from '../../src/hooks/usePrevious';
 import { usePageVisibility } from '../../src/hooks/usePageVisibility';
-import { apiQueries } from '../../src/http-client/apiQueries';
+import { tmdb } from '../../src/http-client/tmdb';
 
 import SkeletonItem from '../SkeletonItem';
 
 export const Carousel = ({ autoplay }) => {
-  const { data: slides, isLoading, isError } = useQuery(apiQueries.trending.movies());
+  const { data: slides, isLoading, isError } = useQuery(tmdb.trending.movies());
 
   const [sliderData, setSliderData] = useState([]);
   const [slideIndex, setSlideIndex] = useState(1);

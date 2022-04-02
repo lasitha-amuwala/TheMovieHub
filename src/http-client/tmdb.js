@@ -4,7 +4,7 @@ const { get } = httpClient;
 
 //const USParams = { region: 'US', language: 'en-US' };
 const USParams = {};
-export const apiQueries = {
+export const tmdb = {
   common: {
     configuration: () => ({
       queryKey: 'configuration',
@@ -45,16 +45,10 @@ export const apiQueries = {
       queryFn: () => get(createUrl(`/movie/${id}/credits`)),
     }),
   },
-  trending: {
-    movies: () => ({
-      queryKey: ['trending', 'movies'],
-      queryFn: () => get(createUrl('/trending/movie/week')),
-    }),
-  },
   people: {
     person: id => ({
       queryKey: ['people', id],
-      queryFn: () => get(createUrl(`/person/${id}`, {append_to_response: 'external_ids'})),
+      queryFn: () => get(createUrl(`/person/${id}`, { append_to_response: 'external_ids' })),
     }),
     movieCredits: id => ({
       queryKey: ['people', id, 'credits', 'movie'],
@@ -67,6 +61,16 @@ export const apiQueries = {
     images: id => ({
       queryKey: ['people', id, 'images'],
       queryFn: () => get(createUrl(`/person/${id}/images`)),
+    }),
+    taggedImages: id => ({
+      queryKey: ['people', id, 'tagged'],
+      queryFn: () => get(createUrl(`/person/${id}/tagged_images`)),
+    }),
+  },
+  trending: {
+    movies: () => ({
+      queryKey: ['trending', 'movies'],
+      queryFn: () => get(createUrl('/trending/movie/week')),
     }),
   },
 };

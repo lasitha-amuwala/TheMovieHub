@@ -44,22 +44,27 @@ const PersonHeader = ({ person }) => {
             {Object.entries(person.external_ids).map(([key, value]) => renderSocials(key, value))}
           </div>
         </div>
-
         <div>
-          <div>
-            <span className='font-semibold'>Born: </span>
-            {person.biography ? getLocaleDate(person.birthday) : 'Birthday not available'}
+          <div className='text-slate-300'>
+            <span className='pr-2 font-semibold text-white'>Born:</span>
+            {person.birthday ? getLocaleDate(person.birthday) : 'Birthday not available'}
           </div>
           {person.deathday && (
-            <div>
-              <span className='font-semibold'>Died: </span>
+            <div className='text-slate-300'>
+              <span className='pr-2 font-bold text-white'>Died: </span>
               {getLocaleDate(person.deathday)}
             </div>
           )}
         </div>
+        {person.place_of_birth && (
+          <div className='text-slate-300'>
+            <span className='pr-1 font-semibold text-white'>Place of Birth: </span>
+            {person.place_of_birth}
+          </div>
+        )}
         <div>
-          <div className='mb-2 text-xl font-bold'>About {person.name.split(' ')[0]}</div>
-          <div className='whitespace-pre-line'>
+          <div className='mb-2 text-xl font-bold '>About {person.name.split(' ')[0]}</div>
+          <div className='whitespace-pre-line text-slate-300'>
             {person.biography ? (
               <ReadMore lines={6} text={person.biography} bg={'backgroundShadow'} />
             ) : (

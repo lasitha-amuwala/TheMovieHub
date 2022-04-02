@@ -1,11 +1,11 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { apiQueries } from '../../src/http-client/apiQueries';
+import { tmdb } from '../../src/http-client/tmdb';
 import BaseCarousel from '../BaseCarousel';
 import MovieCastCard from './MovieCastCard';
 
 const MovieCastCarousel = ({ id }) => {
-  const { data } = useQuery(apiQueries.movies.credits(id));
+  const { data } = useQuery(tmdb.movies.credits(id));
 
   return (
     <BaseCarousel

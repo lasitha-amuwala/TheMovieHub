@@ -1,10 +1,10 @@
-import { apiQueries } from '../http-client/apiQueries';
+import { tmdb } from '../http-client/tmdb';
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 
 const useApiConfiguration = () => {
   const { data: configuration } = useQuery({
-    ...apiQueries.common.configuration(),
+    ...tmdb.common.configuration(),
     staleTime: Infinity,
   });
 

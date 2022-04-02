@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { apiQueries } from '../../src/http-client/apiQueries';
+import { tmdb } from '../../src/http-client/tmdb';
 import BaseCarousel from '../BaseCarousel';
 import ImageModal from '../modals/ImageModal';
 import PersonImageCard from './PersonImageCard';
 
 const PersonImageCarousel = ({ id, title }) => {
-  const { data } = useQuery(apiQueries.people.images(id));
+  const { data } = useQuery(tmdb.people.images(id));
   const imagePaths = data.profiles.map(({ file_path }) => file_path.substring(1));
 
   return (
