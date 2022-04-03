@@ -73,3 +73,4 @@ const ImageModal = ({ title, paths }) => {
 };
 
 export default ImageModal;
+hi
