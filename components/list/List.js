@@ -3,6 +3,7 @@ import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
 import ListItem from './ListItem';
 import ListButton from './ListButton';
 import { useQuery } from 'react-query';
+import classNames from 'classnames';
 
 export const List = ({ query, title }) => {
   const listRef = useRef(null);
@@ -14,6 +15,7 @@ export const List = ({ query, title }) => {
   const [numPages, setNumPages] = useState(0);
   const [numItemsOnScreen, setNumItemsOnScreen] = useState([]);
   const [hover, setHover] = useState(false);
+  const [animation, setAnimation] = useState(true);
 
   const handleLeftClick = () => handleClick('left');
   const handleRightClick = () => handleClick('right');
@@ -34,19 +36,6 @@ export const List = ({ query, title }) => {
     setNumPages(numPages);
   };
 
-  let resizeTimer;
-  const handleResize = () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      setStates();
-    }, 100);
-  };
-
-  useEffect(() => {
-    addEventListener('resize', handleResize);
-    return () => removeEventListener('resize', handleResize);
-  }, []);
-
   useEffect(() => {
     const list = listRef.current;
     const translate = list.clientWidth * count;
@@ -57,8 +46,28 @@ export const List = ({ query, title }) => {
 
   useEffect(() => setStates(), []);
 
+  // Temperarily stop animations on window resize for better performance
+  useEffect(() => {
+    addEventListener('resize', handleResize);
+    return () => removeEventListener('resize', handleResize);
+  }, []);
+
+  let resizeTimer;
+  const handleResize = () => {
+    // setAnimation(false);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      setStates();
+      // setAnimation(true);
+    }, 100);
+  };
+
   return (
-    <div className='list group relative mt-5 w-full lg:mt-0 lg:mb-12 2xl:mb-12'>
+    <div
+      className={classNames('list group relative mt-5 w-full lg:mt-0 lg:mb-12 2xl:mb-12', {
+        'resize-animation-stopper': !animation,
+      })}
+    >
       <span className='ml-3 h-full pl-1 text-xl font-medium sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-xl lg:absolute lg:text-2xl 2xl:-top-16 2xl:text-3xl 3xl:text-4xl'>
         {title}
       </span>

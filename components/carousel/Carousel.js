@@ -74,14 +74,14 @@ export const Carousel = ({ autoplay }) => {
   // if the datails not an array return null
   if (isLoading || isError) {
     return (
-      <div className='h-[70vw] max-h-85vh pb-24 '>
+      <div className='h-[70vw] pb-24 '>
         <SkeletonItem w='100%' h='100%' />
       </div>
     );
   }
 
   return (
-    <div className='relative h-[70vw] max-h-85vh w-full overflow-hidden sm:h-[56vw]'>
+    <div className='fixed h-[70vw] w-full overflow-hidden sm:h-screen'>
       <div {...handlers} className='h-full w-full'>
         <Track
           animation={animation}

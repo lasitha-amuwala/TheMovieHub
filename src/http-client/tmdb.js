@@ -2,8 +2,8 @@ import { httpClient } from './httpClient';
 import { createUrl } from './httpClientUtils';
 const { get } = httpClient;
 
-//const USParams = { region: 'US', language: 'en-US' };
-const USParams = {};
+const USParams = { region: 'US', language: 'en-US' };
+
 export const tmdb = {
   common: {
     configuration: () => ({
@@ -18,7 +18,7 @@ export const tmdb = {
     }),
     images: id => ({
       queryKey: ['movies', id, 'images'],
-      queryFn: () => get(createUrl(`/movie/${id}/images`)),
+      queryFn: () => get(createUrl(`/movie/${id}/images`, { include_image_language: 'en' })),
     }),
     videos: id => ({
       queryKey: ['movies', id, 'videos'],
