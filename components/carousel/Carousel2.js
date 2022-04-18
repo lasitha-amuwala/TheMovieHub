@@ -35,6 +35,7 @@ const Carousel2 = ({ children }) => {
             layout='fill'
             objectFit='cover'
             src={getImageUrl(item.backdrop_path, { original: true })}
+            priority
             quality={100}
           />
         </div>
@@ -63,7 +64,7 @@ const Carousel2 = ({ children }) => {
               <div className='absolute bottom-0 flex w-full flex-col items-center gap-5 bg-gradient-to-t from-almostBlack to-transparent sm:items-start sm:from-transparent'>
                 {movieImages && movieImages.logos[0] && (
                   <img
-                    src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
+                    src={getImageUrl(movieImages.logos[0].file_path)}
                     className='max-h-44 object-contain px-16 sm:max-h-72 sm:px-0'
                   />
                 )}
