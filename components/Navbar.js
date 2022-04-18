@@ -21,8 +21,8 @@ export const Navbar = () => {
   return (
     <div
       className={classNames(
-        'fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack bg-opacity-0  transition-all duration-700 lg:h-16',
-        { 'bg-opacity-75 backdrop-blur': show }
+        'fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack bg-opacity-75 backdrop-blur transition-all duration-700 sm:bg-opacity-0 sm:backdrop-blur-none lg:h-16',
+        { 'backdrop-blur sm:bg-opacity-75': show }
       )}
     >
       <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>
