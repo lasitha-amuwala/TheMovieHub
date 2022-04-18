@@ -55,7 +55,6 @@ const Movie = () => {
       <PageMargin padding className='py-10'>
         <MovieCastCarousel id={router.query.movieId} />
         <MovieVideoCarousel id={router.query.movieId} />
-        <MovieVideoCarousel id={router.query.movieId} />
       </PageMargin>
     </>
   );

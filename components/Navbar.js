@@ -9,7 +9,7 @@ const NavItem = ({ label, to }) => (
 );
 
 export const Navbar = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const onScroll = () => setShow(scrollY > 50);
 
@@ -21,8 +21,8 @@ export const Navbar = () => {
   return (
     <div
       className={classNames(
-        'fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack bg-opacity-75 backdrop-blur transition-all duration-700 sm:bg-opacity-0 sm:backdrop-blur-none lg:h-16',
-        { 'backdrop-blur sm:bg-opacity-75': show }
+        'fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack/75 backdrop-blur transition-all duration-700 sm:bg-transparent sm:backdrop-blur-none lg:h-16',
+        { 'backdrop-blur sm:bg-almostBlack/75': show }
       )}
     >
       <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>

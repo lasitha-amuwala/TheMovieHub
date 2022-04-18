@@ -6,6 +6,5 @@ module.exports = {
   images: {
     domains: ['image.tmdb.org', 'img.youtube.com'],
   },
-  experimental: { optimizeCss: true },
   devIndicators: { autoPrerender: true },
 };
