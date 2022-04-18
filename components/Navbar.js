@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import classNames from 'classnames';
+
+const NavItem = ({ label, to }) => (
+  <Link href={to} className='px-4 py-2 hover:text-gray-300'>
+    <a>{label}</a>
+  </Link>
+);
 
 export const Navbar = () => {
-  const NavItem = ({ label, to }) => (
-    <Link href={to} className='px-4 py-2 hover:text-gray-300'>
-      <a>{label}</a>
-    </Link>
-  );
+  const [show, setShow] = useState(true);
+
+  const onScroll = () => setShow(scrollY > 50);
+
+  useEffect(() => {
+    addEventListener('scroll', onScroll);
+    return () => removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <div className='fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack bg-opacity-80 backdrop-blur lg:h-16'>
+    <div
+      className={classNames(
+        'fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack bg-opacity-75 backdrop-blur transition-all duration-700 sm:bg-opacity-0 sm:backdrop-blur-none lg:h-16',
+        { 'backdrop-blur sm:bg-opacity-75': show }
+      )}
+    >
       <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>
         <div className='highlights-none flex items-center font-bold'>
           <NavItem to='/' label='MovieHub' />

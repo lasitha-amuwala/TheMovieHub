@@ -18,25 +18,10 @@ Router.onRouteChangeError = () => NProgress.done();
 function MyApp({ Component, pageProps }) {
   const [queryClient] = useState(() => customQueryClient());
 
-  // Temperarily stop animations on window resize for better performance
-  useEffect(() => {
-    addEventListener('resize', handleResize);
-    return () => removeEventListener('resize', handleResize);
-  }, []);
-
-  let resizeTimer;
-  const handleResize = () => {
-    document.body.classList.add('resize-animation-stopper');
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      document.body.classList.remove('resize-animation-stopper');
-    }, 100);
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <div className='mt-14 mb-14 text-white lg:mt-16 lg:mb-0'>
+        <div className='mb-14 text-white lg:mb-0'>
           <Layout>
             <Component {...pageProps} />
           </Layout>

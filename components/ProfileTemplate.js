@@ -25,7 +25,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
           'bg-opacity-50': backdropSrc,
         })}
       >
-        <PageMargin padding className='py-10 lg:py-12'>
+        <PageMargin padding className='py-1 lg:pb-12 pt-24'>
           <div className='flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row lg:gap-12'>
             <div className='relative h-full border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:self-center sm:px-0'>
               {imageSrc ? (
