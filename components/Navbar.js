@@ -11,23 +11,20 @@ const NavItem = ({ label, to }) => (
 export const Navbar = () => {
   const [show, setShow] = useState(false);
 
-  const onScroll = () => setShow(scrollY > 50);
+  const onScroll = () => setShow(scrollY > 56);
 
   useEffect(() => {
     addEventListener('scroll', onScroll);
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
+  const navStyle = `fixed top-0 left-0 z-[2] h-14 w-full bg-gradient-to-b from-almostBlack/50 via-almostBlack/30 to-transparent duration-700 lg:h-16`;
+
   return (
-    <div
-      className={classNames(
-        'fixed top-0 left-0 z-[2] h-14 w-full bg-almostBlack/75 backdrop-blur transition-all duration-700 sm:bg-transparent sm:backdrop-blur-none lg:h-16',
-        { 'backdrop-blur sm:bg-almostBlack/75': show }
-      )}
-    >
+    <navbar className={classNames(navStyle, { 'bg-black/50 backdrop-blur-lg': show })}>
       <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>
         <div className='highlights-none flex items-center font-bold'>
-          <NavItem to='/' label='MovieHub' />
+          <NavItem to='/' label='TheMovieHub' />
           <div className='hidden items-center gap-16 pl-16 font-normal sm:flex '>
             <NavItem label='Movies' to='/Movies' />
             <NavItem label='Series' to='/Series' />
@@ -36,6 +33,6 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </navbar>
   );
 };
