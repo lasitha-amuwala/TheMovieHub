@@ -18,7 +18,7 @@ export const Navbar = () => {
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
-  const navStyle = `fixed top-0 left-0 z-[2] h-14 w-full bg-gradient-to-b from-almostBlack/50 via-almostBlack/30 to-transparent duration-700 lg:h-16`;
+  const navStyle = `fixed top-0 left-0 z-[2] h-14 w-full bg-gradient-to-b from-almostBlack/50 to-transparent duration-700 lg:h-16`;
 
   return (
     <navbar className={classNames(navStyle, { 'bg-black/50 backdrop-blur-lg': show })}>

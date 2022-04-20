@@ -9,12 +9,9 @@ import Link from 'next/link';
 
 const Carousel2 = ({ children }) => {
   const [show, setShow] = useState(true);
-  const [count, setCount] = useState(0);
 
   const ImageRef = useRef(null);
-
   const { getImageUrl } = useApiConfiguration();
-
   const onScroll = () => setShow(scrollY < ImageRef.current.clientHeight * 0.05);
 
   useEffect(() => {
@@ -22,9 +19,8 @@ const Carousel2 = ({ children }) => {
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
-  const { data: slides, isLoading, isError } = useQuery(tmdb.trending.movies());
-  const item = slides.results[count];
-
+  const { data: slides } = useQuery(tmdb.trending.movies());
+  const item = slides.results[new Date().getDay()];
   const { data: movieImages } = useQuery(tmdb.movies.images(item.id));
 
   return (
@@ -44,6 +40,7 @@ const Carousel2 = ({ children }) => {
           blurRadius={64}
           className='h-full'
           shouldResize
+          resizeInterval={0}
         />
       </div>
       <div
@@ -59,6 +56,8 @@ const Carousel2 = ({ children }) => {
                   layout='fill'
                   src={getImageUrl(item.backdrop_path, { original: true })}
                   objectFit='cover'
+                  priority
+                  quality={100}
                 />
               </div>
               <div className='absolute bottom-0 flex w-full flex-col items-center gap-5 bg-gradient-to-t from-almostBlack to-transparent sm:items-start sm:from-transparent'>
