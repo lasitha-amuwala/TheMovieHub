@@ -7,7 +7,7 @@ import Blur from 'react-blur';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-const Carousel2 = ({ children }) => {
+const Spotlight = ({ children }) => {
   const [show, setShow] = useState(true);
 
   const ImageRef = useRef(null);
@@ -83,7 +83,7 @@ const Carousel2 = ({ children }) => {
   );
 };
 
-export default Carousel2;
+export default Spotlight;
 
 /**          <div className='relative flex h-full flex-col justify-end gap-5 sm:mx-[5%] sm:w-1/3 sm:pb-36'>
             <div className='relative h-full w-full sm:hidden'>

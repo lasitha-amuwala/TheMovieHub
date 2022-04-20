@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { List } from '../components/list/List';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { tmdb } from '../src/http-client/tmdb';
-import Carousel2 from '../components/carousel/Carousel2';
+import Spotlight from '../components/home/Spotlight';
 
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient();
@@ -25,14 +25,14 @@ const Home = () => {
       <Head>
         <title>{process.env.title}</title>
       </Head>
-      <Carousel2>
-        <div className='overflow-hidden flex flex-col sm:gap-2 md:gap-4 lg:gap-6 2xl:gap-9'>
+      <Spotlight>
+        <div className='flex flex-col overflow-hidden sm:gap-2 md:gap-4 lg:gap-6 2xl:gap-9'>
           <List query={tmdb.movies.popular()} title='Popular' />
           <List query={tmdb.movies.nowPlaying()} title='Now Playing' />
           <List query={tmdb.movies.upcoming()} title='Upcoming' />
           <List query={tmdb.movies.topRated()} title='Top Rated' />
         </div>
-      </Carousel2>
+      </Spotlight>
     </div>
   );
 };
