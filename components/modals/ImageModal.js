@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseModal from './BaseModal';
 import NextImage from '../NextImage';
-import { useRouter } from '../../src/hooks/useRouter';
+import useRouter from '../../src/hooks/useRouter';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 import { FaExpand, FaCompress } from 'react-icons/fa';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';

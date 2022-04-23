@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseModal from './BaseModal';
 import VideoPlayer from '../VideoPlayer';
-import { useRouter } from '../../src/hooks/useRouter';
+import useRouter from '../../src/hooks/useRouter';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 
 const VideoModal = ({ paths }) => {

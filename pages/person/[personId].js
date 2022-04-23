@@ -5,7 +5,6 @@ import { tmdb } from '../../src/http-client/tmdb';
 import PersonHeader from '../../components/person/PersonHeader';
 import PersonImageCarousel from '../../components/person/PersonImageCarousel';
 import PageMargin from '../../components/PageMargin';
-import { getYearFromDate } from '../../src/commonUtils';
 
 export const getServerSideProps = async ({ params }) => {
   try {

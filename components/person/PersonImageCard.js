@@ -1,7 +1,7 @@
 import React from 'react';
 import NextImage from '../NextImage';
 import Link from 'next/link';
-import { useRouter } from '../../src/hooks/useRouter';
+import useRouter from '../../src/hooks/useRouter';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 
 const PersonImageCard = ({ data }) => {

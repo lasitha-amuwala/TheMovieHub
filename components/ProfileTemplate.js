@@ -4,9 +4,13 @@ import NextImage from './NextImage';
 import PageMargin from './PageMargin';
 import PersonPlaceholder from './PersonPlaceholder';
 import useApiConfiguration from '../src/hooks/useApiConfig';
+import useRouter from '../src/hooks/useRouter';
+import Link from 'next/link';
 
 const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
   const { getImageUrl } = useApiConfiguration();
+  const router = useRouter();
+
   return (
     <div className='relative h-full w-full'>
       {backdropSrc && (
@@ -25,21 +29,29 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
           'bg-opacity-50': backdropSrc,
         })}
       >
-        <PageMargin padding className='py-1 lg:pb-12 pt-24'>
+        <PageMargin padding className='py-1 pt-24 lg:pb-12'>
           <div className='flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row lg:gap-12'>
             <div className='relative h-full border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:self-center sm:px-0'>
               {imageSrc ? (
-                <NextImage
-                  width={200}
-                  height={300}
-                  layout='responsive'
-                  className='rounded-lg'
-                  src={getImageUrl(imageSrc, { original: true })}
-                  alt={imageAlt}
-                  quality={100}
-                  unoptimized
-                  priority={!backdropSrc}
-                ></NextImage>
+                <Link
+                  href={{ pathname: router.asRoute, query: { i: imageSrc.substring(1) } }}
+                  passHref
+                  shallow
+                >
+                  <a>
+                    <NextImage
+                      width={200}
+                      height={300}
+                      layout='responsive'
+                      className='rounded-lg'
+                      src={getImageUrl(imageSrc, { original: true })}
+                      alt={imageAlt}
+                      quality={100}
+                      unoptimized
+                      priority={!backdropSrc}
+                    />
+                  </a>
+                </Link>
               ) : (
                 <PersonPlaceholder />
               )}
@@ -53,53 +65,3 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
 };
 
 export default ProfileTemplate;
-
-/**const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
-  const { getImageUrl } = useApiConfiguration();
-  return (
-    <div className='relative h-full w-full'>
-      <div className='relative h-full w-full'>
-        {backdropSrc && (
-          <NextImage
-            layout='fill'
-            objectFit='cover'
-            objectPosition='top'
-            src={getImageUrl(backdropSrc, { original: true })}
-            alt={backdropAlt}
-            priority
-            unoptimized
-          />
-        )}
-      </div>
-
-      <div
-        className={`top-0 h-full w-full bg-backgroundShadow absolute ${
-          backdropSrc && 'bg-opacity-50'
-        } backdrop-blur-3xl`}
-      >
-        <PageMargin padding className='py-10 lg:py-12'>
-          <div className='flex h-full w-full flex-col gap-10 overflow-hidden md:flex-row lg:gap-12'>
-            <div className='relative h-full border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:self-center sm:px-0'>
-              {imageSrc ? (
-                <NextImage
-                  width={200}
-                  height={300}
-                  layout='responsive'
-                  className='rounded-lg'
-                  src={getImageUrl(imageSrc, { original: true })}
-                  alt={imageAlt}
-                  quality={100}
-                  unoptimized
-                  priority={!backdropSrc}
-                ></NextImage>
-              ) : (
-                <PersonPlaceholder />
-              )}
-            </div>
-            <div className='grow self-start'>{children}</div>
-          </div>
-        </PageMargin>
-      </div>
-    </div>
-  );
-}; */
