@@ -20,7 +20,8 @@ const Spotlight = ({ children }) => {
   }, []);
 
   const { data: slides } = useQuery(tmdb.trending.movies());
-  const item = slides.results[new Date().getDay()];
+  const dayOfWeek = new Date().getDay();
+  const item = slides.results[dayOfWeek];
   const { data: movieImages } = useQuery(tmdb.movies.images(item.id));
 
   return (
@@ -44,11 +45,11 @@ const Spotlight = ({ children }) => {
         />
       </div>
       <div
-        className={classNames('absolute top-0 w-full bg-almostBlack/75 duration-700', {
+        className={classNames('absolute top-0 w-full bg-black duration-700 sm:bg-almostBlack/75', {
           'sm:bg-almostBlack/0': show,
         })}
       >
-        <div className='relative h-[55vh] sm:h-[90vh]'>
+        <div className='relative h-[65vh] sm:h-[90vh]'>
           <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-52'>
             <div className='relative h-full'>
               <div className='relative block h-full sm:hidden'>
@@ -59,18 +60,22 @@ const Spotlight = ({ children }) => {
                   quality={100}
                 />
               </div>
-              <div className='absolute bottom-0 flex w-full flex-col items-center gap-5 bg-gradient-to-t from-almostBlack to-transparent sm:items-start sm:from-transparent'>
-                {movieImages && movieImages.logos[0] && (
-                  <img
-                    src={getImageUrl(movieImages.logos[0].file_path)}
-                    className='max-h-44 object-contain px-16 sm:max-h-72 sm:px-0'
-                  />
-                )}
+              <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-5 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:from-transparent sm:px-0'>
+                <div className='max-h relative h-full max-h-72 w-full'>
+                  {movieImages && movieImages.logos[0] && (
+                    <NextImage
+                      src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
+                      layout='fill'
+                      objectFit='contain'
+                      objectPosition='bottom'
+                    />
+                  )}
+                </div>
                 <p className='hidden sm:block'>{item.overview}</p>
                 <Link href={`/movie/${item.id}`}>
-                  <a className='w-24 rounded-md bg-accentBlue/50 p-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
+                  <button className='w-24 rounded-md bg-accentBlue/50 p-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
                     More info
-                  </a>
+                  </button>
                 </Link>
               </div>
             </div>
@@ -83,25 +88,3 @@ const Spotlight = ({ children }) => {
 };
 
 export default Spotlight;
-
-/**          <div className='relative flex h-full flex-col justify-end gap-5 sm:mx-[5%] sm:w-1/3 sm:pb-36'>
-            <div className='relative h-full w-full sm:hidden'>
-              <NextImage
-                layout='fill'
-                src={getImageUrl(item.backdrop_path, { original: true })}
-                objectFit='cover'
-              />
-            </div>
-            <div className='absolute bottom-0 text-7xl font-bold sm:static'>
-              <div className='mx-16 sm:px-0 sm:pr-5%'>
-                {movieImages && movieImages.logos[0] && (
-                  <img
-                    src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
-                    className='max-h-44 w-full object-contain 3xl:w-4/5'
-                  />
-                )}
-              </div>
-            </div>
-            <h1 className='hidden leading-normal sm:block'>{item.overview}</h1>
-            <div></div>
-          </div> */
