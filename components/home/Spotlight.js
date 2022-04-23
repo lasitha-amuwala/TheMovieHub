@@ -56,7 +56,6 @@ const Spotlight = ({ children }) => {
                   layout='fill'
                   src={getImageUrl(item.backdrop_path, { original: true })}
                   objectFit='cover'
-                  priority
                   quality={100}
                 />
               </div>
