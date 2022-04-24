@@ -20,14 +20,87 @@ const Spotlight = ({ children }) => {
   }, []);
 
   const { data: slides } = useQuery(tmdb.trending.movies());
-  const dayOfWeek = new Date().getDay();
-  const item = slides.results[dayOfWeek];
-  const { data: movieImages } = useQuery(tmdb.movies.images(item.id));
+  const item = slides.results[new Date().getDay()];
+  const { data: movieImages, isSuccess: imageSuccess } = useQuery(tmdb.movies.images(item.id), {
+    enabled: !!item,
+  });
 
   return (
-    <div>
+    <>
       <div ref={ImageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
-        <div className={classNames('opacity-0 duration-700', { 'opacity-100': show })}>
+        <div className='relative h-full w-full'>
+          <NextImage
+            src={getImageUrl(item.backdrop_path, { original: true })}
+            layout='fill'
+            objectFit='cover'
+            quality={100}
+            priority
+          />
+          <div
+            className={classNames('absolute top-0 h-full w-full duration-500', {
+              'opacity-0': show,
+            })}
+          >
+            <Blur
+              img={getImageUrl(item.backdrop_path, { original: true })}
+              blurRadius={64}
+              className='h-full'
+              shouldResize
+              resizeInterval={0}
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className={classNames(
+          'transform-opacity absolute top-0 w-full bg-black duration-500 sm:bg-almostBlack/75',
+          {
+            'sm:bg-almostBlack/0': show,
+          }
+        )}
+      >
+        <div className='relative h-[55vh] sm:h-[90vh]'>
+          <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-24'>
+            <div className='relative h-full'>
+              <div className='relative block h-full sm:hidden'>
+                <NextImage
+                  layout='fill'
+                  src={getImageUrl(item.backdrop_path, { original: true })}
+                  objectFit='cover'
+                  quality={100}
+                />
+              </div>
+              <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-5 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:from-transparent sm:px-0'>
+                <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
+                  {movieImages && imageSuccess && (
+                    <NextImage
+                      src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
+                      layout='fill'
+                      objectFit='contain'
+                      className='sm:object-left-bottom'
+                      priority
+                    />
+                  )}
+                </div>
+                <p className='hidden sm:block'>{item.overview}</p>
+                <Link href={`/movie/${item.id}`}>
+                  <button className='w-24 rounded bg-accentBlue/50 p-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
+                    More info
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        {children}
+      </div>
+    </>
+  );
+};
+
+export default Spotlight;
+
+/**        <div className={classNames('w-full relative h-full opacity-0 duration-700', { 'opacity-100': show })}>
           <NextImage
             layout='fill'
             objectFit='cover'
@@ -42,49 +115,4 @@ const Spotlight = ({ children }) => {
           className='h-full'
           shouldResize
           resizeInterval={0}
-        />
-      </div>
-      <div
-        className={classNames('absolute top-0 w-full bg-black duration-700 sm:bg-almostBlack/75', {
-          'sm:bg-almostBlack/0': show,
-        })}
-      >
-        <div className='relative h-[65vh] sm:h-[90vh]'>
-          <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-52'>
-            <div className='relative h-full'>
-              <div className='relative block h-full sm:hidden'>
-                <NextImage
-                  layout='fill'
-                  src={getImageUrl(item.backdrop_path, { original: true })}
-                  objectFit='cover'
-                  quality={100}
-                />
-              </div>
-              <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-5 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:from-transparent sm:px-0'>
-                <div className='max-h relative h-full max-h-72 w-full'>
-                  {movieImages && movieImages.logos[0] && (
-                    <NextImage
-                      src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
-                      layout='fill'
-                      objectFit='contain'
-                      objectPosition='bottom'
-                    />
-                  )}
-                </div>
-                <p className='hidden sm:block'>{item.overview}</p>
-                <Link href={`/movie/${item.id}`}>
-                  <button className='w-24 rounded-md bg-accentBlue/50 p-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
-                    More info
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-};
-
-export default Spotlight;
+        /> */
