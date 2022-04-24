@@ -83,7 +83,7 @@ const Spotlight = ({ children }) => {
                   )}
                 </div>
                 <p className='hidden sm:block'>{item.overview}</p>
-                <Link href={`/movie/${item.id}`}>
+                <Link href={`/movie/${item.id}`} passHref>
                   <button className='w-24 rounded bg-accentBlue/50 p-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
                     More info
                   </button>

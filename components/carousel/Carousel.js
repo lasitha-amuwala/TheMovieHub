@@ -26,7 +26,7 @@ export const Carousel = ({ autoplay }) => {
   const prevIndex = usePrevious(slideIndex);
 
   // checks if page is active, pauses autoplay interval if inactive
-  const visible = typeof window !== 'undefined' && usePageVisibility();
+  const visible = usePageVisibility();
   useEffect(() => setIsVisible(visible), [visible]);
 
   // enable auto play every set interval

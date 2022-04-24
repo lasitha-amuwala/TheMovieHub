@@ -50,7 +50,7 @@ export const List = ({ query, title }) => {
   useEffect(() => {
     addEventListener('resize', handleResize);
     return () => removeEventListener('resize', handleResize);
-  }, []);
+  });
 
   let resizeTimer;
   const handleResize = () => {
