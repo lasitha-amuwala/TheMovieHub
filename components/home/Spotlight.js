@@ -99,20 +99,3 @@ const Spotlight = ({ children }) => {
 };
 
 export default Spotlight;
-
-/**        <div className={classNames('w-full relative h-full opacity-0 duration-700', { 'opacity-100': show })}>
-          <NextImage
-            layout='fill'
-            objectFit='cover'
-            src={getImageUrl(item.backdrop_path, { original: true })}
-            priority
-            quality={100}
-          />
-        </div>
-        <Blur
-          img={getImageUrl(item.backdrop_path, { original: true })}
-          blurRadius={64}
-          className='h-full'
-          shouldResize
-          resizeInterval={0}
-        /> */

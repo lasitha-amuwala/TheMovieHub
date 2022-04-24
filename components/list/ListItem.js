@@ -17,7 +17,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
         ref={ref}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseOut}
-        className={`item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-[6px] lg:px-2 3xl:px-3`}
+        className='item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-2 lg:px-[10px] xl:px-3 3xl:px-[14px]'
       >
         <Link href={`/movie/${data.id}`}>
           <a>
@@ -36,25 +36,26 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                 />
               </div>
               <div className='item-cover absolute top-0 flex h-full w-full flex-col bg-black bg-opacity-70 backdrop-blur-3xl'>
-                <div className='w-full sm:block'>
+                <div className='relative grow'>
                   <NextImage
-                    width={16}
-                    height={8.5}
                     src={getImageUrl(data.backdrop_path)}
                     alt={data.title}
-                    layout='responsive'
+                    layout='fill'
                     className='rounded-t-md'
                     objectFit='cover'
+                    objectPosition='center'
                     unoptimized
                   />
                 </div>
-                <div className='2x1:text-base flex h-full flex-col justify-center p-1 px-3 text-sm md:p-2 md:px-3 md:text-sm lg:text-base 2xl:p-3 2xl:px-4 2xl:text-xl 3xl:p-5 3xl:text-2xl'>
-                  <div className='grow font-medium line-clamp-1'>{data.title}</div>
-                  <div className='flex grow justify-between text-gray-300'>
-                    <div>{getYearFromDate(data.release_date)}</div>
-                    <div className='flex items-center gap-2'>
-                      <MdOutlineStar className='fill-yellow-400' />
-                      <span className='font-medium text-white'>{data.vote_average}</span> / 10
+                <div className='flex flex-col justify-center px-5 py-2'>
+                  <div className='flex items-center'>{data.title}</div>
+                  <div className='h-1/2 w-full'>
+                    <div className='flex grow items-center justify-between text-gray-300'>
+                      <div>{getYearFromDate(data.release_date)}</div>
+                      <div className='flex items-center gap-2'>
+                        <MdOutlineStar className='fill-yellow-400' />
+                        <span className='font-medium text-white'>{data.vote_average}</span> / 10
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -66,6 +67,17 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
     )
   );
 });
-
+// <div className='flex h-1/2 w-full grow items-center font-medium line-clamp-1'>
+//   <div>{data.title}</div>
+// </div>
 ListItem.displayName = 'ListItem'; // getting past lint error Component definition is missing display name  react/display-name
 export default ListItem;
+
+/*                  <h6 className='grow font-medium line-clamp-1'>{data.title}</h6>
+                  <div className='flex grow items-center justify-between text-gray-300'>
+                    <div>{getYearFromDate(data.release_date)}</div>
+                    <div className='flex  gap-2'>
+                      <MdOutlineStar className='fill-yellow-400' />
+                      <span className='font-medium text-white'>{data.vote_average}</span> / 10
+                    </div>
+                  </div> */

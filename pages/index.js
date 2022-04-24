@@ -26,7 +26,7 @@ const Home = () => {
         <title>{process.env.title}</title>
       </Head>
       <Spotlight>
-        <div className='flex flex-col overflow-hidden sm:gap-2 md:gap-4 lg:gap-6 2xl:gap-9'>
+        <div className='mt-5 mb-16 flex flex-col gap-8 overflow-hidden sm:gap-10 md:gap-12 lg:gap-14 2xl:gap-16'>
           <List query={tmdb.movies.popular()} title='Popular' />
           <List query={tmdb.movies.nowPlaying()} title='Now Playing' />
           <List query={tmdb.movies.upcoming()} title='Upcoming' />

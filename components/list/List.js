@@ -64,14 +64,12 @@ export const List = ({ query, title }) => {
 
   return (
     <div
-      className={classNames('list group relative mt-5 w-full lg:mt-0 lg:mb-12 2xl:mb-12', {
+      className={classNames('list group relative w-full', {
         'resize-animation-stopper': !animation,
       })}
     >
-      <span className='ml-3 h-full pl-1 text-xl font-medium sm:ml-7% sm:odd:-top-14 md:ml-5% md:text-xl lg:absolute lg:text-2xl 2xl:-top-16 2xl:text-3xl 3xl:text-4xl'>
-        {title}
-      </span>
-      <div className='highlights-none relative mt-2 h-full md:mt-4 lg:mt-0'>
+      <h1 className='pl-4 text-2xl font-semibold sm:ml-5% sm:pl-1 lg:pl-2'>{title}</h1>
+      <div className='highlights-none relative mt-2 h-full w-full md:mt-4 lg:mt-6'>
         {!!count && (
           <ListButton
             icon={<HiOutlineChevronLeft />}
@@ -86,9 +84,9 @@ export const List = ({ query, title }) => {
             onClick={handleRightClick}
           />
         )}
-        <div className='track select-none overflow-x-scroll px-3 scrollbar-hide sm:overflow-visible sm:px-7% sm:scrollbar-default md:px-5%'>
+        <div className='track w-full select-none overflow-x-scroll pl-3 pr-5% scrollbar-hide sm:overflow-visible sm:px-5% sm:scrollbar-default'>
           <ul
-            className={`${hover && 'hideFistChild'} sm:netflixTransition flex h-full`}
+            className={`${hover && 'hideFistChild'} sm:netflixTransition flex h-full w-full`}
             ref={listRef}
           >
             {data.results.map((item, index) => (
