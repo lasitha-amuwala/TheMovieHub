@@ -10,6 +10,7 @@ export const getServerSideProps = async () => {
   await Promise.all([
     queryClient.fetchQuery(tmdb.common.configuration()),
     queryClient.fetchQuery(tmdb.trending.movies()),
+    queryClient.fetchQuery(tmdb.movies.genres()),
     queryClient.fetchQuery(tmdb.movies.nowPlaying()),
     queryClient.fetchQuery(tmdb.movies.popular()),
     queryClient.fetchQuery(tmdb.movies.topRated()),

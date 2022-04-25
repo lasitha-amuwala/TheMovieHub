@@ -68,7 +68,7 @@ export const List = ({ query, title }) => {
         'resize-animation-stopper': !animation,
       })}
     >
-      <h1 className='pl-4 text-2xl font-semibold sm:ml-5% sm:pl-1 lg:pl-2'>{title}</h1>
+      <h1 className='pl-4 text-xl font-semibold sm:ml-5% sm:pl-1 sm:text-2xl lg:pl-2'>{title}</h1>
       <div className='highlights-none relative mt-2 h-full w-full md:mt-4 lg:mt-6'>
         {!!count && (
           <ListButton

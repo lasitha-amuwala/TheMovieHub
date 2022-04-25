@@ -17,11 +17,11 @@ export const tmdb = {
       queryFn: () => get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
     }),
     images: id => ({
-      queryKey: ['movies', id, 'images'],
+      queryKey: ['movies', 'images', id],
       queryFn: () => get(createUrl(`/movie/${id}/images`, { include_image_language: 'en' })),
     }),
     videos: id => ({
-      queryKey: ['movies', id, 'videos'],
+      queryKey: ['movies', 'videos', id],
       queryFn: () => get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
     }),
     nowPlaying: () => ({
@@ -41,8 +41,18 @@ export const tmdb = {
       queryFn: () => get(createUrl(`/movie/upcoming`, USParams)),
     }),
     credits: id => ({
-      queryKey: ['credits', 'movie', id],
+      queryKey: ['movies', 'credits', id],
       queryFn: () => get(createUrl(`/movie/${id}/credits`)),
+    }),
+    genres: () => ({
+      queryKey: ['movies', 'genre'],
+      queryFn: () => get(createUrl('/genre/movie/list')),
+    }),
+  },
+  series: {
+    genres: () => ({
+      queryKey: ['series', 'genre'],
+      queryFn: () => get(createUrl('/genre/tv/list')),
     }),
   },
   people: {
@@ -51,19 +61,19 @@ export const tmdb = {
       queryFn: () => get(createUrl(`/person/${id}`, { append_to_response: 'external_ids' })),
     }),
     movieCredits: id => ({
-      queryKey: ['people', id, 'credits', 'movie'],
+      queryKey: ['people', 'credits', 'movie', id],
       queryFn: () => get(createUrl(`/person/${id}/movie_credits`)),
     }),
     tvCredits: id => ({
-      queryKey: ['people', id, 'credits', 'tv'],
+      queryKey: ['people', 'credits', 'tv', id],
       queryFn: () => get(createUrl(`/person/${id}/tv_credits`)),
     }),
     images: id => ({
-      queryKey: ['people', id, 'images'],
+      queryKey: ['people', 'images', id],
       queryFn: () => get(createUrl(`/person/${id}/images`)),
     }),
     taggedImages: id => ({
-      queryKey: ['people', id, 'tagged'],
+      queryKey: ['people', 'tagged', id],
       queryFn: () => get(createUrl(`/person/${id}/tagged_images`)),
     }),
   },

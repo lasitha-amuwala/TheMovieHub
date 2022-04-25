@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import NextImage from '../NextImage';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
-import { useQuery } from 'react-query';
+import { useQuery, useQueries } from 'react-query';
 import { tmdb } from '../../src/http-client/tmdb';
 import Blur from 'react-blur';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { useMovieGenres } from '../../src/hooks/useGenres';
 
 const Spotlight = ({ children }) => {
   const [show, setShow] = useState(true);
@@ -19,8 +20,9 @@ const Spotlight = ({ children }) => {
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
+  const genres = useMovieGenres();
   const { data: slides } = useQuery(tmdb.trending.movies());
-  const item = slides.results[new Date().getDay()];
+  const item = slides.results[0];
   const { data: movieImages, isSuccess: imageSuccess } = useQuery(tmdb.movies.images(item.id), {
     enabled: !!item,
   });
@@ -54,9 +56,7 @@ const Spotlight = ({ children }) => {
       <div
         className={classNames(
           'transform-opacity absolute top-0 w-full bg-black duration-500 sm:bg-almostBlack/75',
-          {
-            'sm:bg-almostBlack/0': show,
-          }
+          { 'sm:bg-almostBlack/0': show }
         )}
       >
         <div className='relative h-[55vh] sm:h-[90vh]'>
@@ -70,7 +70,7 @@ const Spotlight = ({ children }) => {
                   quality={100}
                 />
               </div>
-              <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-5 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:from-transparent sm:px-0'>
+              <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-4 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:gap-5 sm:from-transparent sm:px-0'>
                 <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
                   {movieImages && imageSuccess && (
                     <NextImage
@@ -82,9 +82,19 @@ const Spotlight = ({ children }) => {
                     />
                   )}
                 </div>
+
+                <div className='text-sm '>
+                  {item.genre_ids.map((id, i) => (
+                    <span
+                      className={i + 1 < item.genre_ids.length && 'after:px-2 after:content-["•"]'}
+                    >
+                      {genres[id].name}
+                    </span>
+                  ))}
+                </div>
                 <p className='hidden sm:block'>{item.overview}</p>
                 <Link href={`/movie/${item.id}`} passHref>
-                  <button className='w-24 rounded bg-accentBlue/50 p-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
+                  <button className='w-24 rounded bg-accentBlue/50 py-2 px-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
                     More info
                   </button>
                 </Link>
