@@ -86,6 +86,7 @@ const Spotlight = ({ children }) => {
                 <div className='text-sm '>
                   {item.genre_ids.map((id, i) => (
                     <span
+                      key={id}
                       className={i + 1 < item.genre_ids.length && 'after:px-2 after:content-["•"]'}
                     >
                       {genres[id].name}
