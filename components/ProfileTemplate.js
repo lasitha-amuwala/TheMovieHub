@@ -6,6 +6,7 @@ import PersonPlaceholder from './PersonPlaceholder';
 import useApiConfiguration from '../src/hooks/useApiConfig';
 import useRouter from '../src/hooks/useRouter';
 import Link from 'next/link';
+import Blur from './Blur';
 
 const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
   const { getImageUrl } = useApiConfiguration();
@@ -14,18 +15,20 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
   return (
     <div className='relative h-full w-full'>
       {backdropSrc && (
-        <NextImage
-          layout='fill'
-          objectFit='cover'
-          objectPosition='top'
-          src={getImageUrl(backdropSrc, { original: true })}
-          alt={backdropAlt}
-          priority
-          unoptimized
-        />
+        <Blur blurRadius={64}>
+          <NextImage
+            layout='fill'
+            objectFit='cover'
+            objectPosition='top'
+            src={getImageUrl(backdropSrc, { original: true })}
+            alt={backdropAlt}
+            priority
+            unoptimized
+          />
+        </Blur>
       )}
       <div
-        className={classNames('h-full w-full bg-backgroundShadow backdrop-blur-3xl', {
+        className={classNames('h-full w-full bg-black/75 ', {
           'bg-opacity-50': backdropSrc,
         })}
       >
@@ -56,7 +59,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                 <PersonPlaceholder />
               )}
             </div>
-            <div className='grow self-start'>{children}</div>
+            <div className='z-10 grow self-start'>{children}</div>
           </div>
         </PageMargin>
       </div>

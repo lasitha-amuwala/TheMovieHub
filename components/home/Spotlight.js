@@ -3,61 +3,55 @@ import NextImage from '../NextImage';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 import { useQuery, useQueries } from 'react-query';
 import { tmdb } from '../../src/http-client/tmdb';
-import Blur from 'react-blur';
 import classNames from 'classnames';
+import Blur from '../Blur.js';
 import Link from 'next/link';
 import { useMovieGenres } from '../../src/hooks/useGenres';
+import { useScrollPosition } from '../../src/hooks/useScrollPosition';
+import { useBreakpoints } from '../../src/hooks/useBreakpoints';
 
 const Spotlight = ({ children }) => {
-  const [show, setShow] = useState(true);
-
-  const ImageRef = useRef(null);
   const { getImageUrl } = useApiConfiguration();
-  const onScroll = () => setShow(scrollY < ImageRef.current.clientHeight * 0.05);
-
-  useEffect(() => {
-    addEventListener('scroll', onScroll);
-    return () => removeEventListener('scroll', onScroll);
-  }, []);
-
+  const breakpoint = useBreakpoints();
   const genres = useMovieGenres();
+  const imageRef = useRef();
+
+  const scrollPosition = useScrollPosition();
+  const scrollDistance = imageRef.current ? imageRef.current.clientHeight : 1000;
+  const scrollDifference = scrollPosition / scrollDistance;
+  const blurAmount = scrollDifference * 64;
+  const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
+
   const { data: slides } = useQuery(tmdb.trending.movies());
-  const item = slides.results[0];
+  const item = slides.results[new Date().getDay() + 4];
+
   const { data: movieImages, isSuccess: imageSuccess } = useQuery(tmdb.movies.images(item.id), {
     enabled: !!item,
   });
 
   return (
     <>
-      <div ref={ImageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
+      <div ref={imageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
         <div className='relative h-full w-full'>
-          <NextImage
-            src={getImageUrl(item.backdrop_path, { original: true })}
-            layout='fill'
-            objectFit='cover'
-            quality={100}
-            priority
-          />
-          <div
-            className={classNames('absolute top-0 h-full w-full duration-500', {
-              'opacity-0': show,
-            })}
-          >
-            <Blur
-              img={getImageUrl(item.backdrop_path, { original: true })}
-              blurRadius={64}
-              className='h-full'
-              shouldResize
-              resizeInterval={0}
+          <Blur blurRadius={blurAmount}>
+            <NextImage
+              src={getImageUrl(item.backdrop_path, { original: true })}
+              layout='fill'
+              objectFit='cover'
+              quality={100}
+              priority
             />
-          </div>
+          </Blur>
         </div>
       </div>
+
       <div
-        className={classNames(
-          'transform-opacity absolute top-0 w-full bg-black duration-500 sm:bg-almostBlack/75',
-          { 'sm:bg-almostBlack/0': show }
-        )}
+        style={
+          Object.keys(breakpoint)[0] == 'none'
+            ? null
+            : { backgroundColor: `rgba(0,0,0, ${opacityAmount}` }
+        }
+        className='transform-opacity duration-500] absolute top-0 w-full bg-black'
       >
         <div className='relative h-[55vh] sm:h-[90vh]'>
           <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-24'>
@@ -87,7 +81,9 @@ const Spotlight = ({ children }) => {
                   {item.genre_ids.map((id, i) => (
                     <span
                       key={id}
-                      className={i + 1 < item.genre_ids.length && 'after:px-2 after:content-["•"]'}
+                      className={
+                        i + 1 < item.genre_ids.length ? 'after:px-2 after:content-["•"]' : undefined
+                      }
                     >
                       {genres[id].name}
                     </span>
@@ -110,3 +106,4 @@ const Spotlight = ({ children }) => {
 };
 
 export default Spotlight;
+//        style={{ backgroundColor: `rgba(0,0,0, ${opacityAmount}` }}
