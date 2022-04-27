@@ -3,9 +3,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        almostBlack: '#121212',
+        almostBlack: '#101010',
         backgroundShadow: '#050505',
-        card: '#1e1e1e',
+        card: 'var(--card)',
         cardHover: '#323232',
         accentBlue: '#005fa8',
         accentBlueHover: '#007cdb',
@@ -39,3 +39,5 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/line-clamp'), require('tailwind-scrollbar-hide')],
 };
+
+//#001b26

@@ -4,8 +4,11 @@
 
 :root {
   --maxPageWidth: 1400px;
-  --card: #1e1e1e;
-  --cardHover: #323232;
+  --card: rgb(30, 30, 30);
+  --cardHover: rgb(50, 50, 50);
+  --primaryColor: 18, 18, 18;
+  --primary: rgba(var(--primaryColor), 1);
+  --secondary: rgb(30, 30, 30);
 }
 
 /* Scroll Bar */
@@ -38,32 +41,31 @@ html {
   left: 0px;
   width: 100%;
   height: 100%;
-  background: rgb(18, 18, 18);
+  background: rgb(var(--primaryColor), 0.05);
   background: -moz-linear-gradient(
     0deg,
-    rgba(18, 18, 18, 0.75) 3%,
-    rgba(18, 18, 18, 0.05) 45%,
-    rgba(18, 18, 18, 0) 50%,
-    rgba(18, 18, 18, 0.05) 85%,
-    rgba(18, 18, 18, 0.75) 100%
+    rgba(0, 0, 0, 0.75) 3%,
+    rgba(0, 0, 0, 0.05) 45%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.05) 85%,
+    rgba(0, 0, 0, 0.75) 100%
   );
   background: -webkit-linear-gradient(
     0deg,
-    rgba(18, 18, 18, 0.75) 3%,
-    rgba(18, 18, 18, 0.05) 45%,
-    rgba(18, 18, 18, 0) 50%,
-    rgba(18, 18, 18, 0.05) 85%,
-    rgba(18, 18, 18, 0.75) 100%
+    rgba(0, 0, 0, 0.75) 3%,
+    rgba(0, 0, 0, 0.05) 45%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.05) 85%,
+    rgba(0, 0, 0, 0.75) 100%
   );
   background: linear-gradient(
     0deg,
-    rgba(18, 18, 18, 0.75) 3%,
-    rgba(18, 18, 18, 0.05) 45%,
-    rgba(18, 18, 18, 0) 50%,
-    rgba(18, 18, 18, 0.05) 85%,
-    rgba(18, 18, 18, 0.75) 100%
+    rgba(0, 0, 0, 0.75) 3%,
+    rgba(0, 0, 0, 0.05) 45%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.05) 85%,
+    rgba(0, 0, 0, 0.75) 100%
   );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#121212",endColorstr="#121212",GradientType=1);
 }
 .backgroundGradient::after {
   content: '';
@@ -77,21 +79,21 @@ html {
   background: rgb(18, 18, 18);
   background: -moz-linear-gradient(
     90deg,
-    rgba(18, 18, 18, 0.75) 0%,
-    rgba(18, 18, 18, 0.01) 60%,
-    rgba(18, 18, 18, 0) 100%
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.01) 60%,
+    rgba(0, 0, 0, 0) 100%
   );
   background: -webkit-linear-gradient(
     90deg,
-    rgba(18, 18, 18, 0.75) 0%,
-    rgba(18, 18, 18, 0.01) 60%,
-    rgba(18, 18, 18, 0) 100%
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.01) 60%,
+    rgba(0, 0, 0, 0) 100%
   );
   background: linear-gradient(
     90deg,
-    rgba(18, 18, 18, 0.75) 0%,
-    rgba(18, 18, 18, 0.01) 60%,
-    rgba(18, 18, 18, 0) 100%
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.01) 60%,
+    rgba(0, 0, 0, 0) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#121212",endColorstr="#121212",GradientType=1);
 }
@@ -151,4 +153,17 @@ html {
 }
 .carousel__dot--selected {
   @apply bg-cardHover;
+}
+
+.blur {
+  filter: blur(64px);
+  -webkit-filter: blur(64px);
+  -moz-filter: blur(64px);
+  -o-filter: blur(64px);
+  -ms-filter: blur(64px);
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  height: 300px;
+  width: auto;
 }
