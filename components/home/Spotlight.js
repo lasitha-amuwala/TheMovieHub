@@ -23,7 +23,7 @@ const Spotlight = ({ children }) => {
   const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
 
   const { data: slides } = useQuery(tmdb.trending.movies());
-  const item = slides.results[new Date().getDay() + 4];
+  const item = slides.results[new Date().getDay()];
 
   const { data: movieImages, isSuccess: imageSuccess } = useQuery(tmdb.movies.images(item.id), {
     enabled: !!item,
