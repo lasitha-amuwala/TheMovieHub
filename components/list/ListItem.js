@@ -47,8 +47,8 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                     unoptimized
                   />
                 </div>
-                <div className='flex flex-col justify-center px-5 py-2'>
-                  <div className='flex items-center'>{data.title}</div>
+                <div className='flex flex-col justify-center px-5 py-2 '>
+                  <div className='truncate'>{data.title}</div>
                   <div className='h-1/2 w-full'>
                     <div className='flex grow items-center justify-between text-gray-300'>
                       <div>{getYearFromDate(data.release_date)}</div>
@@ -67,17 +67,6 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
     )
   );
 });
-// <div className='flex h-1/2 w-full grow items-center font-medium line-clamp-1'>
-//   <div>{data.title}</div>
-// </div>
+
 ListItem.displayName = 'ListItem'; // getting past lint error Component definition is missing display name  react/display-name
 export default ListItem;
-
-/*                  <h6 className='grow font-medium line-clamp-1'>{data.title}</h6>
-                  <div className='flex grow items-center justify-between text-gray-300'>
-                    <div>{getYearFromDate(data.release_date)}</div>
-                    <div className='flex  gap-2'>
-                      <MdOutlineStar className='fill-yellow-400' />
-                      <span className='font-medium text-white'>{data.vote_average}</span> / 10
-                    </div>
-                  </div> */
