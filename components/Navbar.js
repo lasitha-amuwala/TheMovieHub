@@ -18,10 +18,15 @@ export const Navbar = () => {
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
-  const navStyle = `fixed top-0 left-0 z-[2] h-14 w-full bg-gradient-to-b from-almostBlack/50 to-transparent duration-700 lg:h-16`;
+  const navStyle = `fixed top-0 left-0 z-[2] h-12 sm:h-14 w-full lg:h-16`;
 
   return (
-    <navbar className={classNames(navStyle, { 'bg-black/50 backdrop-blur-lg': show })}>
+    <nav
+      className={classNames(navStyle, {
+        'bg-black/50 backdrop-blur-lg duration-700 ': show,
+        'bg-gradient-to-b from-black/50 to-transparent duration-700 ': !show,
+      })}
+    >
       <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>
         <div className='highlights-none flex items-center font-bold'>
           <NavItem to='/' label='TheMovieHub' />
@@ -33,6 +38,6 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-    </navbar>
+    </nav>
   );
 };
