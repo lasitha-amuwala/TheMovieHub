@@ -33,6 +33,7 @@ const Spotlight = ({ children }) => {
     <>
       <div ref={imageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
         <div className='relative h-full w-full'>
+          <div>{item.id}</div>
           <Blur blurRadius={blurAmount}>
             <NextImage
               src={getImageUrl(item.backdrop_path, { original: true })}
@@ -66,7 +67,7 @@ const Spotlight = ({ children }) => {
               </div>
               <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-4 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:gap-5 sm:from-transparent sm:px-0'>
                 <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
-                  {movieImages && imageSuccess && (
+                  {movieImages && imageSuccess && movieImages.logos[0] && (
                     <NextImage
                       src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
                       layout='fill'
@@ -76,7 +77,7 @@ const Spotlight = ({ children }) => {
                     />
                   )}
                 </div>
-
+                {item.id}
                 <div className='text-sm '>
                   {item.genre_ids.map((id, i) => (
                     <span
@@ -106,4 +107,3 @@ const Spotlight = ({ children }) => {
 };
 
 export default Spotlight;
-//        style={{ backgroundColor: `rgba(0,0,0, ${opacityAmount}` }}
