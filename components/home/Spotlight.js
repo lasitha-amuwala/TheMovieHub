@@ -66,8 +66,8 @@ const Spotlight = ({ children }) => {
                 />
               </div>
               <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-4 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:gap-5 sm:from-transparent sm:px-0'>
-                <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
-                  {movieImages && imageSuccess && movieImages.logos[0] && (
+                {movieImages && imageSuccess && movieImages.logos[0] ? (
+                  <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
                     <NextImage
                       src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
                       layout='fill'
@@ -75,9 +75,11 @@ const Spotlight = ({ children }) => {
                       className='sm:object-left-bottom'
                       priority
                     />
-                  )}
-                </div>
-                {item.id}
+                  </div>
+                ) : (
+                  <div className='text-3xl font-bold sm:text-5xl'>{item.title}</div>
+                )}
+                <div className='h-0 text-transparent'>{item.id}</div>
                 <div className='text-sm '>
                   {item.genre_ids.map((id, i) => (
                     <span
