@@ -4,7 +4,7 @@ import { ButtonBack, ButtonNext, CarouselProvider, Slide, Slider, Dot } from 'pu
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 const styles = {
-  button: `absolute top-1/2 z-10 mx-4 aspect-square w-[5%] -translate-y-1/2 rounded-full bg-accentBlue bg-opacity-50 opacity-0 backdrop-blur-md duration-300 hover:bg-opacity-80 group-hover:opacity-100 lg:p-4`,
+  button: `absolute top-1/2 z-10 sm:mx-4 aspect-square w-[5%] -translate-y-1/2 rounded-full bg-accentBlue bg-opacity-50 opacity-0 backdrop-blur-md duration-300 hover:bg-opacity-80 group-hover:opacity-100 lg:p-4`,
 };
 
 const BaseCarousel = ({ data, visibleSlides, component, label, ...rest }) => {

@@ -8,7 +8,7 @@ const MovieCastCard = ({ data }) => {
   const { getImageUrl } = useApiConfiguration();
 
   return (
-    <div className='mx-2 h-full rounded-xl bg-card p-1 duration-300 hover:bg-cardHover lg:p-3'>
+    <div className='mx-1 h-full rounded sm:rounded-xl bg-card p-1 duration-300 hover:bg-cardHover sm:mx-2 lg:p-3'>
       <Link href={`/person/${data.id}`}>
         <a>
           <div className='flex h-full flex-col gap-3'>
@@ -24,8 +24,8 @@ const MovieCastCard = ({ data }) => {
               )}
               <PersonPlaceholder />
             </div>
-            <div className='flex grow flex-col justify-center text-center'>
-              <div className='font-medium lg:text-lg'>{data.name}</div>
+            <div className='flex grow flex-col justify-center text-center text-sm sm:text-base'>
+              <div className='font-medium'>{data.name}</div>
               <div className='text-slate-300'>{data.character}</div>
             </div>
           </div>
