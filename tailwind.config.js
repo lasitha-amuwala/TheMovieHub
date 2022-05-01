@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       colors: {
         almostBlack: '#101010',
-        backgroundShadow: '#050505',
+        backgroundShadow: '#040404',
         card: 'var(--card)',
         cardHover: '#323232',
         accentBlue: '#005fa8',

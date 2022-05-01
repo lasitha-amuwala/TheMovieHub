@@ -59,7 +59,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                 <PersonPlaceholder />
               )}
             </div>
-            <div className='z-10 grow self-start'>{children}</div>
+            <div className='z-[1] grow self-start'>{children}</div>
           </div>
         </PageMargin>
       </div>

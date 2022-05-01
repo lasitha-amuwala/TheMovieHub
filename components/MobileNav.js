@@ -18,9 +18,9 @@ const buttons = {
 
 const styles = {
   link: `highlights-none aspect-square h-full`,
-  container: `fixed bottom-0 z-50 h-14 w-full border-t border-borderPrimary bg-black/50 bg-opacity-80 backdrop-blur-lg sm:hidden`,
+  container: `fixed bottom-0 z-50 h-12 w-full border-t border-borderPrimary bg-black/50 bg-opacity-80 backdrop-blur-lg sm:hidden`,
   button: `flex h-full justify-around`,
-  icon: `h-full w-full p-4 active:scale-[1.3] transition-transform duration-500 text-mobileNavButton`,
+  icon: `h-full w-full p-3 active:scale-[1.3] transition-transform duration-500 text-mobileNavButton`,
 };
 
 export const MobileNav = () => {

@@ -4,6 +4,7 @@ import { List } from '../components/list/List';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 import { tmdb } from '../src/http-client/tmdb';
 import Spotlight from '../components/home/Spotlight';
+import { Footer } from '../components/Footer';
 
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const Home = () => {
           <List query={tmdb.movies.upcoming()} title='Upcoming' />
           <List query={tmdb.movies.topRated()} title='Top Rated' />
         </div>
+        <Footer />
       </Spotlight>
     </div>
   );

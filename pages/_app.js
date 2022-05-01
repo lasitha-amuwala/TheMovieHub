@@ -21,11 +21,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <div className='mb-14 text-white lg:mb-0'>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </div>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

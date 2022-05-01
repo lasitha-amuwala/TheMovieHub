@@ -79,7 +79,6 @@ const Spotlight = ({ children }) => {
                 ) : (
                   <div className='text-3xl font-bold sm:text-5xl'>{item.title}</div>
                 )}
-                <div className='h-0 text-transparent'>{item.id}</div>
                 <div className='text-sm '>
                   {item.genre_ids.map((id, i) => (
                     <span
