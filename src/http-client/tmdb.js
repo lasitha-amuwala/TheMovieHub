@@ -78,9 +78,13 @@ export const tmdb = {
     }),
   },
   trending: {
-    movies: () => ({
-      queryKey: ['trending', 'movies'],
+    moviesWeek: () => ({
+      queryKey: ['trending', 'movies', 'week'],
       queryFn: () => get(createUrl('/trending/movie/week')),
+    }),
+    moviesDay: () => ({
+      queryKey: ['trending', 'movies', 'day'],
+      queryFn: () => get(createUrl('/trending/movie/day')),
     }),
   },
 };

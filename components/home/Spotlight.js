@@ -21,13 +21,13 @@ const Spotlight = ({ children }) => {
   const blurAmount = scrollDifference * 64;
   const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
 
-  const { data: slides } = useQuery(tmdb.trending.movies());
-  const item = slides.results[new Date().getDay()];
+  const { data: trendingDaily } = useQuery(tmdb.trending.moviesDay());
+  const movieOfTheDay = trendingDaily.results[0];
 
   const [{ data: movieData, data: movieSuccess }, { data: movieImages, isSuccess: imageSuccess }] =
     useQueries([
-      { ...tmdb.movies.movie(item.id), enabled: !!item },
-      { ...tmdb.movies.images(item.id), enabled: !!item },
+      { ...tmdb.movies.movie(movieOfTheDay.id), enabled: !!movieOfTheDay },
+      { ...tmdb.movies.images(movieOfTheDay.id), enabled: !!movieOfTheDay },
     ]);
 
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };

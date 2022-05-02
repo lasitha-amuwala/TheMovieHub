@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { List } from '../components/list/List';
-import { QueryClient, dehydrate, useQuery } from 'react-query';
+import { QueryClient, dehydrate } from 'react-query';
 import { tmdb } from '../src/http-client/tmdb';
 import Spotlight from '../components/home/Spotlight';
 import { Footer } from '../components/Footer';
@@ -9,13 +9,14 @@ import { Footer } from '../components/Footer';
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient();
   await Promise.all([
-    queryClient.prefetchQuery(tmdb.common.configuration()),
-    queryClient.prefetchQuery(tmdb.trending.movies()),
     queryClient.prefetchQuery(tmdb.movies.genres()),
-    queryClient.prefetchQuery(tmdb.movies.nowPlaying()),
     queryClient.prefetchQuery(tmdb.movies.popular()),
     queryClient.prefetchQuery(tmdb.movies.topRated()),
     queryClient.prefetchQuery(tmdb.movies.upcoming()),
+    queryClient.prefetchQuery(tmdb.movies.nowPlaying()),
+    queryClient.prefetchQuery(tmdb.trending.moviesDay()),
+    queryClient.prefetchQuery(tmdb.trending.moviesWeek()),
+    queryClient.prefetchQuery(tmdb.common.configuration()),
   ]);
 
   return { props: { dehydratedState: dehydrate(queryClient) } };
