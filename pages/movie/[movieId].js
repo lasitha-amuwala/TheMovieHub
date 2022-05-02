@@ -13,10 +13,10 @@ export const getServerSideProps = async ({ params }) => {
   try {
     const queryClient = new QueryClient();
     await Promise.all([
-      queryClient.fetchQuery(tmdb.common.configuration()),
-      queryClient.fetchQuery(tmdb.movies.movie(params.movieId)),
-      queryClient.fetchQuery(tmdb.movies.credits(params.movieId)),
-      queryClient.fetchQuery(tmdb.movies.videos(params.movieId)),
+      queryClient.prefetchQuery(tmdb.common.configuration()),
+      queryClient.prefetchQuery(tmdb.movies.movie(params.movieId)),
+      queryClient.prefetchQuery(tmdb.movies.credits(params.movieId)),
+      queryClient.prefetchQuery(tmdb.movies.videos(params.movieId)),
     ]);
 
     return { props: { dehydratedState: dehydrate(queryClient) } };

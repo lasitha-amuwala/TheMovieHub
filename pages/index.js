@@ -9,13 +9,13 @@ import { Footer } from '../components/Footer';
 export const getServerSideProps = async () => {
   const queryClient = new QueryClient();
   await Promise.all([
-    queryClient.fetchQuery(tmdb.common.configuration()),
-    queryClient.fetchQuery(tmdb.trending.movies()),
-    queryClient.fetchQuery(tmdb.movies.genres()),
-    queryClient.fetchQuery(tmdb.movies.nowPlaying()),
-    queryClient.fetchQuery(tmdb.movies.popular()),
-    queryClient.fetchQuery(tmdb.movies.topRated()),
-    queryClient.fetchQuery(tmdb.movies.upcoming()),
+    queryClient.prefetchQuery(tmdb.common.configuration()),
+    queryClient.prefetchQuery(tmdb.trending.movies()),
+    queryClient.prefetchQuery(tmdb.movies.genres()),
+    queryClient.prefetchQuery(tmdb.movies.nowPlaying()),
+    queryClient.prefetchQuery(tmdb.movies.popular()),
+    queryClient.prefetchQuery(tmdb.movies.topRated()),
+    queryClient.prefetchQuery(tmdb.movies.upcoming()),
   ]);
 
   return { props: { dehydratedState: dehydrate(queryClient) } };

@@ -17,11 +17,11 @@ export const tmdb = {
       queryFn: () => get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
     }),
     images: id => ({
-      queryKey: ['movies', 'images', id],
+      queryKey: ['movie', 'images', id],
       queryFn: () => get(createUrl(`/movie/${id}/images`, { include_image_language: 'en' })),
     }),
     videos: id => ({
-      queryKey: ['movies', 'videos', id],
+      queryKey: ['movie', 'videos', id],
       queryFn: () => get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
     }),
     nowPlaying: () => ({
@@ -41,7 +41,7 @@ export const tmdb = {
       queryFn: () => get(createUrl(`/movie/upcoming`, USParams)),
     }),
     credits: id => ({
-      queryKey: ['movies', 'credits', id],
+      queryKey: ['movie', 'credits', id],
       queryFn: () => get(createUrl(`/movie/${id}/credits`)),
     }),
     genres: () => ({

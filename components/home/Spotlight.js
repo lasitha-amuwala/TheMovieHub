@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import NextImage from '../NextImage';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
-import { useQuery, useQueries } from 'react-query';
-import { tmdb } from '../../src/http-client/tmdb';
-import classNames from 'classnames';
+import React, { useRef } from 'react';
 import Blur from '../Blur.js';
 import Link from 'next/link';
-import { useMovieGenres } from '../../src/hooks/useGenres';
+import classNames from 'classnames';
+import NextImage from '../NextImage';
+import useApiConfiguration from '../../src/hooks/useApiConfig';
+
+import { tmdb } from '../../src/http-client/tmdb';
+import { useQuery, useQueries } from 'react-query';
 import { useScrollPosition } from '../../src/hooks/useScrollPosition';
 import { useBreakpoints } from '../../src/hooks/useBreakpoints';
 
 const Spotlight = ({ children }) => {
   const { getImageUrl } = useApiConfiguration();
   const breakpoint = useBreakpoints();
-  const genres = useMovieGenres();
   const imageRef = useRef();
 
   const scrollPosition = useScrollPosition();
@@ -25,18 +24,23 @@ const Spotlight = ({ children }) => {
   const { data: slides } = useQuery(tmdb.trending.movies());
   const item = slides.results[new Date().getDay()];
 
-  const { data: movieImages, isSuccess: imageSuccess } = useQuery(tmdb.movies.images(item.id), {
-    enabled: !!item,
-  });
+  const [{ data: movieData, data: movieSuccess }, { data: movieImages, isSuccess: imageSuccess }] =
+    useQueries([
+      { ...tmdb.movies.movie(item.id), enabled: !!item },
+      { ...tmdb.movies.images(item.id), enabled: !!item },
+    ]);
+
+  const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
+
+  if (movie === {}) return <div></div>;
 
   return (
     <>
       <div ref={imageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
-        <div className='relative h-full w-full'>
-          <div>{item.id}</div>
+        <div className='relative h-full min-h-screen w-full'>
           <Blur blurRadius={blurAmount}>
             <NextImage
-              src={getImageUrl(item.backdrop_path, { original: true })}
+              src={getImageUrl(movie.backdrop_path, { original: true })}
               layout='fill'
               objectFit='cover'
               quality={100}
@@ -60,7 +64,7 @@ const Spotlight = ({ children }) => {
               <div className='relative block h-full sm:hidden'>
                 <NextImage
                   layout='fill'
-                  src={getImageUrl(item.backdrop_path, { original: true })}
+                  src={getImageUrl(movie.backdrop_path, { original: true })}
                   objectFit='cover'
                   quality={100}
                 />
@@ -77,22 +81,22 @@ const Spotlight = ({ children }) => {
                     />
                   </div>
                 ) : (
-                  <div className='text-3xl font-bold sm:text-5xl'>{item.title}</div>
+                  <div className='text-3xl font-bold sm:text-5xl'>{movie.title}</div>
                 )}
-                <div className='text-sm '>
-                  {item.genre_ids.map((id, i) => (
+                <div className='text-sm'>
+                  {Object.keys(movie.genres).map((genre, i) => (
                     <span
-                      key={id}
-                      className={
-                        i + 1 < item.genre_ids.length ? 'after:px-2 after:content-["•"]' : undefined
-                      }
+                      key={i}
+                      className={classNames({
+                        'after:px-2 after:content-["•"]': i + 1 < movie.genres.length,
+                      })}
                     >
-                      {genres[id].name}
+                      {movie.genres[genre].name}
                     </span>
                   ))}
                 </div>
-                <p className='hidden sm:block'>{item.overview}</p>
-                <Link href={`/movie/${item.id}`} passHref>
+                <p className='hidden sm:block'>{movie.overview}</p>
+                <Link href={`/movie/${movie.id}`} passHref>
                   <button className='w-24 rounded bg-accentBlue/50 py-2 px-2 text-center font-semibold backdrop-blur-lg duration-200 hover:bg-accentBlueHover/50'>
                     More info
                   </button>
