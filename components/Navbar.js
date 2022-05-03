@@ -23,8 +23,8 @@ export const Navbar = () => {
   return (
     <nav
       className={classNames(navStyle, {
-        'bg-black/50 backdrop-blur-lg duration-700 ': show,
-        'bg-gradient-to-b from-black/50 to-transparent duration-700 ': !show,
+        'bg-black/50 backdrop-blur-lg duration-500 ': show,
+        'bg-gradient-to-b from-black/50 to-transparent duration-500 ': !show,
       })}
     >
       <div className='mx-7% flex h-full items-center justify-between md:mx-5%'>
