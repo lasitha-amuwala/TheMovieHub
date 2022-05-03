@@ -21,7 +21,7 @@ const Spotlight = ({ children }) => {
   const blurAmount = scrollDifference * 64;
   const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
 
-  const { data: trendingDaily } = useQuery(tmdb.trending.moviesDay());
+  const { data: trendingDaily } = useQuery(tmdb.trending.moviesWeek());
   const movieOfTheDay = trendingDaily.results[0];
 
   const [{ data: movieData, data: movieSuccess }, { data: movieImages, isSuccess: imageSuccess }] =
