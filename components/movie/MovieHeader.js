@@ -36,7 +36,7 @@ const MovieHeader = ({ movie }) => {
         )}
         {movie.tagline && <div className='font-normal italic text-gray-300'>{movie.tagline}</div>}
         <div>
-          <div className='pb-2 text-xl font-bold'>Overview</div>
+          <div className='pb-2 text-xl font-bold'>Overviews</div>
           <div className='font-normal'>{movie.overview}</div>
         </div>
       </div>
