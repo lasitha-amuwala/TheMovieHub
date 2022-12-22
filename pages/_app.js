@@ -8,6 +8,7 @@ import Router from 'next/router';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
 import Layout from '../components/Layout';
+import { Analytics } from '@vercel/analytics/react';
 
 // Configure NProgress bar
 NProgress.configure({ showSpinner: false });
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }) {
       <Hydrate state={pageProps.dehydratedState}>
         <Layout>
           <Component {...pageProps} />
+          <Analytics />
         </Layout>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
