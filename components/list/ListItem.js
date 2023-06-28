@@ -1,15 +1,26 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 import { MdOutlineStar } from 'react-icons/md';
 import NextImage from '../NextImage';
 import { getYearFromDate } from '../../src/commonUtils';
+import Blur from '../Blur';
 
 const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
   const { getImageUrl } = useApiConfiguration();
+  const [hover, setHover] = useState();
+  const [blur, setBlur] = useState(0);
 
-  const onMouseOut = () => onItemHover(false, index);
-  const onMouseEnter = () => onItemHover(true, index);
+  const onMouseOut = () => {
+    setHover(hover);
+    setBlur(0);
+  };
+  const onMouseEnter = () => {
+    setHover(hover);
+    setBlur(64);
+  };
+
+  useEffect(() => onItemHover(hover, index), [hover]);
 
   return (
     data.poster_path && (
@@ -23,19 +34,21 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
           <a>
             <div className='relative h-full overflow-hidden rounded-md'>
               <div className='item-poster relative top-0 block h-full w-full object-fill '>
-                <NextImage
-                  layout='fill'
-                  src={getImageUrl(data.poster_path)}
-                  alt={data.title}
-                  className='rounded-md'
-                  objectFit='cover'
-                  objectPosition='top'
-                  placeholder='blur'
-                  blurDataURL='/placeholder.png'
-                  unoptimized
-                />
+                <Blur blurRadius={blur}>
+                  <NextImage
+                    layout='fill'
+                    src={getImageUrl(data.poster_path)}
+                    alt={data.title}
+                    className='rounded-md'
+                    objectFit='cover'
+                    objectPosition='top'
+                    placeholder='blur'
+                    blurDataURL='/placeholder.png'
+                    unoptimized
+                  />
+                </Blur>
               </div>
-              <div className='item-cover absolute top-0 flex h-full w-full flex-col bg-black bg-opacity-70 backdrop-blur-3xl'>
+              <div className='item-cover absolute top-0 flex h-full w-full flex-col'>
                 <div className='relative grow'>
                   <NextImage
                     src={getImageUrl(data.backdrop_path)}
@@ -47,7 +60,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                     unoptimized
                   />
                 </div>
-                <div className='flex flex-col justify-center px-5 py-2 '>
+                <div className='z-[1] flex flex-col justify-center px-5 py-2 '>
                   <div className='truncate'>{data.title}</div>
                   <div className='h-1/2 w-full'>
                     <div className='flex grow items-center justify-between text-gray-300'>

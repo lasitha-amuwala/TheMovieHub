@@ -11,7 +11,7 @@ import Blur from './Blur';
 const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
   const { getImageUrl } = useApiConfiguration();
   const router = useRouter();
-
+  console.log(router)
   return (
     <div className='relative h-full w-full'>
       {backdropSrc && (

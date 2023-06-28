@@ -28,3 +28,4 @@ What needs to be added:
 - add dynamic titles per page
 - loading states and animation
 - fix SSR issue with carousel
+test

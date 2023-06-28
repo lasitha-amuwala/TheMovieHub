@@ -31,7 +31,7 @@ const ReadMore = ({ lines, text, bg }) => {
         <div className={`grow bg-gradient-to-r from-transparent to-backgroundShadow`}></div>
         <button
           onClick={() => setTruncated(!truncated)}
-          className={`bg-${bg} py-0 px-2 font-semibold text-accentBlue bg-backgroundShadow transition-colors duration-150 hover:text-accentBlueHover`}
+          className={`bg-${bg} bg-backgroundShadow py-0 px-2 font-semibold text-accentBlue transition-colors duration-150 hover:text-accentBlueHover`}
         >
           {truncated ? 'Read More' : 'Read Less'}
         </button>
