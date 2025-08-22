@@ -40,7 +40,8 @@ const Spotlight = ({ children }) => {
         <div className='relative h-full min-h-screen w-full'>
           <Blur blurRadius={blurAmount}>
             <NextImage
-              src={getImageUrl(movie.backdrop_path, { original: true })}
+              // src={getImageUrl(movie.backdrop_path, { original: true })}
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               layout='fill'
               objectFit='cover'
               quality={100}
