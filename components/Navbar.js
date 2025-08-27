@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const NavItem = ({ label, to }) => (
   <Link href={to} className='px-4 py-2 hover:text-gray-300'>
-    <a>{label}</a>
+    {label}
   </Link>
 );
 
