@@ -39,7 +39,6 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                   passHref
                   shallow
                 >
-                  <a>
                     <NextImage
                       width={200}
                       height={300}
@@ -51,7 +50,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                       unoptimized
                       priority={!backdropSrc}
                     />
-                  </a>
+
                 </Link>
               ) : (
                 <PersonPlaceholder />

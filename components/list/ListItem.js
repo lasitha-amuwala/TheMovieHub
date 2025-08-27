@@ -31,7 +31,6 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
         className='item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-2 lg:px-[10px] xl:px-3 3xl:px-[14px]'
       >
         <Link href={`/movie/${data.id}`}>
-          <a>
             <div className='relative h-full overflow-hidden rounded-md'>
               <div className='item-poster relative top-0 block h-full w-full object-fill '>
                 <Blur blurRadius={blur}>
@@ -74,7 +73,6 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                 </div>
               </div>
             </div>
-          </a>
         </Link>
       </li>
     )
