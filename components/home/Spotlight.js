@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Blur from '../Blur.js';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -14,6 +14,7 @@ const Spotlight = ({ children }) => {
   const { getImageUrl } = useApiConfiguration();
   const breakpoint = useBreakpoints();
   const imageRef = useRef();
+  const [randomSpotlightMovie, setRandom] = useState(0);
 
   const scrollPosition = useScrollPosition();
   const scrollDistance = imageRef.current ? imageRef.current.clientHeight : 1000;
@@ -22,7 +23,7 @@ const Spotlight = ({ children }) => {
   const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
 
   const { data: trendingDaily } = useQuery(tmdb.trending.moviesWeek());
-  const movieOfTheDay = trendingDaily.results[0];
+  const movieOfTheDay = trendingDaily.results[randomSpotlightMovie];
 
   const [{ data: movieData, data: movieSuccess }, { data: movieImages, isSuccess: imageSuccess }] =
     useQueries([
@@ -31,6 +32,10 @@ const Spotlight = ({ children }) => {
     ]);
 
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
+
+  useEffect(()=> {
+    setRandom(Math.floor(Math.random() * trendingDaily.results.length))
+  },[trendingDaily.results.length])
 
   if (movie == {}) return <div></div>;
 
