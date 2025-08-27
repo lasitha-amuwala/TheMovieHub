@@ -32,7 +32,7 @@ const Spotlight = ({ children }) => {
 
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
 
-  if (movie === {}) return <div></div>;
+  if (movie == {}) return <div></div>;
 
   return (
     <>
@@ -40,8 +40,7 @@ const Spotlight = ({ children }) => {
         <div className='relative h-full min-h-screen w-full'>
           <Blur blurRadius={blurAmount}>
             <NextImage
-              // src={getImageUrl(movie.backdrop_path, { original: true })}
-              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              src={getImageUrl(movie.backdrop_path, { original: true })}
               layout='fill'
               objectFit='cover'
               quality={100}
