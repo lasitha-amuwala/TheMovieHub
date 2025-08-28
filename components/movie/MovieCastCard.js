@@ -10,7 +10,6 @@ const MovieCastCard = ({ data }) => {
   return (
     <div className='mx-1 h-full rounded sm:rounded-xl bg-card p-1 duration-300 hover:bg-cardHover sm:mx-2 lg:p-3'>
       <Link href={`/person/${data.id}`}>
-        <a>
           <div className='flex h-full flex-col gap-3'>
             <div className='relative aspect-square shrink-0 drop-shadow-md'>
               {data.profile_path && (
@@ -29,7 +28,6 @@ const MovieCastCard = ({ data }) => {
               <div className='text-slate-300'>{data.character}</div>
             </div>
           </div>
-        </a>
       </Link>
     </div>
   );

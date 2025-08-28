@@ -11,7 +11,6 @@ const PersonImageCard = ({ data }) => {
   return (
     <div className='mx-2 flex h-full flex-col overflow-hidden rounded drop-shadow-md duration-300'>
       <Link href={{ pathname: router.asRoute, query: { i: data.file_path.substring(1) } }} shallow>
-        <a>
           <div className='relative aspect-[2/3]'>
             <NextImage
               src={getImageUrl(data.file_path)}
@@ -21,7 +20,6 @@ const PersonImageCard = ({ data }) => {
             />
             <div className='absolute top-0 h-full w-full opacity-10 transition-colors duration-200 hover:bg-white'></div>
           </div>
-        </a>
       </Link>
     </div>
   );
