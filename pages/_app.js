@@ -9,6 +9,7 @@ import '../styles/globals.css';
 import 'nprogress/nprogress.css';
 import Layout from '../components/Layout';
 import { Analytics } from '@vercel/analytics/react';
+import { ScrollContext } from '../components/ScrollContext';
 
 // Configure NProgress bar
 NProgress.configure({ showSpinner: false });
@@ -22,10 +23,12 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <Layout>
-          <Component {...pageProps} />
-          <Analytics />
-        </Layout>
+        <ScrollContext>
+          <Layout>
+            <Component {...pageProps} />
+            <Analytics />
+          </Layout>
+        </ScrollContext>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
