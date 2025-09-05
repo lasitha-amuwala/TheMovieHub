@@ -11,15 +11,14 @@ import Blur from './Blur';
 const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, children }) => {
   const { getImageUrl } = useApiConfiguration();
   const router = useRouter();
-  console.log(router)
+
   return (
     <div className='relative h-full w-full'>
       {backdropSrc && (
         <Blur blurRadius={64}>
           <NextImage
-            layout='fill'
-            objectFit='cover'
-            objectPosition='top'
+            fill
+            className='object-cover object-top'
             src={getImageUrl(backdropSrc, { original: true })}
             alt={backdropAlt}
             priority
@@ -27,9 +26,7 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
           />
         </Blur>
       )}
-      <div
-        className='h-full w-full bg-backgroundShadow'
-      >
+      <div className='h-full w-full bg-backgroundShadow'>
         <PageMargin padding className='py-1 pt-24 pb-6 sm:pb-12'>
           <div className=' flex h-full w-full flex-col gap-10 overflow-hidden sm:flex-row lg:gap-12'>
             <div className='relative z-[1] h-full border-backgroundShadow px-12 drop-shadow-2xl sm:aspect-[2/3] sm:min-h-[425px] sm:self-center sm:px-0'>
@@ -39,18 +36,17 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                   passHref
                   shallow
                 >
-                    <NextImage
-                      width={200}
-                      height={300}
-                      layout='responsive'
-                      className='rounded-lg'
-                      src={getImageUrl(imageSrc, { original: true })}
-                      alt={imageAlt}
-                      quality={100}
-                      unoptimized
-                      priority={!backdropSrc}
-                    />
-
+                  <NextImage
+                    width={200}
+                    height={300}
+                    // layout='responsive'
+                    className='rounded-lg'
+                    src={getImageUrl(imageSrc, { original: true })}
+                    alt={imageAlt}
+                    quality={100}
+                    unoptimized
+                    priority={!backdropSrc}
+                  />
                 </Link>
               ) : (
                 <PersonPlaceholder />
@@ -60,7 +56,9 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
           </div>
         </PageMargin>
       </div>
-      <div className={classNames('absolute top-0 h-full w-full', {'bg-black/50': backdropSrc})}></div>
+      <div
+        className={classNames('absolute top-0 h-full w-full', { 'bg-black/50': backdropSrc })}
+      ></div>
     </div>
   );
 };

@@ -33,9 +33,9 @@ const Spotlight = ({ children }) => {
 
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
 
-  useEffect(()=> {
-    setRandom(Math.floor(Math.random() * trendingDaily.results.length))
-  },[trendingDaily.results.length])
+  useEffect(() => {
+    setRandom(Math.floor(Math.random() * trendingDaily.results.length));
+  }, [trendingDaily.results.length]);
 
   if (movie == {}) return <div></div>;
 
@@ -46,8 +46,8 @@ const Spotlight = ({ children }) => {
           <Blur blurRadius={blurAmount}>
             <NextImage
               src={getImageUrl(movie.backdrop_path, { original: true })}
-              layout='fill'
-              objectFit='cover'
+              fill
+              className='object-cover'
               quality={100}
               priority
             />
@@ -68,9 +68,9 @@ const Spotlight = ({ children }) => {
             <div className='relative h-full'>
               <div className='relative block h-full sm:hidden'>
                 <NextImage
-                  layout='fill'
+                  fill
                   src={getImageUrl(movie.backdrop_path, { original: true })}
-                  objectFit='cover'
+                  className='object-cover'
                   quality={100}
                 />
               </div>
@@ -78,10 +78,9 @@ const Spotlight = ({ children }) => {
                 {movieImages && imageSuccess && movieImages.logos[0] ? (
                   <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
                     <NextImage
+                      fill
                       src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
-                      layout='fill'
-                      objectFit='contain'
-                      className='sm:object-left-bottom'
+                      className='sm:object-left-bottom object-contain'
                       priority
                     />
                   </div>
