@@ -6,6 +6,7 @@ module.exports = {
   images: {
     domains: ['image.tmdb.org', 'img.youtube.com'],
     unoptimized: true,
+    qualities: [25, 50, 75, 100],
   },
   devIndicators: {},
 };

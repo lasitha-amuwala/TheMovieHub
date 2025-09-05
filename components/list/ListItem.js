@@ -31,48 +31,44 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
         className='item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-2 lg:px-[10px] xl:px-3 3xl:px-[14px]'
       >
         <Link href={`/movie/${data.id}`}>
-            <div className='relative h-full overflow-hidden rounded-md'>
-              <div className='item-poster relative top-0 block h-full w-full object-fill '>
-                <Blur blurRadius={blur}>
-                  <NextImage
-                    layout='fill'
-                    src={getImageUrl(data.poster_path)}
-                    alt={data.title}
-                    className='rounded-md'
-                    objectFit='cover'
-                    objectPosition='top'
-                    placeholder='blur'
-                    blurDataURL='/placeholder.png'
-                    unoptimized
-                  />
-                </Blur>
+          <div className='relative h-full overflow-hidden rounded-md'>
+            <div className='item-poster relative top-0 block h-full w-full object-fill '>
+              <Blur blurRadius={blur}>
+                <NextImage
+                  fill
+                  src={getImageUrl(data.poster_path)}
+                  alt={data.title}
+                  className='rounded-md object-cover object-top'
+                  placeholder='blur'
+                  blurDataURL='/placeholder.png'
+                  unoptimized
+                />
+              </Blur>
+            </div>
+            <div className='item-cover absolute top-0 flex h-full w-full flex-col'>
+              <div className='relative grow'>
+                <NextImage
+                  src={getImageUrl(data.backdrop_path)}
+                  alt={data.title}
+                  fill
+                  className='rounded-t-md object-cover object-center'
+                  unoptimized
+                />
               </div>
-              <div className='item-cover absolute top-0 flex h-full w-full flex-col'>
-                <div className='relative grow'>
-                  <NextImage
-                    src={getImageUrl(data.backdrop_path)}
-                    alt={data.title}
-                    layout='fill'
-                    className='rounded-t-md'
-                    objectFit='cover'
-                    objectPosition='center'
-                    unoptimized
-                  />
-                </div>
-                <div className='z-[1] flex flex-col justify-center px-5 py-2 '>
-                  <div className='truncate'>{data.title}</div>
-                  <div className='h-1/2 w-full'>
-                    <div className='flex grow items-center justify-between text-gray-300'>
-                      <div>{getYearFromDate(data.release_date)}</div>
-                      <div className='flex items-center gap-2'>
-                        <MdOutlineStar className='fill-yellow-400' />
-                        <span className='font-medium text-white'>{data.vote_average}</span> / 10
-                      </div>
+              <div className='z-[1] flex flex-col justify-center px-5 py-2 '>
+                <div className='truncate'>{data.title}</div>
+                <div className='h-1/2 w-full'>
+                  <div className='flex grow items-center justify-between text-gray-300'>
+                    <div>{getYearFromDate(data.release_date)}</div>
+                    <div className='flex items-center gap-2'>
+                      <MdOutlineStar className='fill-yellow-400' />
+                      <span className='font-medium text-white'>{data.vote_average}</span> / 10
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </Link>
       </li>
     )

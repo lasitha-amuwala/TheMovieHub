@@ -37,8 +37,8 @@ const ImageModal = ({ title, paths }) => {
             <NextImage
               width={200}
               height={300}
-              objectFit='cover'
-              layout='responsive'
+              className='object-cover'
+              // layout='responsive'
               src={getImageUrl('/' + router.query.i, { original: true })}
               priority
               quality={100}
