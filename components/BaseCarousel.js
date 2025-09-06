@@ -1,19 +1,57 @@
-import React from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import React, { useCallback } from 'react';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
-import { ButtonBack, ButtonNext, CarouselProvider, Slide, Slider, Dot } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-
 const styles = {
   button: `absolute top-1/2 z-10 sm:mx-4 aspect-square w-[5%] -translate-y-1/2 rounded-full bg-accentBlue bg-opacity-50 opacity-0 backdrop-blur-md duration-300 hover:bg-opacity-80 group-hover:opacity-100 lg:p-4`,
 };
+import '../styles/embla.css';
 
-const BaseCarousel = ({ data, visibleSlides, component, label, ...rest }) => {
-  const multipleSlides = data.length > visibleSlides;
+const BaseCarousel = ({ data: slides, visibleSlides, component, label, ...rest }) => {
+  const multipleSlides = slides.length > visibleSlides;
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    axis: 'x',
+    dragFree: true,
+    align: 'start',
+    active: true,
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   return (
     <div>
       {label && <div className='ml-2 text-2xl font-semibold'>{label}</div>}
       <div className='group relative my-3 mb-5'>
-        <CarouselProvider
+        <div className='embla py-2 relative'>
+          <button
+            className='embla__prev absolute left-0 sm:mx-4 top-1/2 z-10 aspect-square w-[5%] -translate-y-1/2 bg-accentBlue bg-opacity-50 backdrop-blur-md rounded-full duration-300 hover:bg-opacity-80 group-hover:opacity-100 opacity-0'
+            onClick={scrollPrev}
+          >
+            <HiChevronLeft className='h-full w-full' />
+          </button>
+          <button
+            className='embla__next absolute right-0 sm:mx-4 top-1/2 z-10 aspect-square  w-[5%] -translate-y-1/2 bg-accentBlue bg-opacity-50 backdrop-blur-md rounded-full duration-300 hover:bg-opacity-80 group-hover:opacity-100 opacity-0'
+            onClick={scrollNext}
+          >
+            <HiChevronRight className='h-full w-full' />
+          </button>
+          <div class='embla__viewport' ref={emblaRef}>
+            <div className='embla__container '>
+              {slides.map((slide, i) => (
+                <div className='embla__slide' key={i}>
+                  {React.cloneElement(component, { data: slide })}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* <CarouselProvider
           visibleSlides={visibleSlides}
           touchEnabled={multipleSlides}
           totalSlides={data.length}
@@ -40,7 +78,7 @@ const BaseCarousel = ({ data, visibleSlides, component, label, ...rest }) => {
               </Slide>
             ))}
           </Slider>
-        </CarouselProvider>
+        </CarouselProvider> */}
       </div>
     </div>
   );
