@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { QueryClient, dehydrate, useQueries } from 'react-query';
+import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query';
 import { tmdb } from '../../src/http-client/tmdb';
 import PersonHeader from '../../components/person/PersonHeader';
 import PersonImageCarousel from '../../components/person/PersonImageCarousel';
