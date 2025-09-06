@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { useSwipeable } from 'react-swipeable';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';

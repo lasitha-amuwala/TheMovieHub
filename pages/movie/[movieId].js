@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { tmdb } from '../../src/http-client/tmdb';
-import { QueryClient, dehydrate, useQuery } from 'react-query';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 
 import Title from '../../components/Title';
 import PageMargin from '../../components/PageMargin';
