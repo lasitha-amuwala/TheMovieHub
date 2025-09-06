@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from 'react-icons/hi';
 import ListItem from './ListItem';
 import ListButton from './ListButton';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 
 export const List = ({ query, title }) => {

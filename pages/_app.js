@@ -1,14 +1,14 @@
 // import App from 'next/app'
 import { useState, useEffect } from 'react';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { Hydrate, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { HydrationBoundary, QueryClientProvider } from '@tanstack/react-query';
 import { customQueryClient } from '../src/http-client/queryClient';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
 import Layout from '../components/Layout';
-import { Analytics } from '@vercel/analytics/react';
+// import { Analytics } from '@vercel/analytics/react';
 import { ScrollContext } from '../components/ScrollContext';
 
 // Configure NProgress bar
@@ -22,14 +22,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
+      <HydrationBoundary state={pageProps.dehydratedState}>
         <ScrollContext>
           <Layout>
             <Component {...pageProps} />
-            <Analytics />
+            {/* <Analytics /> */}
           </Layout>
         </ScrollContext>
-      </Hydrate>
+      </HydrationBoundary>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

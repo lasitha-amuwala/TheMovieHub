@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { List } from '../components/list/List';
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import { tmdb } from '../src/http-client/tmdb';
 import Spotlight from '../components/home/Spotlight';
 import { Footer } from '../components/Footer';

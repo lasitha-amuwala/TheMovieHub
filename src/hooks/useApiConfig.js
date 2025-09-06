@@ -1,6 +1,6 @@
 import { tmdb } from '../http-client/tmdb';
 import { useCallback } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useApiConfiguration = () => {
   const { data: configuration } = useQuery({

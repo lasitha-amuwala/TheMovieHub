@@ -6,7 +6,7 @@ import NextImage from '../NextImage';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 
 import { tmdb } from '../../src/http-client/tmdb';
-import { useQuery, useQueries } from 'react-query';
+import { useQuery, useQueries } from '@tanstack/react-query';
 import { useScrollPosition } from '../../src/hooks/useScrollPosition';
 import { useBreakpoints } from '../../src/hooks/useBreakpoints';
 
@@ -14,7 +14,7 @@ const Spotlight = ({ children }) => {
   const { getImageUrl } = useApiConfiguration();
   const breakpoint = useBreakpoints();
   const imageRef = useRef();
-  const [randomSpotlightMovie, setRandom] = useState(0);
+  const [spotlightMovieID, setSpotlightMovieID] = useState(null);
 
   const scrollPosition = useScrollPosition();
   const scrollDistance = imageRef.current ? imageRef.current.clientHeight : 1000;
@@ -22,20 +22,31 @@ const Spotlight = ({ children }) => {
   const blurAmount = scrollDifference * 64;
   const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
 
-  const { data: trendingDaily } = useQuery(tmdb.trending.moviesWeek());
-  const movieOfTheDay = trendingDaily.results[randomSpotlightMovie];
+  // fetch trending movie list
+  const { data: trendingDaily, isSuccess: trendingSuccess } = useQuery(tmdb.trending.moviesWeek());
 
-  const [{ data: movieData, data: movieSuccess }, { data: movieImages, isSuccess: imageSuccess }] =
-    useQueries([
-      { ...tmdb.movies.movie(movieOfTheDay.id), enabled: !!movieOfTheDay },
-      { ...tmdb.movies.images(movieOfTheDay.id), enabled: !!movieOfTheDay },
-    ]);
+  //
+  useEffect(() => {
+    if (trendingSuccess) {
+      const rand = Math.floor(Math.random() * trendingDaily.results.length);
+      setSpotlightMovieID(trendingDaily.results[rand].id);
+    }
+  }, [trendingDaily, trendingSuccess]);
+
+  const movieQueries = useQueries({
+    queries: [
+      { ...tmdb.movies.movie(spotlightMovieID), enabled: !!spotlightMovieID },
+      { ...tmdb.movies.images(spotlightMovieID), enabled: !!spotlightMovieID },
+    ],
+  });
+  const [movieQuery, imageQuery] = movieQueries;
+  const movieSuccess = movieQuery?.isSuccess;
+  const movieData = movieQuery?.data;
+
+  const imageSuccess = imageQuery?.isSuccess;
+  const imageData = imageQuery?.data;
 
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
-
-  useEffect(() => {
-    setRandom(Math.floor(Math.random() * trendingDaily.results.length));
-  }, [trendingDaily.results.length]);
 
   if (movie == {}) return <div></div>;
 
@@ -75,11 +86,11 @@ const Spotlight = ({ children }) => {
                 />
               </div>
               <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-4 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:gap-5 sm:from-transparent sm:px-0'>
-                {movieImages && imageSuccess && movieImages.logos[0] ? (
+                {imageSuccess ? (
                   <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
                     <NextImage
                       fill
-                      src={getImageUrl(movieImages.logos[0].file_path, { original: true })}
+                      src={getImageUrl(imageData.logos[0].file_path, { original: true })}
                       className='sm:object-left-bottom object-contain'
                       priority
                     />
