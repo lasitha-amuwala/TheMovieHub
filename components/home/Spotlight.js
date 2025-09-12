@@ -20,7 +20,7 @@ const Spotlight = ({ children }) => {
   const scrollDistance = imageRef.current ? imageRef.current.clientHeight : 1000;
   const scrollDifference = scrollPosition / scrollDistance;
   const blurAmount = scrollDifference * 64;
-  const opacityAmount = scrollDifference > 0.75 ? 0.75 : scrollDifference;
+  const opacityAmount = scrollDifference > 0.75 ? 0.5 : scrollDifference;
 
   // fetch trending movie list
   const { data: trendingDaily, isSuccess: trendingSuccess } = useQuery(tmdb.trending.moviesWeek());
@@ -72,7 +72,7 @@ const Spotlight = ({ children }) => {
             ? null
             : { backgroundColor: `rgba(0,0,0, ${opacityAmount}` }
         }
-        className='transform-opacity duration-500] absolute top-0 w-full bg-black'
+        className='transform-opacity duration-500 absolute top-0 w-full bg-black'
       >
         <div className='relative h-[55vh] sm:h-[90vh]'>
           <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-24'>
