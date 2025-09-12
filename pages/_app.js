@@ -7,6 +7,8 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
+import '../styles/embla.css'
+
 import Layout from '../components/Layout';
 // import { Analytics } from '@vercel/analytics/react';
 import { ScrollContext } from '../components/ScrollContext';
