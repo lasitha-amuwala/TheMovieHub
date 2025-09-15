@@ -1,23 +1,19 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { tmdb } from '../../src/http-client/tmdb';
-import BaseCarousel from '../BaseCarousel';
 import MovieCastCard from './MovieCastCard';
+import EmblaCarousel from '../carousel/EmblaCarousel';
 
 const MovieCastCarousel = ({ id }) => {
   const { data, isLoading, isSuccess } = useQuery(tmdb.movies.credits(id));
 
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
+  if (isLoading) return <div>Loading</div>;
+
   return (
-    <BaseCarousel
-      label='Cast'
-      data={data.cast}
-      visibleSlides={6}
-      component={<MovieCastCard />}
-      isIntrinsicHeight
-    />
+    <EmblaCarousel>
+      {data.cast.map((cast, i) => (
+        <MovieCastCard data={cast} key={i} />
+      ))}
+    </EmblaCarousel>
   );
 };
 

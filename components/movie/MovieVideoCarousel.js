@@ -1,9 +1,8 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { tmdb } from '../../src/http-client/tmdb';
-import BaseCarousel from '../BaseCarousel';
 import VideoModal from '../modals/VideoModal';
 import MovieVideoCard from './MovieVideoCard';
+import EmblaCarousel from '../carousel/EmblaCarousel';
 
 const MovieVideoCarousel = ({ id }) => {
   const { data } = useQuery(tmdb.movies.videos(id));
@@ -12,15 +11,15 @@ const MovieVideoCarousel = ({ id }) => {
     return { name, key };
   });
 
+  const breakPointNumSlides = { normal: 3, sm: 4, lg: 4 };
+
   return (
     <>
-      <BaseCarousel
-        label='Videos'
-        data={data.results}
-        visibleSlides={4}
-        component={<MovieVideoCard />}
-        isIntrinsicHeight
-      />
+      <EmblaCarousel breakPointNumSlides={breakPointNumSlides}>
+        {data.results.map((slide, i) => (
+          <MovieVideoCard data={slide} key={i} />
+        ))}
+      </EmblaCarousel>
       <VideoModal paths={videoPaths} />
     </>
   );
