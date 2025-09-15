@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRouter } from 'next/router';
 import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query';
 import { tmdb } from '../../src/http-client/tmdb';
@@ -28,21 +27,26 @@ const Person = () => {
   const router = useRouter();
   const { personId } = router.query;
 
-  const results = useQueries([
-    tmdb.people.person(personId),
-    tmdb.people.movieCredits(personId),
-    tmdb.people.tvCredits(personId),
-  ]);
+  const results = useQueries({
+    queries: [
+      tmdb.people.person(personId),
+      tmdb.people.movieCredits(personId),
+      tmdb.people.tvCredits(personId),
+      tmdb.people.images(personId),
+    ],
+  });
 
-  const [{ data: personData }, { data: movieCredits }, { data: tvCredits }] = results;
+  const [{ data: personData }, { data: movieCredits }, { data: tvCredits }, { data: imageData }] =
+    results;
 
+  const imageFilePaths = imageData.profiles.map(({ file_path }) => file_path);
 
   if (router.isFallback) return <div>error</div>;
   return (
     <>
       <PersonHeader person={personData} />
       <PageMargin padding className='py-10'>
-        <PersonImageCarousel id={personId} title={personData.name} />
+        <PersonImageCarousel paths={imageFilePaths} title={personData.name} />
       </PageMargin>
       <div className='h-screen'></div>
     </>

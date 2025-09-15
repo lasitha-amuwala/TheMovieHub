@@ -31,14 +31,14 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
         className='item listWidth listHeight shrink-0 px-1 drop-shadow-md sm:px-2 lg:px-[10px] xl:px-3 3xl:px-[14px]'
       >
         <Link href={`/movie/${data.id}`}>
-          <div className='relative h-full overflow-hidden rounded-md'>
+          <div className='relative h-full overflow-hidden '>
             <div className='item-poster relative top-0 block h-full w-full object-fill '>
               <Blur blurRadius={blur}>
                 <NextImage
                   fill
                   src={getImageUrl(data.poster_path)}
                   alt={data.title}
-                  className='rounded-md object-cover object-top'
+                  className='object-cover object-top'
                   placeholder='blur'
                   blurDataURL='/placeholder.png'
                   unoptimized
@@ -51,11 +51,11 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
                   src={getImageUrl(data.backdrop_path)}
                   alt={data.title}
                   fill
-                  className='rounded-t-md object-cover object-center'
+                  className='object-cover object-center'
                   unoptimized
                 />
               </div>
-              <div className='z-[1] flex flex-col justify-center px-5 py-2 '>
+              <div className='z-[1] flex flex-col justify-center px-5 py-2 bg-black/50'>
                 <div className='truncate'>{data.title}</div>
                 <div className='h-1/2 w-full'>
                   <div className='flex grow items-center justify-between text-gray-300'>

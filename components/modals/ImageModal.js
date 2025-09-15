@@ -1,4 +1,3 @@
-import React from 'react';
 import BaseModal from './BaseModal';
 import NextImage from '../NextImage';
 import useRouter from '../../src/hooks/useRouter';
@@ -13,21 +12,23 @@ const ImageModal = ({ title, paths }) => {
   const handle = useFullScreenHandle();
   const { getImageUrl } = useApiConfiguration();
 
-  const currIndex = paths.indexOf(router.query.i);
+  const queryImage = router.query.i;
+
+  const currIndex = paths.indexOf('/' + queryImage);
 
   const isInRange = index => index >= 0 && index < paths.length;
   const goToNextPath = () => (isInRange(currIndex + 1) ? goToPath(currIndex + 1) : currIndex);
   const goToPrevPath = () => (isInRange(currIndex - 1) ? goToPath(currIndex - 1) : currIndex);
 
   const goToPath = index =>
-    router.push({ pathname: router.asRoute, query: { i: paths[index] } }, undefined, {
+    router.push({ pathname: router.asRoute, query: { i: paths[index].substring(1) } }, undefined, {
       shallow: true,
     });
 
   return (
     <BaseModal
       title={title}
-      isOpen={!!router.query.i}
+      isOpen={!!queryImage}
       onRequestClose={() => router.push(router.asRoute, undefined, { shallow: true })}
       contentLabel='image modal'
     >
@@ -35,11 +36,9 @@ const ImageModal = ({ title, paths }) => {
         <FullScreen handle={handle}>
           <div className='m-auto block aspect-[2/3] w-[40%] drop-shadow-md'>
             <NextImage
-              width={200}
-              height={300}
+              fill
               className='object-cover'
-              // layout='responsive'
-              src={getImageUrl('/' + router.query.i, { original: true })}
+              src={getImageUrl('/' + queryImage, { original: true })}
               priority
               quality={100}
               unoptimized

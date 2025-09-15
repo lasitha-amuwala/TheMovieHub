@@ -1,23 +1,22 @@
-import { cloneElement } from 'react';
+import { Children } from 'react';
 import { DotButton } from './EmblaCarouselDotButton';
 import { PrevButton, NextButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useDotButton } from '../../src/hooks/embla/useDotButton';
 
 const EmblaCarousel = ({
-  slides,
-  options,
-  component,
-  disableSlideLink,
+  options = { align: 'start', slidesToScroll: 'auto' },
   breakPointNumSlides = { normal: 4, sm: 6, lg: 8 },
+  children,
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
-  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
+  const { prevBtnDisabled, nextBtnDisabled, onPrevBtnClick, onNextBtnClick } =
     usePrevNextButtons(emblaApi);
 
+  const renderButtons = !(selectedIndex === 0 && scrollSnaps.length <= 1);
   return (
     <section
       className='embla'
@@ -28,28 +27,35 @@ const EmblaCarousel = ({
       }}
     >
       <div className='my-3 mb-5 group relative'>
-        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-
+        {renderButtons && (
+          <>
+            <PrevButton onClick={onPrevBtnClick} disabled={prevBtnDisabled} />
+            <NextButton onClick={onNextBtnClick} disabled={nextBtnDisabled} />
+          </>
+        )}
         <div className='embla__viewport' ref={emblaRef}>
           <div className='embla__container'>
-            {slides.map((slide, index) => (
-              <div className='embla__slide' key={index}>
-                {cloneElement(component, { data: slide, disableLink: disableSlideLink })}
+            {Children.map(children, (child, i) => (
+              <div className='embla__slide' key={i}>
+                {child}
               </div>
             ))}
           </div>
         </div>
       </div>
-      <div className='embla__dots'>
-        {scrollSnaps.map((_, index) => (
-          <DotButton
-            key={index}
-            onClick={() => onDotButtonClick(index)}
-            className={'embla__dot'.concat(index === selectedIndex ? ' embla__dot--selected' : '')}
-          />
-        ))}
-      </div>
+      {renderButtons && (
+        <div className='embla__dots'>
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
