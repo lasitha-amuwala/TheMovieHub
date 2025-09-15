@@ -1,14 +1,14 @@
 import React from 'react';
 import NextImage from '../NextImage';
 import Link from 'next/link';
-import useRouter from '../../src/hooks/useRouter';
+import { usePathname } from 'next/navigation';
 
 const MovieVideoCard = ({ data }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <>
-      <Link href={{ pathname: router.asRoute, query: { v: data.key } }} shallow>
+      <Link href={{ pathname, query: { v: data.key } }} shallow>
         <div className='mx-2 flex h-full flex-col overflow-hidden rounded-lg bg-card duration-300 hover:bg-cardHover'>
           <div className='relative aspect-video'>
             <NextImage

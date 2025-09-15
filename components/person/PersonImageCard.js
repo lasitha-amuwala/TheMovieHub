@@ -1,10 +1,10 @@
 import NextImage from '../NextImage';
 import Link from 'next/link';
-import useRouter from '../../src/hooks/useRouter';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
+import { usePathname } from 'next/navigation';
 
 const PersonImageCard = ({ path, name, disableLink = true }) => {
-  const router = useRouter();
+  const pathname = usePathname();
   const { getImageUrl } = useApiConfiguration();
 
   const ImageCard = () => (
@@ -26,7 +26,7 @@ const PersonImageCard = ({ path, name, disableLink = true }) => {
       {disableLink ? (
         <ImageCard />
       ) : (
-        <Link href={{ pathname: router.asRoute, query: { i: path.substring(1) } }} shallow>
+        <Link href={{ pathname, query: { i: path.substring(1) } }} shallow>
           <ImageCard />
         </Link>
       )}

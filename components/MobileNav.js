@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { RiFilmLine, RiFilmFill, RiSearchLine, RiSearchFill } from 'react-icons/ri';
 import { BsTv, BsTvFill, BsHouse, BsHouseFill, BsBookmarks, BsBookmarksFill } from 'react-icons/bs';
 
@@ -24,13 +24,13 @@ const styles = {
 };
 
 export const MobileNav = () => {
-  const { pathname } = useRouter();
+  const { pathname } = usePathname();
 
   const Button = ({ data }) => (
     <Link href={data.href} className={styles.link}>
-        {React.cloneElement(data.href == pathname ? data.icon2 : data.icon1, {
-          className: styles.icon,
-        })}
+      {React.cloneElement(data.href == pathname ? data.icon2 : data.icon1, {
+        className: styles.icon,
+      })}
     </Link>
   );
 

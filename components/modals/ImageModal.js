@@ -1,18 +1,20 @@
 import BaseModal from './BaseModal';
 import NextImage from '../NextImage';
-import useRouter from '../../src/hooks/useRouter';
 import useApiConfiguration from '../../src/hooks/useApiConfig';
 import { FaExpand, FaCompress } from 'react-icons/fa';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import IconButton from '../IconButton';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const ImageModal = ({ title, paths }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const handle = useFullScreenHandle();
   const { getImageUrl } = useApiConfiguration();
 
-  const queryImage = router.query.i;
+  const queryImage = searchParams.get('i');
 
   const currIndex = paths.indexOf('/' + queryImage);
 
@@ -21,7 +23,7 @@ const ImageModal = ({ title, paths }) => {
   const goToPrevPath = () => (isInRange(currIndex - 1) ? goToPath(currIndex - 1) : currIndex);
 
   const goToPath = index =>
-    router.push({ pathname: router.asRoute, query: { i: paths[index].substring(1) } }, undefined, {
+    router.push({ pathname, query: { i: paths[index].substring(1) } }, undefined, {
       shallow: true,
     });
 
@@ -29,7 +31,7 @@ const ImageModal = ({ title, paths }) => {
     <BaseModal
       title={title}
       isOpen={!!queryImage}
-      onRequestClose={() => router.push(router.asRoute, undefined, { shallow: true })}
+      onRequestClose={() => router.push(pathname, undefined, { shallow: true })}
       contentLabel='image modal'
     >
       <div className='relative text-white'>
