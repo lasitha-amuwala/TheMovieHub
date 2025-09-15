@@ -1,13 +1,16 @@
-import React from 'react';
 import BaseModal from './BaseModal';
 import VideoPlayer from '../VideoPlayer';
-import useRouter from '../../src/hooks/useRouter';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const VideoModal = ({ paths }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const currIndex = paths.findIndex(i => i.key == router.query.v);
+  const videoId = searchParams.get('v');
+
+  const currIndex = paths.findIndex(i => i.key == videoId);
   const currName = currIndex >= 0 ? paths[currIndex].name : '';
 
   const isInRange = index => index >= 0 && index < paths.length;
@@ -15,20 +18,20 @@ const VideoModal = ({ paths }) => {
   const goToPrevPath = () => (isInRange(currIndex - 1) ? goToPath(currIndex - 1) : currIndex);
 
   const goToPath = index =>
-    router.push({ pathname: router.asRoute, query: { v: paths[index].key } }, undefined, {
+    router.push({ pathname, query: { v: paths[index].key } }, undefined, {
       shallow: true,
     });
 
   return (
     <BaseModal
       title={currName}
-      isOpen={!!router.query.v}
-      onRequestClose={() => router.push(router.asRoute, undefined, { shallow: true })}
+      isOpen={!!videoId}
+      onRequestClose={() => router.push(pathname, undefined, { shallow: true })}
       contentLabel='video modal'
     >
       <div className='group relative flex w-full flex-col text-white'>
         <div className='aspect-video'>
-          <VideoPlayer videoId={router.query.v} />
+          <VideoPlayer videoId={videoId} />
         </div>
         {isInRange(currIndex + 1) && (
           <button

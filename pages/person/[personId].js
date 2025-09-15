@@ -4,6 +4,7 @@ import { tmdb } from '../../src/http-client/tmdb';
 import PersonHeader from '../../components/person/PersonHeader';
 import PersonImageCarousel from '../../components/person/PersonImageCarousel';
 import PageMargin from '../../components/PageMargin';
+import { useParams } from 'next/navigation';
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -25,7 +26,8 @@ export const getServerSideProps = async ({ params }) => {
 
 const Person = () => {
   const router = useRouter();
-  const { personId } = router.query;
+  const params = useParams();
+  const personId = params.personId;
 
   const results = useQueries({
     queries: [
@@ -41,7 +43,7 @@ const Person = () => {
 
   const imageFilePaths = imageData.profiles.map(({ file_path }) => file_path);
 
-  if (router.isFallback) return <div>error</div>;
+  // if (router.isFallback) return <div>error</div>;
   return (
     <>
       <PersonHeader person={personData} />
