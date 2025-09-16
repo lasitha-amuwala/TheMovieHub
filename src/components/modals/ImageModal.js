@@ -1,6 +1,6 @@
 import BaseModal from './BaseModal';
 import NextImage from '../NextImage';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import useApiConfiguration from '@/hooks/useApiConfig';
 import { FaExpand, FaCompress } from 'react-icons/fa';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';

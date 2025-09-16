@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileTemplate from '../ProfileTemplate';
-import { getLocaleDate } from '../../src/commonUtils';
+import { getLocaleDate } from '@/utils/commonUtils';
 import { FaInstagram, FaFacebook, FaTwitter, FaImdb } from 'react-icons/fa';
 import IconButton from '../IconButton';
 import ReadMore from '../ReadMore';

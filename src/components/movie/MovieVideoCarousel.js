@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { tmdb } from '../../src/http-client/tmdb';
+import { tmdb } from '@/utils/http-client/tmdb';
 import VideoModal from '../modals/VideoModal';
 import MovieVideoCard from './MovieVideoCard';
 import EmblaCarousel from '../carousel/EmblaCarousel';

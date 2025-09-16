@@ -1,11 +1,11 @@
-import { tmdb } from '../../src/http-client/tmdb';
+import { tmdb } from '@/utils/http-client/tmdb';
 import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
 
-import Title from '../../components/Title';
-import PageMargin from '../../components/PageMargin';
-import MovieHeader from '../../components/movie/MovieHeader';
-import MovieCastCarousel from '../../components/movie/MovieCastCarousel';
-import MovieVideoCarousel from '../../components/movie/MovieVideoCarousel';
+import Title from '@/components/Title';
+import PageMargin from '@/components/PageMargin';
+import MovieHeader from '@/components/movie/MovieHeader';
+import MovieCastCarousel from '@/components/movie/MovieCastCarousel';
+import MovieVideoCarousel from '@/components/movie/MovieVideoCarousel';
 import { useParams } from 'next/navigation';
 
 export const getServerSideProps = async ({ params }) => {

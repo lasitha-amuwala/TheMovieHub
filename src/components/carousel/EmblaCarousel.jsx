@@ -2,7 +2,7 @@ import { Children } from 'react';
 import { DotButton } from './EmblaCarouselDotButton';
 import { PrevButton, NextButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useDotButton } from '../../src/hooks/embla/useDotButton';
+import { useDotButton } from '@/hooks/embla/useDotButton';
 
 const EmblaCarousel = ({
   options = { align: 'start', slidesToScroll: 'auto' },
