@@ -1,4 +1,4 @@
-import { tmdb } from '../http-client/tmdb';
+import { tmdb } from '../utils/http-client/tmdb';
 import { useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 

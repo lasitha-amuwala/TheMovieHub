@@ -1,6 +1,6 @@
 import NextImage from '../NextImage';
 import Link from 'next/link';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import useApiConfiguration from '@/hooks/useApiConfig';
 import { usePathname } from 'next/navigation';
 
 const PersonImageCard = ({ path, name, disableLink = true }) => {

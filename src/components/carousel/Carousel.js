@@ -6,10 +6,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Track } from './Track';
 import { CarouselItem } from './CaroselItem';
-import { useInterval } from '../../src/hooks/useInterval';
-import { usePrevious } from '../../src/hooks/usePrevious';
-import { usePageVisibility } from '../../src/hooks/usePageVisibility';
-import { tmdb } from '../../src/http-client/tmdb';
+import { useInterval } from '@/hooks/useInterval';
+import { usePrevious } from '@/hooks/usePrevious';
+import { usePageVisibility } from '@/hooks/usePageVisibility';
+import { tmdb } from '@/utils/http-client/tmdb';
 
 import SkeletonItem from '../SkeletonItem';
 

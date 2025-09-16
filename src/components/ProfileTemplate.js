@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import NextImage from './NextImage';
 import PageMargin from './PageMargin';
 import PersonPlaceholder from './PersonPlaceholder';
-import useApiConfiguration from '../src/hooks/useApiConfig';
+import useApiConfiguration from '@/hooks/useApiConfig';
 import Link from 'next/link';
 import Blur from './Blur';
 import { usePathname } from 'next/navigation';

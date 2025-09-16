@@ -3,12 +3,12 @@ import Blur from '../Blur.js';
 import Link from 'next/link';
 import classNames from 'classnames';
 import NextImage from '../NextImage';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import useApiConfiguration from '@/hooks/useApiConfig';
 
-import { tmdb } from '../../src/http-client/tmdb';
+import { tmdb } from '@/utils/http-client/tmdb';
 import { useQuery, useQueries } from '@tanstack/react-query';
-import { useScrollPosition } from '../../src/hooks/useScrollPosition';
-import { useBreakpoints } from '../../src/hooks/useBreakpoints';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
+import { useBreakpoints } from '@/hooks/useBreakpoints';
 
 const Spotlight = ({ children }) => {
   const { getImageUrl } = useApiConfiguration();

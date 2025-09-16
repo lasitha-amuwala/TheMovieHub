@@ -1,17 +1,17 @@
 // import App from 'next/app'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HydrationBoundary, QueryClientProvider } from '@tanstack/react-query';
-import { customQueryClient } from '../src/http-client/queryClient';
+import { customQueryClient } from '@/utils/http-client/queryClient';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import '../styles/globals.css';
+import '@/styles/globals.css';
 import 'nprogress/nprogress.css';
-import '../styles/embla.css'
+import '@/styles/embla.css';
 
-import Layout from '../components/Layout';
+import Layout from '@/components/Layout';
+import { ScrollContext } from '@/components/ScrollContext';
 // import { Analytics } from '@vercel/analytics/react';
-import { ScrollContext } from '../components/ScrollContext';
 
 // Configure NProgress bar
 NProgress.configure({ showSpinner: false });

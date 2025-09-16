@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import NextImage from '../NextImage';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import useApiConfiguration from '@/hooks/useApiConfig';
 import PersonPlaceholder from '../PersonPlaceholder';
 
 const MovieCastCard = ({ data }) => {

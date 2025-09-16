@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query';
-import { tmdb } from '../../src/http-client/tmdb';
-import PersonHeader from '../../components/person/PersonHeader';
-import PersonImageCarousel from '../../components/person/PersonImageCarousel';
-import PageMargin from '../../components/PageMargin';
+import { tmdb } from '@/utils/http-client/tmdb';
+import PersonHeader from '@/components/person/PersonHeader';
+import PersonImageCarousel from '@/components/person/PersonImageCarousel';
+import PageMargin from '@/components/PageMargin';
 import { useParams } from 'next/navigation';
 
 export const getServerSideProps = async ({ params }) => {

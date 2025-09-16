@@ -1,9 +1,9 @@
 import { forwardRef, useEffect, useState } from 'react';
 import Link from 'next/link';
-import useApiConfiguration from '../../src/hooks/useApiConfig';
+import useApiConfiguration from '@/hooks/useApiConfig';
 import { MdOutlineStar } from 'react-icons/md';
 import NextImage from '../NextImage';
-import { getYearFromDate } from '../../src/commonUtils';
+import { getYearFromDate } from '@/utils/commonUtils';
 import Blur from '../Blur';
 
 const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {

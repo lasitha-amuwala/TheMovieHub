@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileTemplate from '../ProfileTemplate';
-import { getYearFromDate, minsToDuration } from '../../src/commonUtils';
+import { getYearFromDate, minsToDuration } from '@/utils/commonUtils';
 
 const MovieHeader = ({ movie }) => {
   return (
