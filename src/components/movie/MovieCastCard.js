@@ -14,6 +14,7 @@ const MovieCastCard = ({ data }) => {
             {data.profile_path && (
               <NextImage
                 src={getImageUrl(data.profile_path)}
+                alt={data.name}
                 fill
                 className='object-cover rounded-lg'
                 unoptimized

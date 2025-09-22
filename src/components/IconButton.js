@@ -1,5 +1,5 @@
+"use client"
 import classNames from 'classnames';
-import React from 'react';
 
 const IconButton = ({ icon, className, onClick }) => {
   return (

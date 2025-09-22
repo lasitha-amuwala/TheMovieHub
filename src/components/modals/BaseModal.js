@@ -1,9 +1,10 @@
+'use client';
 import React from 'react';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
 import IconButton from '../IconButton';
 
-Modal.setAppElement('#__next');
+Modal.setAppElement('body');
 
 const modalStyles = {
   overlay: {

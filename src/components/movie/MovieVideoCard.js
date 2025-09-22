@@ -8,11 +8,12 @@ const MovieVideoCard = ({ data }) => {
 
   return (
     <>
-      <Link href={{ pathname, query: { v: data.key } }} shallow>
+      <Link href={{ pathname, query: { v: data.key } }} scroll={false} replace>
         <div className='mx-2 flex h-full flex-col overflow-hidden rounded-lg bg-card duration-300 hover:bg-cardHover'>
           <div className='relative aspect-video'>
             <NextImage
               src={`http://img.youtube.com/vi/${data.key}/hqdefault.jpg`}
+              alt={data.name}
               fill
               className='object-cover'
             />

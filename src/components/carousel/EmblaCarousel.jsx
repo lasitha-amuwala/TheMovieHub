@@ -1,3 +1,4 @@
+'use client';
 import { Children } from 'react';
 import { DotButton } from './EmblaCarouselDotButton';
 import { PrevButton, NextButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';

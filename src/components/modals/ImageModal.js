@@ -1,3 +1,4 @@
+'use client';
 import BaseModal from './BaseModal';
 import NextImage from '../NextImage';
 import useApiConfiguration from '@/hooks/useApiConfig';
@@ -23,15 +24,13 @@ const ImageModal = ({ title, paths }) => {
   const goToPrevPath = () => (isInRange(currIndex - 1) ? goToPath(currIndex - 1) : currIndex);
 
   const goToPath = index =>
-    router.push({ pathname, query: { i: paths[index].substring(1) } }, undefined, {
-      shallow: true,
-    });
+    router.replace(`${pathname}?i=${paths[index].substring(1)}`, { scroll: false });
 
   return (
     <BaseModal
       title={title}
       isOpen={!!queryImage}
-      onRequestClose={() => router.push(pathname, undefined, { shallow: true })}
+      onRequestClose={() => router.replace(pathname, { scroll: false })}
       contentLabel='image modal'
     >
       <div className='relative text-white'>
@@ -41,6 +40,7 @@ const ImageModal = ({ title, paths }) => {
               fill
               className='object-cover'
               src={getImageUrl('/' + queryImage, { original: true })}
+              alt='modal image'
               priority
               quality={100}
               unoptimized

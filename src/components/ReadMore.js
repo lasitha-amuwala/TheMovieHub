@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 
@@ -10,8 +11,8 @@ const ReadMore = ({ lines, text, bg }) => {
   const style = {
     overflow: 'hidden',
     display: '-webkit-box',
-    '-webkit-box-orient': 'vertical',
-    '-webkit-line-clamp': `${lines}`,
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: `${lines}`,
   };
 
   useEffect(() => {
