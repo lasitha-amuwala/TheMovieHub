@@ -21,9 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "next dev",
-    "prod": "next build && next start",
-    "build": "next build",
+    "dev": "next dev --turbopack",
+    "prod": "next build --turbopack && next start",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
     "prettier:check": "npx prettier --check .",
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.3.1",
+    "@types/node": "24.4.0",
     "autoprefixer": "^10.4.4",
     "eslint": "^8.14.0",
     "eslint-config-next": "^15.5.2",

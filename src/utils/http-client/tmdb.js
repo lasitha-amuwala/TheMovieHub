@@ -7,7 +7,7 @@ const USParams = { region: 'US', language: 'en-US' };
 export const tmdb = {
   common: {
     configuration: () => ({
-      queryKey: 'configuration',
+      queryKey: ['configuration'],
       queryFn: () => get(createUrl('/configuration')),
     }),
   },

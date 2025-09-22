@@ -1,3 +1,4 @@
+'use client';
 export const DotButton = props => {
   const { children, ...restProps } = props;
 

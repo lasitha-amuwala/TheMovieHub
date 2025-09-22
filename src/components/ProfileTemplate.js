@@ -1,3 +1,4 @@
+'use client';
 import classNames from 'classnames';
 import NextImage from './NextImage';
 import PageMargin from './PageMargin';
@@ -35,7 +36,6 @@ const ProfileTemplate = ({ backdropSrc, backdropAlt, imageSrc, imageAlt, childre
                   <NextImage
                     width={200}
                     height={300}
-                    // layout='responsive'
                     className='rounded-lg'
                     src={getImageUrl(imageSrc, { original: true })}
                     alt={imageAlt}

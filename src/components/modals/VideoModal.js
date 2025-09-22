@@ -1,3 +1,5 @@
+'use client';
+
 import BaseModal from './BaseModal';
 import VideoPlayer from '../VideoPlayer';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
@@ -18,7 +20,7 @@ const VideoModal = ({ paths }) => {
   const goToPrevPath = () => (isInRange(currIndex - 1) ? goToPath(currIndex - 1) : currIndex);
 
   const goToPath = index =>
-    router.push({ pathname, query: { v: paths[index].key } }, undefined, {
+    router.replace({ pathname, query: { v: paths[index].key } }, undefined, {
       shallow: true,
     });
 
@@ -26,7 +28,7 @@ const VideoModal = ({ paths }) => {
     <BaseModal
       title={currName}
       isOpen={!!videoId}
-      onRequestClose={() => router.push(pathname, undefined, { shallow: true })}
+      onRequestClose={() => router.replace(pathname, { scroll: false })}
       contentLabel='video modal'
     >
       <div className='group relative flex w-full flex-col text-white'>

@@ -1,34 +1,40 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Blur from '../Blur.js';
-import Link from 'next/link';
-import classNames from 'classnames';
-import NextImage from '../NextImage';
+'use client';
+
+import Blur from '@/components/Blur';
+import NextImage from '@/components/NextImage';
 import useApiConfiguration from '@/hooks/useApiConfig';
-
-import { tmdb } from '@/utils/http-client/tmdb';
-import { useQuery, useQueries } from '@tanstack/react-query';
-import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { useBreakpoints } from '@/hooks/useBreakpoints';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
+import { tmdb } from '@/utils/http-client/tmdb';
+import { useQueries, useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
 
-const Spotlight = ({ children }) => {
+export const Backdrop = ({ children }) => {
   const { getImageUrl } = useApiConfiguration();
-  const breakpoint = useBreakpoints();
+
   const imageRef = useRef();
+  const breakpoint = useBreakpoints();
+  const scrollPosition = useScrollPosition();
   const [spotlightMovieID, setSpotlightMovieID] = useState(null);
 
-  const scrollPosition = useScrollPosition();
   const scrollDistance = imageRef.current ? imageRef.current.clientHeight : 1000;
   const scrollDifference = scrollPosition / scrollDistance;
   const blurAmount = scrollDifference * 64;
   const opacityAmount = scrollDifference > 0.75 ? 0.5 : scrollDifference;
 
-  // fetch trending movie list
-  const { data: trendingDaily, isSuccess: trendingSuccess } = useQuery(tmdb.trending.moviesWeek());
+  const {
+    data: trendingDaily,
+    isSuccess: trendingSuccess,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(tmdb.trending.moviesWeek());
 
-  //
   useEffect(() => {
     if (trendingSuccess) {
-      const rand = Math.floor(Math.random() * trendingDaily.results.length);
+      const rand = Math.floor(Math.random() * 10);
       setSpotlightMovieID(trendingDaily.results[rand].id);
     }
   }, [trendingDaily, trendingSuccess]);
@@ -48,24 +54,25 @@ const Spotlight = ({ children }) => {
 
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
 
-  if (movie == {}) return <div></div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error} </div>;
 
   return (
     <>
       <div ref={imageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
-        <div className='relative h-full min-h-screen w-full'>
+        <div className='fixed h-full min-h-screen w-full'>
           <Blur blurRadius={blurAmount}>
             <NextImage
               src={getImageUrl(movie.backdrop_path, { original: true })}
               fill
-              className='object-cover'
+              className='object-cover object-top'
+              alt={`${movie.name} backdrop` ?? 'movie backdrop'}
               quality={100}
               priority
             />
           </Blur>
         </div>
       </div>
-
       <div
         style={
           Object.keys(breakpoint)[0] == 'none'
@@ -81,6 +88,7 @@ const Spotlight = ({ children }) => {
                 <NextImage
                   fill
                   src={getImageUrl(movie.backdrop_path, { original: true })}
+                  alt={`${movie.name} backdrop` ?? 'movie backdrop'}
                   className='object-cover'
                   quality={100}
                 />
@@ -91,6 +99,7 @@ const Spotlight = ({ children }) => {
                     <NextImage
                       fill
                       src={getImageUrl(imageData.logos[0].file_path, { original: true })}
+                      alt={`${movie.name} logo` ?? 'movie logo'}
                       className='sm:object-left-bottom object-contain'
                       priority
                     />
@@ -125,5 +134,3 @@ const Spotlight = ({ children }) => {
     </>
   );
 };
-
-export default Spotlight;

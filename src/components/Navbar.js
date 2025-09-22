@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -31,10 +32,10 @@ export const Navbar = () => {
         <div className='highlights-none flex items-center font-bold'>
           <NavItem to='/' label='TheMovieHub' />
           <div className='hidden items-center gap-16 pl-16 font-normal sm:flex '>
-            <NavItem label='Movies' to='/Movies' />
+            {/* <NavItem label='Movies' to='/Movies' />
             <NavItem label='Series' to='/Series' />
             <NavItem label='Profile' to='/Profile' />
-            <NavItem label='My List' to='/MyList' />
+            <NavItem label='My List' to='/MyList' /> */}
           </div>
         </div>
       </div>

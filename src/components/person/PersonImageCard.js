@@ -1,35 +1,27 @@
-import NextImage from '../NextImage';
+'use client';
 import Link from 'next/link';
 import useApiConfiguration from '@/hooks/useApiConfig';
+import NextImage from '@/components/NextImage';
+import { ImageCard } from '@/components/person/ImageCard';
 import { usePathname } from 'next/navigation';
 
-const PersonImageCard = ({ path, name, disableLink = true }) => {
-  const pathname = usePathname();
+const PersonImageCard = ({ path, personId, disableLink = true }) => {
   const { getImageUrl } = useApiConfiguration();
-
-  const ImageCard = () => (
-    <div className='relative aspect-[2/3]'>
-      <NextImage
-        src={getImageUrl(path)}
-        fill
-        alt={name}
-        className='object-cover'
-        placeholder='data:image/png../../public/placeholder.png'
-        unoptimized
-      />
-      <div className='absolute top-0 h-full w-full opacity-10 transition-colors duration-200 hover:bg-white'></div>
-    </div>
-  );
-
+  const pathname = usePathname();
   return (
     <div className='mx-2 flex h-full flex-col overflow-hidden rounded drop-shadow-md duration-300'>
-      {disableLink ? (
-        <ImageCard />
-      ) : (
-        <Link href={{ pathname, query: { i: path.substring(1) } }} shallow>
-          <ImageCard />
-        </Link>
-      )}
+      <Link href={disableLink ? '' : { pathname, query: { i: path.substring(1) } }} scroll={false} replace>
+        <ImageCard>
+          <NextImage
+            src={getImageUrl(path)}
+            fill
+            alt={`${personId} image`}
+            className='object-cover'
+            placeholder='data:image/png../../public/placeholder.png'
+            unoptimized
+          />
+        </ImageCard>
+      </Link>
     </div>
   );
 };

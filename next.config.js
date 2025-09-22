@@ -9,4 +9,5 @@ module.exports = {
     qualities: [25, 50, 75, 100],
   },
   devIndicators: {},
+  outputFileTracingRoot: __dirname,
 };
