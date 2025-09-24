@@ -25,14 +25,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.js",
-    "**/*.jsx",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/components/carousel/CaroselItem.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.js", "**/*.jsx", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
