@@ -9,15 +9,15 @@ import { tmdb } from '@/utils/http-client/tmdb';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 
-export const Backdrop = ({ children }) => {
+export const Backdrop = ({ children }: { children: ReactNode }) => {
   const { getImageUrl } = useApiConfiguration();
 
-  const imageRef = useRef();
+  const imageRef = useRef<HTMLDivElement | null>(null);
   const breakpoint = useBreakpoints();
   const scrollPosition = useScrollPosition();
-  const [spotlightMovieID, setSpotlightMovieID] = useState(null);
+  const [spotlightMovieID, setSpotlightMovieID] = useState<number>(0);
 
   const scrollDistance = imageRef.current ? imageRef.current.clientHeight : 1000;
   const scrollDifference = scrollPosition / scrollDistance;
@@ -41,8 +41,8 @@ export const Backdrop = ({ children }) => {
 
   const movieQueries = useQueries({
     queries: [
-      { ...tmdb.movies.movie(spotlightMovieID), enabled: !!spotlightMovieID },
-      { ...tmdb.movies.images(spotlightMovieID), enabled: !!spotlightMovieID },
+      { ...tmdb.movies.movie(spotlightMovieID.toString()), enabled: !!spotlightMovieID },
+      { ...tmdb.movies.images(spotlightMovieID.toString()), enabled: !!spotlightMovieID },
     ],
   });
   const [movieQuery, imageQuery] = movieQueries;
@@ -55,7 +55,7 @@ export const Backdrop = ({ children }) => {
   const movie = movieSuccess ? movieData : { genres: { id: '', name: '' } };
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error} </div>;
+  if (isError) return <div>Error: {error.message} </div>;
 
   return (
     <>
@@ -66,7 +66,7 @@ export const Backdrop = ({ children }) => {
               src={getImageUrl(movie.backdrop_path, { original: true })}
               fill
               className='object-cover object-top'
-              alt={`${movie.name} backdrop` ?? 'movie backdrop'}
+              alt={`${movie.name} backdrop`}
               quality={100}
               priority
             />
@@ -74,11 +74,9 @@ export const Backdrop = ({ children }) => {
         </div>
       </div>
       <div
-        style={
-          Object.keys(breakpoint)[0] == 'none'
-            ? null
-            : { backgroundColor: `rgba(0,0,0, ${opacityAmount}` }
-        }
+        style={{
+          backgroundColor: Object.keys(breakpoint)[0] ? `rgba(0,0,0, ${opacityAmount})` : undefined,
+        }}
         className='transform-opacity duration-500 absolute top-0 w-full bg-black'
       >
         <div className='relative h-[55vh] sm:h-[90vh]'>
@@ -88,7 +86,7 @@ export const Backdrop = ({ children }) => {
                 <NextImage
                   fill
                   src={getImageUrl(movie.backdrop_path, { original: true })}
-                  alt={`${movie.name} backdrop` ?? 'movie backdrop'}
+                  alt={`${movie.name} backdrop`}
                   className='object-cover'
                   quality={100}
                 />
@@ -99,7 +97,7 @@ export const Backdrop = ({ children }) => {
                     <NextImage
                       fill
                       src={getImageUrl(imageData.logos[0].file_path, { original: true })}
-                      alt={`${movie.name} logo` ?? 'movie logo'}
+                      alt={`${movie.name} logo`}
                       className='sm:object-left-bottom object-contain'
                       priority
                     />
