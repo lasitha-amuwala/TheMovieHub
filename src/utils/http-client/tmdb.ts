@@ -12,15 +12,15 @@ export const tmdb = {
     }),
   },
   movies: {
-    movie: id => ({
+    movie: (id: string) => ({
       queryKey: ['movies', id],
       queryFn: () => get(createUrl(`/movie/${id}`, { append_to_response: 'release_dates' })),
     }),
-    images: id => ({
+    images: (id: string) => ({
       queryKey: ['movie', 'images', id],
       queryFn: () => get(createUrl(`/movie/${id}/images`, { include_image_language: 'en' })),
     }),
-    videos: id => ({
+    videos: (id: string) => ({
       queryKey: ['movie', 'videos', id],
       queryFn: () => get(createUrl(`/movie/${id}/videos`, { language: 'en-US' })),
     }),
@@ -40,7 +40,7 @@ export const tmdb = {
       queryKey: ['movies', 'upcoming'],
       queryFn: () => get(createUrl(`/movie/upcoming`, USParams)),
     }),
-    credits: id => ({
+    credits: (id: string) => ({
       queryKey: ['movie', 'credits', id],
       queryFn: () => get(createUrl(`/movie/${id}/credits`)),
     }),
@@ -56,23 +56,23 @@ export const tmdb = {
     }),
   },
   people: {
-    person: id => ({
+    person: (id: string) => ({
       queryKey: ['people', id],
       queryFn: () => get(createUrl(`/person/${id}`, { append_to_response: 'external_ids' })),
     }),
-    movieCredits: id => ({
+    movieCredits: (id: string) => ({
       queryKey: ['people', 'credits', 'movie', id],
       queryFn: () => get(createUrl(`/person/${id}/movie_credits`)),
     }),
-    tvCredits: id => ({
+    tvCredits: (id: string) => ({
       queryKey: ['people', 'credits', 'tv', id],
       queryFn: () => get(createUrl(`/person/${id}/tv_credits`)),
     }),
-    images: id => ({
+    images: (id: string) => ({
       queryKey: ['people', 'images', id],
       queryFn: () => get(createUrl(`/person/${id}/images`)),
     }),
-    taggedImages: id => ({
+    taggedImages: (id: string) => ({
       queryKey: ['people', 'tagged', id],
       queryFn: () => get(createUrl(`/person/${id}/tagged_images`)),
     }),

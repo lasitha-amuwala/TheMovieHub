@@ -2,7 +2,9 @@ import { PersonContent } from '@/components/person/PersonContent';
 import { tmdb } from '@/utils/http-client/tmdb';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-export default async function MoviePage({ params }) {
+type Params = Promise<{ personId: string }>;
+
+export default async function MoviePage({ params }: { params: Params }) {
   const { personId } = await params;
 
   const queryClient = new QueryClient();

@@ -5,8 +5,8 @@ import VideoModal from '../modals/VideoModal';
 import MovieVideoCard from './MovieVideoCard';
 import EmblaCarousel from '../carousel/EmblaCarousel';
 
-const MovieVideoCarousel = ({ id }) => {
-  const { data, error, isError, isLoading } = useQuery(tmdb.movies.videos(id));
+const MovieVideoCarousel = ({ movieId }) => {
+  const { data, error, isError, isLoading } = useQuery(tmdb.movies.videos(movieId));
 
   const videoPaths = data.results.map(({ name, key }) => {
     return { name, key };

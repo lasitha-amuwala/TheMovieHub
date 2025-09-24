@@ -5,7 +5,9 @@ import PageMargin from '@/components/PageMargin';
 import { tmdb } from '@/utils/http-client/tmdb';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-export default async function MoviePage({ params }) {
+type Params = Promise<{ movieId: string }>;
+
+export default async function MoviePage({ params }: { params: Params }) {
   const { movieId } = await params;
 
   const queryClient = new QueryClient();
@@ -22,9 +24,9 @@ export default async function MoviePage({ params }) {
       <MovieHeader movieId={movieId} />
       <PageMargin padding className='py-10'>
         <h1 className='font-semibold text-2xl'>Cast:</h1>
-        <MovieCastCarousel id={movieId} />
+        <MovieCastCarousel movieId={movieId} />
         <h1 className='font-semibold text-2xl'>Trailers:</h1>
-        <MovieVideoCarousel id={movieId} />
+        <MovieVideoCarousel movieId={movieId} />
       </PageMargin>
     </HydrationBoundary>
   );

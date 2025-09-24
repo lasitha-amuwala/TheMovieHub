@@ -4,8 +4,8 @@ import { tmdb } from '@/utils/http-client/tmdb';
 import MovieCastCard from './MovieCastCard';
 import EmblaCarousel from '../carousel/EmblaCarousel';
 
-const MovieCastCarousel = ({ id }) => {
-  const { data, error, isLoading, isError } = useQuery(tmdb.movies.credits(id));
+const MovieCastCarousel = ({ movieId }) => {
+  const { data, error, isLoading, isError } = useQuery(tmdb.movies.credits(movieId));
 
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>Error: {error}</div>;

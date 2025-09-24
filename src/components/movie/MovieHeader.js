@@ -4,7 +4,6 @@ import ProfileTemplate from '../ProfileTemplate';
 import { getYearFromDate, minsToDuration } from '@/utils/commonUtils';
 import { useQuery } from '@tanstack/react-query';
 import { tmdb } from '@/utils/http-client/tmdb';
-import { useParams } from 'next/navigation';
 
 const filterData = data => {
   try {
@@ -22,8 +21,7 @@ const filterData = data => {
   }
 };
 
-const MovieHeader = ({}) => {
-  const { movieId } = useParams();
+const MovieHeader = ({ movieId }) => {
   const { data: movieData, error, isLoading, isError } = useQuery(tmdb.movies.movie(movieId));
   const movie = filterData(movieData);
 
