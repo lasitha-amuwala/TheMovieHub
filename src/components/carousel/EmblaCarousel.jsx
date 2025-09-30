@@ -45,7 +45,7 @@ const EmblaCarousel = ({
         </div>
       </div>
       {renderButtons && (
-        <div className='embla__dots'>
+        <div className='embla__dots invisible sm:visible'>
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}

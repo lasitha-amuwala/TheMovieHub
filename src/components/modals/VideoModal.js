@@ -19,10 +19,7 @@ const VideoModal = ({ paths }) => {
   const goToNextPath = () => (isInRange(currIndex + 1) ? goToPath(currIndex + 1) : currIndex);
   const goToPrevPath = () => (isInRange(currIndex - 1) ? goToPath(currIndex - 1) : currIndex);
 
-  const goToPath = index =>
-    router.replace({ pathname, query: { v: paths[index].key } }, undefined, {
-      shallow: true,
-    });
+  const goToPath = index => router.replace(`${pathname}?v=${paths[index].key}`, { scroll: false });
 
   return (
     <BaseModal

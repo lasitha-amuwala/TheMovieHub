@@ -1,3 +1,4 @@
+import MovieBackdrop from '@/components/movie/MovieBackdrop';
 import MovieCastCarousel from '@/components/movie/MovieCastCarousel';
 import MovieHeader from '@/components/movie/MovieHeader';
 import MovieVideoCarousel from '@/components/movie/MovieVideoCarousel';
@@ -21,13 +22,15 @@ export default async function MoviePage({ params }: { params: Params }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <MovieHeader movieId={movieId} />
-      <PageMargin padding className='py-10'>
-        <h1 className='font-semibold text-2xl'>Cast:</h1>
-        <MovieCastCarousel movieId={movieId} />
-        <h1 className='font-semibold text-2xl'>Trailers:</h1>
-        <MovieVideoCarousel movieId={movieId} />
-      </PageMargin>
+      <MovieBackdrop movieId={movieId}>
+        <MovieHeader movieId={movieId} />
+        <PageMargin>
+          <h1 className='font-semibold text-2xl'>Cast:</h1>
+          <MovieCastCarousel movieId={movieId} />
+          <h1 className='font-semibold text-2xl'>Trailers:</h1>
+          <MovieVideoCarousel movieId={movieId} />
+        </PageMargin>
+      </MovieBackdrop>
     </HydrationBoundary>
   );
 }

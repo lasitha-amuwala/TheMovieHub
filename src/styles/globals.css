@@ -167,3 +167,16 @@ html {
   height: 300px;
   width: auto;
 }
+
+/* Ripple Wrapper CSS*/
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  transform: scale(0);
+  animation: ripple 0.4s linear;
+}

@@ -45,6 +45,7 @@ export interface MovieDetails {
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
   release_date: string;
+  release_dates?: ReleaseDates;
   revenue: number;
   runtime: number;
   spoken_languages: SpokenLanguage[];
@@ -54,4 +55,19 @@ export interface MovieDetails {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface ReleaseDates {
+  id: number;
+  results: {
+    iso_3166_1: string;
+    release_dates: {
+      certification: string;
+      descriptors: string;
+      iso_639_1: string;
+      nots: string;
+      release_date: string;
+      type: number;
+    }[];
+  }[];
 }

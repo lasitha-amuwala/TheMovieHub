@@ -60,18 +60,16 @@ export const Backdrop = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <div ref={imageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
-        <div className='fixed h-full min-h-screen w-full'>
-          <Blur blurRadius={blurAmount}>
-            <NextImage
-              src={getImageUrl(movie.backdrop_path, { original: true })}
-              fill
-              className='object-cover object-top'
-              alt={`${movie.name} backdrop`}
-              quality={100}
-              priority
-            />
-          </Blur>
-        </div>
+        <Blur blurRadius={blurAmount}>
+          <NextImage
+            src={getImageUrl(movie.backdrop_path, { original: true })}
+            fill
+            className='object-cover object-top'
+            alt={`${movie.name} backdrop`}
+            quality={100}
+            priority
+          />
+        </Blur>
       </div>
       <div
         style={{
@@ -79,10 +77,10 @@ export const Backdrop = ({ children }: { children: ReactNode }) => {
         }}
         className='transform-opacity duration-500 absolute top-0 w-full bg-black'
       >
-        <div className='relative h-[55vh] sm:h-[90vh]'>
+        <div className='h-[55vh] sm:h-[90vh]'>
           <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-24'>
             <div className='relative h-full'>
-              <div className='relative block h-full sm:hidden'>
+              <div className='block h-full sm:hidden'>
                 <NextImage
                   fill
                   src={getImageUrl(movie.backdrop_path, { original: true })}
