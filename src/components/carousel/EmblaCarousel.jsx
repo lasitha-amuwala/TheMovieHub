@@ -3,14 +3,15 @@ import { Children } from 'react';
 import { DotButton } from './EmblaCarouselDotButton';
 import { PrevButton, NextButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { useDotButton } from '@/hooks/embla/useDotButton';
 
 const EmblaCarousel = ({
-  options = { align: 'start', slidesToScroll: 'auto' },
+  options = { align: 'start', slidesToScroll: 'auto', skipSnaps: true, dragFree: true },
   breakPointNumSlides = { normal: 4, sm: 6, lg: 8 },
   children,
 }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [WheelGesturesPlugin()]);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
