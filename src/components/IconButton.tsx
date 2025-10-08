@@ -1,7 +1,13 @@
-"use client"
+'use client';
 import classNames from 'classnames';
 
-const IconButton = ({ icon, className, onClick }) => {
+type Props = {
+  icon: React.ReactNode;
+  className: string;
+  onClick: () => void;
+};
+
+const IconButton = ({ icon, className = '', onClick }: Props) => {
   return (
     <button
       onClick={onClick}

@@ -1,6 +1,6 @@
 'use client';
 import BaseModal from './BaseModal';
-import NextImage from '../NextImage';
+import Image from '../Image';
 import useApiConfiguration from '@/hooks/useApiConfig';
 import { FaExpand, FaCompress } from 'react-icons/fa';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
@@ -36,7 +36,7 @@ const ImageModal = ({ title, paths }) => {
       <div className='relative text-white'>
         <FullScreen handle={handle}>
           <div className='m-auto block aspect-[2/3] w-[40%] drop-shadow-md'>
-            <NextImage
+            <Image
               fill
               className='object-cover'
               src={getImageUrl('/' + queryImage, { original: true })}

@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import useApiConfiguration from '@/hooks/useApiConfig';
 import { MdOutlineStar } from 'react-icons/md';
-import NextImage from '../NextImage';
+import Image from '../Image';
 import { getYearFromDate } from '@/utils/commonUtils';
 import Blur from '../Blur';
 
@@ -34,7 +34,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
           <div className='relative h-full overflow-hidden '>
             <div className='item-poster relative top-0 block h-full w-full object-fill '>
               <Blur blurRadius={blur}>
-                <NextImage
+                <Image
                   fill
                   src={getImageUrl(data.poster_path)}
                   alt={data.title}
@@ -47,7 +47,7 @@ const ListItem = forwardRef(({ data, index, onItemHover }, ref) => {
             </div>
             <div className='item-cover absolute top-0 flex h-full w-full flex-col'>
               <div className='relative grow'>
-                <NextImage
+                <Image
                   src={getImageUrl(data.backdrop_path)}
                   alt={data.title}
                   fill

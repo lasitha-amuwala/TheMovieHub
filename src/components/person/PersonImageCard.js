@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import useApiConfiguration from '@/hooks/useApiConfig';
-import NextImage from '@/components/NextImage';
+import Image from '@/components/Image';
 import { ImageCard } from '@/components/person/ImageCard';
 import { usePathname } from 'next/navigation';
 
@@ -10,9 +10,13 @@ const PersonImageCard = ({ path, personId, disableLink = true }) => {
   const pathname = usePathname();
   return (
     <div className='mx-2 flex h-full flex-col overflow-hidden rounded drop-shadow-md duration-300'>
-      <Link href={disableLink ? '' : { pathname, query: { i: path.substring(1) } }} scroll={false} replace>
+      <Link
+        href={disableLink ? '' : { pathname, query: { i: path.substring(1) } }}
+        scroll={false}
+        replace
+      >
         <ImageCard>
-          <NextImage
+          <Image
             src={getImageUrl(path)}
             fill
             alt={`${personId} image`}

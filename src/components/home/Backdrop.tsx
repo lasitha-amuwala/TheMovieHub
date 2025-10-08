@@ -1,7 +1,7 @@
 'use client';
 
 import Blur from '@/components/Blur';
-import NextImage from '@/components/NextImage';
+import Image from '@/components/Image';
 import useApiConfiguration from '@/hooks/useApiConfig';
 import { useBreakpoints } from '@/hooks/useBreakpoints';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
@@ -61,7 +61,7 @@ export const Backdrop = ({ children }: { children: ReactNode }) => {
     <>
       <div ref={imageRef} className='backgroundGradient fixed hidden h-full w-full sm:block'>
         <Blur blurRadius={blurAmount}>
-          <NextImage
+          <Image
             src={getImageUrl(movie.backdrop_path, { original: true })}
             fill
             className='object-cover object-top'
@@ -75,13 +75,13 @@ export const Backdrop = ({ children }: { children: ReactNode }) => {
         style={{
           backgroundColor: Object.keys(breakpoint)[0] ? `rgba(0,0,0, ${opacityAmount})` : undefined,
         }}
-        className='transform-opacity duration-500 absolute top-0 w-full bg-black'
+        className='absolute top-0 w-full'
       >
         <div className='h-[55vh] sm:h-[90vh]'>
           <div className='h-full sm:mx-5% sm:w-1/3 sm:pb-24'>
             <div className='relative h-full'>
               <div className='block h-full sm:hidden'>
-                <NextImage
+                <Image
                   fill
                   src={getImageUrl(movie.backdrop_path, { original: true })}
                   alt={`${movie.name} backdrop`}
@@ -92,7 +92,7 @@ export const Backdrop = ({ children }: { children: ReactNode }) => {
               <div className='absolute bottom-0 flex h-full max-h-56 w-full flex-col items-center justify-end gap-4 bg-gradient-to-t from-black to-transparent px-10 sm:max-h-full sm:items-start sm:gap-5 sm:from-transparent sm:px-0'>
                 {imageSuccess ? (
                   <div className='max-h relative h-full max-h-28 w-full sm:max-h-72'>
-                    <NextImage
+                    <Image
                       fill
                       src={getImageUrl(imageData.logos[0].file_path, { original: true })}
                       alt={`${movie.name} logo`}

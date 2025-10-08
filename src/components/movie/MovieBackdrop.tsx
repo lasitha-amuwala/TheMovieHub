@@ -1,6 +1,6 @@
 'use client';
 import Blur from '@/components/Blur';
-import NextImage from '@/components/NextImage';
+import Image from '@/components/Image';
 import useApiConfiguration from '@/hooks/useApiConfig';
 import { MovieDetails } from '@/types/movies';
 import { tmdb } from '@/utils/http-client/tmdb';
@@ -24,21 +24,25 @@ function MovieBackdrop({ movieId, children }: Props) {
 
   return (
     <>
-      <div className='fixed h-full w-full'>
+      <div className='fixed h-full w-full '>
         {movieData && (
-          <Blur blurRadius={64}>
-            <NextImage
-              fill
-              className='object-cover object-top'
-              src={getImageUrl(movieData.backdrop_path, { original: false })}
-              alt={movieData.backdrop_path}
-              priority
-              unoptimized
-            />
-          </Blur>
+          <>
+            <Blur blurRadius={64}>
+              <Image
+                fill
+                className='object-cover object-top filter:'
+                src={getImageUrl(movieData.backdrop_path, { original: false })}
+                alt={movieData.backdrop_path}
+                priority
+                unoptimized
+                loading='eager'
+              />
+            </Blur>
+            <div className='absolute inset-0 bg-black/65' />
+          </>
         )}
       </div>
-      <div className='absolute w-full bg-black/65 min-h-screen'>{children}</div>
+      <div className='absolute w-full'>{children}</div>
     </>
   );
 }

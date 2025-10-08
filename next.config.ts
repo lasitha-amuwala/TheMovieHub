@@ -1,4 +1,6 @@
-module.exports = {
+import { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
   env: {
     title: 'TheMovieHub',
     API_KEY: process.env.API_KEY,
@@ -11,3 +13,5 @@ module.exports = {
   devIndicators: {},
   outputFileTracingRoot: __dirname,
 };
+
+export default nextConfig;

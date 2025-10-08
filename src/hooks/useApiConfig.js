@@ -15,7 +15,7 @@ const useApiConfiguration = () => {
       const { images } = configuration;
       const { secure_base_url } = images;
 
-      return `${secure_base_url}${options && options.original ? 'original' : 'w500'}${path}`;
+      return `${secure_base_url}${options && options.original ? 'w1920' : 'w500'}${path}`;
     },
     [configuration]
   );

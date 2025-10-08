@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
 
-const VideoPlayer = ({ videoId }) => (
+type Props = {
+  videoId: string;
+};
+
+const VideoPlayer = ({ videoId }: Props) => (
   <ReactPlayer
     controls
-    playsinline
+    playsInline
     src={`https://www.youtube.com/watch?v=${videoId}`}
     width='100%'
     height='100%'

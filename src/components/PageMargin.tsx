@@ -1,10 +1,11 @@
 import React from 'react';
 
-const PageMargin = ({
-  className = '',
-  children,
-}: {
+type Props = {
   className?: string;
   children: React.ReactNode;
-}) => <div className={`m-auto max-w-[var(--maxPageWidth)] p-6 ${className}`}>{children}</div>;
+};
+
+const PageMargin = ({ className = '', children }: Props) => (
+  <div className={`m-auto max-w-[var(--maxPageWidth)] p-6 ${className}`}>{children}</div>
+);
 export default PageMargin;

@@ -1,21 +1,22 @@
 import Link from 'next/link';
-import NextImage from '../NextImage';
+import Image from '../Image';
 import useApiConfiguration from '@/hooks/useApiConfig';
 import PersonPlaceholder from '../PersonPlaceholder';
 import RippleWrapper from '@/components/RippleWrapper';
+import { Cast } from '@/types/movies';
 
-const MovieCastCard = ({ data }) => {
+const MovieCastCard = ({ cast }: { cast: Cast }) => {
   const { getImageUrl } = useApiConfiguration();
 
   return (
-    <Link href={`/person/${data.id}`} scroll prefetch>
+    <Link href={`/person/${cast.id}`} scroll prefetch>
       <RippleWrapper className='h-full rounded sm:rounded-xl p-1 duration-300 hover:bg-white/15 bg-white/5 lg:p-2'>
         <div className='flex h-full flex-col gap-3'>
           <div className='relative shrink-0 drop-shadow-md'>
-            {data.profile_path && (
-              <NextImage
-                src={getImageUrl(data.profile_path)}
-                alt={data.name}
+            {cast.profile_path && (
+              <Image
+                src={getImageUrl(cast.profile_path)}
+                alt={cast.name}
                 fill
                 className='object-cover rounded-lg'
                 unoptimized
@@ -24,12 +25,13 @@ const MovieCastCard = ({ data }) => {
             <PersonPlaceholder />
           </div>
           <div className='flex grow flex-col justify-center text-center text-sm sm:text-sm'>
-            <p className='font-medium'>{data.name}</p>
-            <p className='text-slate-300'>{data.character ? data.character : 'Unknown'}</p>
+            <p className='font-medium'>{cast.name}</p>
+            <p className='text-slate-300'>{cast.character ? cast.character : 'Unknown'}</p>
           </div>
         </div>
       </RippleWrapper>
     </Link>
   );
 };
+
 export default MovieCastCard;
